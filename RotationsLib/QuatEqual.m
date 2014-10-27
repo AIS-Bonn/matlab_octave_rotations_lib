@@ -1,7 +1,19 @@
-% QuatEqual.m - Philipp Allgeuer - 07/03/14
-% Returns whether two quaternions represent the same underlying rotation to the given
-% degree of tolerance in terms of the vector norm of the deviation.
+% QuatEqual.m - Philipp Allgeuer - 22/10/14
+% Returns whether two quaternion rotations represent the same rotation.
+%
+% function [Equal, Err] = QuatEqual(P, Q, Tol)
+%
 % Two quaternions P and Q are equivalent iff P == Q or P == -Q.
+% Refer to EnsureQuat for more information on the unique form of a
+% quaternion rotation.
+%
+% P     ==> First quaternion rotation to compare
+% Q     ==> Second quaternion rotation to compare
+% Tol   ==> Allowed tolerance between P and Q for which equality is still asserted
+% Equal ==> Boolean flag whether P equals Q to the given L_inf norm tolerance
+% Err   ==> The quantified error between P and Q (0 if exactly equal)
+
+% Main function
 function [Equal, Err] = QuatEqual(P, Q, Tol)
 
 	% Default tolerance
@@ -11,14 +23,12 @@ function [Equal, Err] = QuatEqual(P, Q, Tol)
 		Tol = abs(Tol);
 	end
 	
-	% Calculate the deviation between the two quaternions
-	Err = norm(P-Q);
-	ErrNeg = norm(P+Q);
-	if ErrNeg < Err
-		Err = ErrNeg;
-	end
+	% Calculate the deviation between the two rotations
+	ErrPos = max(abs(P-Q));
+	ErrNeg = max(abs(P+Q));
+	Err = min(ErrPos,ErrNeg);
 	
-	% Check whether the two quaternions are within tolerance
+	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);
 
 end

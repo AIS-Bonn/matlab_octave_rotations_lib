@@ -1,16 +1,20 @@
-% QuatFromEuler.m - Philipp Allgeuer - 09/12/13
-% Converts ZYX Euler angles to the corresponding quaternion representation
+% QuatFromEuler.m - Philipp Allgeuer - 22/10/14
+% Converts a ZYX Euler angles rotation to the corresponding quaternion representation.
 %
-% function Quat = QuatFromEuler(Euler)
+% function [Quat] = QuatFromEuler(Euler)
 %
+% The output quaternion is in the format [w x y z].
+%
+% Euler ==> Input ZYX Euler angles rotation
+% Quat  ==> Equivalent quaternion rotation
 
 % Main function
-function Quat = QuatFromEuler(Euler)
+function [Quat] = QuatFromEuler(Euler)
 
-	% Halve the euler angles
-	hpsi = Euler(1)/2.0;
-	hth  = Euler(2)/2.0;
-	hphi = Euler(3)/2.0;
+	% Halve the Euler angles
+	hpsi = 0.5*Euler(1);
+	hth  = 0.5*Euler(2);
+	hphi = 0.5*Euler(3);
 	
 	% Precalculate the sin and cos values
 	cpsi = cos(hpsi);

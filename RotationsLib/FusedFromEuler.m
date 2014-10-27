@@ -1,5 +1,7 @@
-% FusedFromEuler.m - Philipp Allgeuer - 30/06/14
-% Converts a ZYX Euler rotation to the corresponding fused angles representation
+% FusedFromEuler.m - Philipp Allgeuer - 22/10/14
+% Converts a ZYX Euler angles rotation to the corresponding fused angles representation.
+%
+% function [Fused, Tilt] = FusedFromEuler(Euler)
 %
 % The output ranges are:
 % Fused yaw:   psi   is in (-pi,pi]
@@ -7,8 +9,9 @@
 % Fused roll:  phi   is in [-pi/2,pi/2]
 % Hemisphere:  h     is in {-1,1}
 % 
-% function [Fused, Tilt] = FusedFromEuler(Euler)
-%
+% Euler ==> Input ZYX Euler angles rotation
+% Fused ==> Equivalent fused angles rotation
+% Tilt  ==> Equivalent tilt angles rotation
 
 % Main function
 function [Fused, Tilt] = FusedFromEuler(Euler)
@@ -27,8 +30,7 @@ function [Fused, Tilt] = FusedFromEuler(Euler)
 
 	% Calculate and wrap the fused yaw
 	gamma = atan2(seth,R32);
-	gammainv = atan2(-(cepsi*sce+sepsi*sephi),sepsi*sce-cepsi*sephi);
-	psi = pi + gammainv - gamma;
+	psi = atan2(cepsi*sce+sepsi*sephi,cepsi*sephi-sepsi*sce) - gamma;
 	psi = pi - mod(pi - psi, 2*pi);
 
 	% Calculate the fused pitch and roll
@@ -36,7 +38,8 @@ function [Fused, Tilt] = FusedFromEuler(Euler)
 	phi = asin(R32);
 	
 	% See which hemisphere we're in
-	if cephi >= 0 || ceth <= 0 % ceth should never actually be negative by more than a few eps...
+	calpha = ceth*cephi;
+	if calpha >= 0
 		h = 1;
 	else
 		h = -1;
@@ -45,11 +48,11 @@ function [Fused, Tilt] = FusedFromEuler(Euler)
 	% Construct the output fused angles
 	Fused = [psi theta phi h];
 	
-	% Calculate the tilt angle
-	alpha = acos(ceth*cephi);
-	
 	% Construct the output tilt angles
-	Tilt = [psi gamma alpha];
+	if nargout >= 2
+		alpha = acos(calpha);
+		Tilt = [psi gamma alpha];
+	end
 
 end
 % EOF

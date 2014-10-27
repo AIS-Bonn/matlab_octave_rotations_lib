@@ -1,8 +1,18 @@
-% ComposeRotmat.m - Philipp Allgeuer - 28/06/14
-% Composes multiple rotation matrices and returns the equivalent total rotation.
-% The rotations are applied right to left, that is, ComposeRotmat(R3,R2,R1) returns the rotation
-% given by applying R1 then R2 then R3.
-function Rout = ComposeRotmat(varargin)
+% ComposeRotmat.m - Philipp Allgeuer - 22/10/14
+% Composes multiple rotation matrices and returns the equivalent
+% total rotation.
+% 
+% function [Rout] = ComposeRotmat(varargin)
+% 
+% The rotations are applied right to left. That is, ComposeRotmat(R3,R2,R1)
+% returns the rotation given by applying R1 then R2 then R3.
+%
+% Rout ==> Rotation matrix representation of the composed rotation
+
+% Main function
+function [Rout] = ComposeRotmat(varargin)
+
+	% Compose the required rotations
 	Num = length(varargin);
 	if Num <= 0
 		Rout = eye(3);
@@ -17,5 +27,6 @@ function Rout = ComposeRotmat(varargin)
 			Rout = Rout * R;
 		end
 	end
+
 end
 % EOF

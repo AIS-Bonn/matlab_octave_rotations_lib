@@ -1,17 +1,19 @@
-% FusedFromTilt.m - Philipp Allgeuer - 30/06/14
-% Converts a tilt angles rotation into fused angles
+% FusedFromTilt.m - Philipp Allgeuer - 22/10/14
+% Converts a tilt angles rotation to the corresponding fused angles representation.
+%
+% function [Fused] = FusedFromTilt(Tilt)
 %
 % The output ranges are:
 % Fused yaw:   psi   is in (-pi,pi]
 % Fused pitch: theta is in [-pi/2,pi/2]
 % Fused roll:  phi   is in [-pi/2,pi/2]
 % Hemisphere:  h     is in {-1,1}
-%
-% function Fused = FusedFromTilt(Tilt)
-%
+% 
+% Tilt  ==> Input tilt angles rotation
+% Fused ==> Equivalent fused angles rotation
 
 % Main function
-function Fused = FusedFromTilt(Tilt)
+function [Fused] = FusedFromTilt(Tilt)
 
 	% Precalculate sin and cos values
 	cgamma = cos(Tilt(2));

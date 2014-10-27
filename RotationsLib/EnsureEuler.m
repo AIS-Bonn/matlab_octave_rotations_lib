@@ -1,6 +1,20 @@
-% EnsureEuler.m - Philipp Allgeuer - 10/03/14
-% Checks whether a ZYX Euler angles rotation is valid to a certain tolerance and 'fixes' it if not.
-% A set of ZYX Euler angles (psi, theta, phi) is valid if psi is (-pi,pi], theta is [-pi/2,pi/2], and phi is (-pi,pi].
+% EnsureEuler.m - Philipp Allgeuer - 22/10/14
+% Checks whether a ZYX Euler angles rotation is valid to within a certain
+% tolerance and fixes it if not.
+%
+% function [Eout, WasBad] = EnsureEuler(Ein, Tol, Unique)
+%
+% A set of ZYX Euler angles (psi, theta, phi) is valid if psi is in (-pi,pi],
+% theta is in [-pi/2,pi/2], and phi is in (-pi,pi]. Uniqueness is achieved by
+% shifting the yaw to zero in situations of gimbal lock.
+%
+% Ein    ==> Input ZYX Euler angles rotation
+% Tol    ==> Tolerance bound for the L_inf norm of the input/output difference
+% Unique ==> Boolean flag whether to make the output rotation unique
+% Eout   ==> Output ZYX Euler angles rotation (fixed)
+% WasBad ==> Boolean flag whether the input and output differ more than Tol
+
+% Main function
 function [Eout, WasBad] = EnsureEuler(Ein, Tol, Unique)
 
 	% Default arguments

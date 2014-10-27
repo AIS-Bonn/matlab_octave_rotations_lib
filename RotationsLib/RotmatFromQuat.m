@@ -1,11 +1,19 @@
-% RotmatFromQuat.m - Philipp Allgeuer - 07/03/14
-% Converts a quaternion orientation into a rotation matrix
+% RotmatFromQuat.m - Philipp Allgeuer - 22/10/14
+% Converts a quaternion rotation to the corresponding rotation matrix representation.
 %
-% function Rotmat = RotmatFromQuat(Quat)
+% function [Rotmat] = RotmatFromQuat(Quat)
 %
+% The output of this function is a 3x3 matrix that to machine precision is orthogonal.
+% Note however, that it cannot be assumed that every element of Rotmat is strictly and
+% irrefutably in the range [-1,1]. It is possible that values such as 1+k*eps come out,
+% and so care should be taken when applying (for instance) inverse trigonometric functions
+% (e.g. asin, acos) to the rotation matrix elements, as otherwise complex values may result. 
+%
+% Quat   ==> Input quaternion rotation (assumed to have unit norm)
+% Rotmat ==> Equivalent rotation matrix
 
 % Main function
-function Rotmat = RotmatFromQuat(Quat)
+function [Rotmat] = RotmatFromQuat(Quat)
 
 	% Data aliases
 	w = Quat(1);

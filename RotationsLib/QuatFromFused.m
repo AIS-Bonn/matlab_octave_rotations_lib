@@ -1,8 +1,12 @@
-% QuatFromFused.m - Philipp Allgeuer - 28/06/14
-% Converts fused angles to the corresponding quaternion representation
+% QuatFromFused.m - Philipp Allgeuer - 22/10/14
+% Converts a fused angles rotation to the corresponding quaternion representation.
 %
 % function [Quat, Tilt] = QuatFromFused(Fused)
 %
+% The output quaternion is in the format [w x y z].
+%
+% Fused ==> Input fused angles rotation
+% Quat  ==> Equivalent quaternion rotation
 
 % Main function
 function [Quat, Tilt] = QuatFromFused(Fused)
@@ -11,10 +15,8 @@ function [Quat, Tilt] = QuatFromFused(Fused)
 	sth  = sin(Fused(2));
 	sphi = sin(Fused(3));
 	
-	% Calculate the sin sum criterion
-	crit = sth*sth + sphi*sphi;
-	
 	% Calculate the tilt angle alpha
+	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0
 		alpha = pi/2;
 	else
@@ -26,12 +28,12 @@ function [Quat, Tilt] = QuatFromFused(Fused)
 		alpha = acos(calpha);
 	end
 	
-	% Calculate the tilt axis gamma
+	% Calculate the tilt axis angle gamma
 	gamma = atan2(sth,sphi);
 	
 	% Evaluate the required intermediate angles
-	halpha = alpha/2.0;
-	hpsi = Fused(1)/2.0;
+	halpha = 0.5*alpha;
+	hpsi = 0.5*Fused(1);
 	hgampsi = gamma + hpsi;
 	
 	% Precalculate trigonometric terms involved in the quaternion expression
@@ -46,7 +48,9 @@ function [Quat, Tilt] = QuatFromFused(Fused)
 	Quat = [chalpha*chpsi shalpha*chgampsi shalpha*shgampsi chalpha*shpsi];
 	
 	% Return the tilt angles representation
-	Tilt = [Fused(1) gamma alpha];
+	if nargout >= 2
+		Tilt = [Fused(1) gamma alpha];
+	end
 
 end
 % EOF

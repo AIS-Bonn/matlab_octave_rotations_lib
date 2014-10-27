@@ -1,6 +1,13 @@
-% EulerInv.m - Philipp Allgeuer - 10/03/14
-% Calculates the inverse rotation of a ZYX Euler rotation
-function Einv = EulerInv(E)
+% EulerInv.m - Philipp Allgeuer - 22/10/14
+% Calculates the inverse of a ZYX Euler angles rotation.
+%
+% function [Einv] = EulerInv(E)
+%
+% E    ==> Input ZYX Euler angles rotation
+% Einv ==> Inverse ZYX Euler angles rotation
+
+% Main function
+function [Einv] = EulerInv(E)
 
 	% Precalculate the required sin and cos values
 	cpsi = cos(E(1));
@@ -14,10 +21,8 @@ function Einv = EulerInv(E)
 	newsth = -(cpsi*sth*cphi+spsi*sphi);
 	newsth = max(min(newsth,1.0),-1.0); % Note: This should only trim at most a few eps...
 
-	% Calculate the required Euler angles
-	Einv = [atan2(cpsi*sth*sphi-spsi*cphi,cpsi*cth)
-	        asin(newsth)
-	        atan2(spsi*sth*cphi-cpsi*sphi,cth*cphi)]';
+	% Calculate the required inverse Euler angles representation
+	Einv = [atan2(cpsi*sth*sphi-spsi*cphi,cpsi*cth) asin(newsth) atan2(spsi*sth*cphi-cpsi*sphi,cth*cphi)];
 
 end
 % EOF

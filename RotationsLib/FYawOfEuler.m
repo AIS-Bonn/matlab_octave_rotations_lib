@@ -1,6 +1,13 @@
-% FYawOfEuler.m - Philipp Allgeuer - 30/06/14
-% Calculates the fused yaw of a ZYX Euler angles rotation
-function FYaw = FYawOfEuler(Euler)
+% FYawOfEuler.m - Philipp Allgeuer - 22/10/14
+% Calculates the fused yaw of a ZYX Euler angles rotation.
+%
+% function [FYaw] = FYawOfEuler(Euler)
+%
+% Euler ==> Input ZYX Euler angles rotation
+% FYaw  ==> Fused yaw of the input rotation
+
+% Main function
+function [FYaw] = FYawOfEuler(Euler)
 
 	% Precalculate the sin and cos values
 	cpsi = cos(Euler(1));
@@ -11,7 +18,7 @@ function FYaw = FYawOfEuler(Euler)
 	sphi = sin(Euler(3));
 
 	% Calculate the fused yaw
-	FYaw = pi + atan2(-cpsi*sth*cphi-spsi*sphi,spsi*sth*cphi-cpsi*sphi) - atan2(sth,cth*sphi);
+	FYaw = atan2(spsi*sphi+cpsi*sth*cphi,cpsi*sphi-spsi*sth*cphi) - atan2(sth,cth*sphi);
 	FYaw = pi - mod(pi - FYaw, 2*pi);
 
 end

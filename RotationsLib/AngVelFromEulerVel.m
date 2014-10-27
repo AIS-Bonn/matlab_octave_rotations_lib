@@ -1,22 +1,25 @@
-% AngVelFromEulerVel.m - Philipp Allgeuer - 06/11/13
-% Transform rates of change of ZYX Euler angles to an angular velocity vector (in unrotated global coordinates)
+% AngVelFromEulerVel.m - Philipp Allgeuer - 22/10/14
+% Convert a ZYX Euler angles velocity to an angular velocity vector
 %
 % function [AngVel, Rotmat] = AngVelFromEulerVel(Euler, EulerVel)
-% Euler should be [phi theta psi]
-% EulerVel should be [dphi dtheta dpsi]
-% AngVel is [wx wy wz]
-% Rotmat is the 3x3 rotation matrix corresponding to Euler
+%
+% The angular velocity vector is expressed in the unrotated global coordinates.
+%
+% Euler    ==> [phi theta psi]
+% EulerVel ==> [dphi dtheta dpsi]
+% AngVel   ==> [wx wy wz]
+% Rotmat   ==> The 3x3 rotation matrix corresponding to Euler
 
 % Main function
 function [AngVel, Rotmat] = AngVelFromEulerVel(Euler, EulerVel)
 
 	% Precompute sin and cos values
-	cphi=cos(Euler(1));
-	sphi=sin(Euler(1));
-	cth =cos(Euler(2));
-	sth =sin(Euler(2));
-	cpsi=cos(Euler(3));
-	spsi=sin(Euler(3));
+	cphi = cos(Euler(1));
+	sphi = sin(Euler(1));
+	cth  = cos(Euler(2));
+	sth  = sin(Euler(2));
+	cpsi = cos(Euler(3));
+	spsi = sin(Euler(3));
 	
 	% Calculate the rotation matrix corresponding to the current orientation
 	Rotmat = [cphi*cth cphi*sth*spsi-sphi*cpsi cphi*sth*cpsi+sphi*spsi;

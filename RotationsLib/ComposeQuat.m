@@ -1,8 +1,18 @@
-% ComposeQuat.m - Philipp Allgeuer - 28/06/14
-% Composes multiple quaternions and returns the equivalent total rotation.
-% The rotations are applied right to left, that is, ComposeQuat(Q3,Q2,Q1) returns the rotation
-% given by applying Q1 then Q2 then Q3.
-function Qout = ComposeQuat(varargin)
+% ComposeQuat.m - Philipp Allgeuer - 22/10/14
+% Composes multiple quaternion rotations and returns the equivalent
+% total rotation.
+% 
+% function [Qout] = ComposeQuat(varargin)
+% 
+% The rotations are applied right to left. That is, ComposeQuat(Q3,Q2,Q1)
+% returns the rotation given by applying Q1 then Q2 then Q3.
+%
+% Qout ==> Quaternion representation of the composed rotation
+
+% Main function
+function [Qout] = ComposeQuat(varargin)
+
+	% Compose the required rotations
 	Num = length(varargin);
 	if Num <= 0
 		Qout = [1 0 0 0];
@@ -17,5 +27,6 @@ function Qout = ComposeQuat(varargin)
 			Qout = [Qout(1)*Q(1)-dot(Qout(2:4),Q(2:4)) Qout(1)*Q(2:4)+Q(1)*Qout(2:4)+cross(Qout(2:4),Q(2:4))];
 		end
 	end
+
 end
 % EOF

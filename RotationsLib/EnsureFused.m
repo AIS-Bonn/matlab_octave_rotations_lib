@@ -1,9 +1,22 @@
-% EnsureFused.m - Philipp Allgeuer - 28/06/14
-% Checks whether a fused angles rotation is valid to a certain tolerance and 'fixes' it if not.
-% The output fused angle can further be enforced to be in its standardised unique representation.
-% A set of fused angles (psi, theta, phi, h) is valid if psi is (-pi,pi], theta is [-pi/2,pi/2], phi is [-pi/2,pi/2], h is {-1,1},
-% and abs(theta) + abs(phi) <= pi/2 (equivalent to sin(theta)^2 + sin(phi)^2 <= 1).
-% Uniqueness is achieved by enforcing h to 1 when equality is achieved in the above inequality.
+% EnsureFused.m - Philipp Allgeuer - 22/10/14
+% Checks whether a fused angles rotation is valid to within a certain
+% tolerance and fixes it if not.
+%
+% function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
+%
+% A set of fused angles (psi, theta, phi, h) is valid if psi is in (-pi,pi],
+% theta is in [-pi/2,pi/2], phi is in [-pi/2,pi/2], h is in {-1,1}, and
+% abs(theta) + abs(phi) <= pi/2 (equivalent to sin(theta)^2 + sin(phi)^2 <= 1).
+% Uniqueness is achieved by setting h = 1 when equality holds in the above
+% inequality, and setting psi = 0 when theta = phi = 0 and h = -1.
+%
+% Fin    ==> Input fused angles rotation
+% Tol    ==> Tolerance bound for the L_inf norm of the input/output difference
+% Unique ==> Boolean flag whether to make the output rotation unique
+% Fout   ==> Output fused angles rotation (fixed)
+% WasBad ==> Boolean flag whether the input and output differ more than Tol
+
+% Main function
 function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
 
 	% Default arguments
@@ -39,6 +52,9 @@ function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
 	if Unique
 		if L1Norm >= pi/2
 			Fout(4) = 1;
+		end
+		if L1Norm <= Tol && Fout(4) == -1
+			Fout(1) = 0;
 		end
 	end
 

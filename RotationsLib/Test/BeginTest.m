@@ -1,21 +1,18 @@
-% BeginTest.m - Philipp Allgeuer - 01/07/14
+% BeginTest.m - Philipp Allgeuer - 22/10/14
 % Function to be called at the beginning of an individual test.
-% Individual tests are intended to be combined into test scripts.
-% Each individual test should return PASS/true (on completion), if the test is successful.
 %
 % function [N, varargout] = BeginTest(Title, N, ErrSize)
 %
-% INPUTS
-% Title:   The name to use for this test
-% N:       The number of test cases to use in the test
-% ErrSize: A vector of zero-initialised error array sizes to be generated
+% Individual tests are intended to be combined into test scripts. Each individual
+% test should return PASS/true on completion if the test was successful.
 %
-% OUTPUTS
-% N:         The number of test cases to use in the test (unmodified from the input)
-% varargout: The zero-initialised error arrays (column vectors) requested via the ErrSize input.
-%            If more outputs are present than numel(ErrSize), the additional arrays default to
-%            being of length N.
-%
+% Title     ==> The name to use for this test
+% N (in)    ==> The number of test cases to use in the test
+% ErrSize   ==> A vector of zero-initialised error array sizes to be generated
+% N (out)   ==> The number of test cases to use in the test (unmodified from the input)
+% varargout ==> The zero-initialised error arrays (column vectors) requested via the ErrSize input.
+%               If more outputs are present than numel(ErrSize), the additional arrays default to
+%               being of length N.
 
 % Main function
 function [N, varargout] = BeginTest(Title, N, ErrSize)
@@ -24,8 +21,8 @@ function [N, varargout] = BeginTest(Title, N, ErrSize)
 	tic;
 	
 	% Print a test header
-	printf('----------------------------------------------------------------------\n');
-	printf('TEST: %s\n\n', Title);
+	fprintf('----------------------------------------------------------------------\n');
+	fprintf('TEST: %s\n\n', Title);
 	
 	% Initialise the required error vectors with zeros
 	if nargin >= 2
@@ -42,8 +39,12 @@ function [N, varargout] = BeginTest(Title, N, ErrSize)
 		end
 	end
 	
-	% Flush the printed output to the screen
-	fflush(stdout);
+	% Flush the printed output to screen
+	if isOctave
+		fflush(stdout);
+	else
+		drawnow('update');
+	end
 
 end
 % EOF

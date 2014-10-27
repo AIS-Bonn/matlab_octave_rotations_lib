@@ -1,7 +1,18 @@
-% FusedRotVec.m - Philipp Allgeuer - 28/06/14
-% Rotate a vector by a given fused angles rotation
-function vout = FusedRotVec(Fused, vin)
-	vout = zeros(size(vin));
-	vout(:) = RotmatFromFused(Fused) * vin(:);
+% FusedRotVec.m - Philipp Allgeuer - 22/10/14
+% Rotate a vector by a given fused angles rotation.
+%
+% function [Vout] = FusedRotVec(Fused, Vin)
+%
+% Fused ==> Fused angles rotation to apply to Vin
+% Vin   ==> Input vector to rotate
+% Vout  ==> Rotated output vector
+
+% Main function
+function [Vout] = FusedRotVec(Fused, Vin)
+
+	% Rotate the vector as required
+	Vout = zeros(size(Vin));
+	Vout(:) = RotmatFromFused(Fused) * Vin(:);
+
 end
 % EOF

@@ -1,7 +1,20 @@
-% EnsureRotmat.m - Philipp Allgeuer - 10/03/14
-% Checks whether a rotation matrix is valid to a certain tolerance and 'fixes' it if not.
-% A rotation matrix is valid if R'*R = I and det(R) = 1.
-function [Rout, WasBad, Err] = EnsureRotmat(Rin, Tol, Force)
+% EnsureRotmat.m - Philipp Allgeuer - 22/10/14
+% Checks whether a rotation matrix is valid to within a certain
+% tolerance and fixes it if not.
+%
+% function [Rout, WasBad, Det] = EnsureRotmat(Rin, Tol)
+%
+% A 3x3 rotation matrix is valid if R'*R = I and det(R) = 1. Rotation matrices
+% that are valid are always automatically unique.
+%
+% Rin    ==> Input rotation matrix
+% Tol    ==> Tolerance bound for the L_inf norm of the input/output difference
+% Rout   ==> Output rotation matrix (fixed)
+% WasBad ==> Boolean flag whether the input and output differ more than Tol
+% Det    ==> Determinant of the input rotation matrix
+
+% Main function
+function [Rout, WasBad, Det] = EnsureRotmat(Rin, Tol)
 
 	% Default arguments
 	if nargin < 2
@@ -9,20 +22,27 @@ function [Rout, WasBad, Err] = EnsureRotmat(Rin, Tol, Force)
 	else
 		Tol = abs(Tol);
 	end
-	if nargin < 3
-		Force = false;
+	
+	% Make a copy of the input
+	Rout = Rin;
+
+	% Orthogonalise the rotation matrix
+	Rout = Rout / sqrtm(Rout' * Rout); % Calculate the 'closest' valid rotation matrix to the given one
+	if ~isreal(Rout)
+		Rout = eye(3);
+	end
+	
+	% Filter out invalid left hand coordinate systems
+	if det(Rout) < 0
+		Rout = eye(3);
 	end
 
-	% Check whether the rotation matrix is ok
-	Prod = Rin' * Rin;
-	Err = norm(Prod - eye(3));
-	WasBad = (Err > Tol) || (abs(det(Rin) - 1) > Tol);
-
-	% Set the output
-	if WasBad || Force
-		Rout = Rin / sqrtm(Prod); % Find the 'closest' valid rotation matrix to the given one
-	else
-		Rout = Rin;
+	% Work out whether we changed anything
+	WasBad = any(any(abs(Rout - Rin) > Tol));
+	
+	% Calculate the input rotation matrix determinant
+	if nargout >= 3
+		Det = det(Rin);
 	end
 
 end

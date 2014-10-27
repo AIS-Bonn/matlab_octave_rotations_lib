@@ -1,16 +1,24 @@
-% PlotCsys.m - Philipp Allgeuer - 05/12/13
-% Plot an XYZ coordinate system in the currently active 3D plot
+% PlotCsys.m - Philipp Allgeuer - 22/10/14
+% Plot an XYZ coordinate system in the currently active 3D plot.
 %
 % function PlotCsys(R, label, P, L, varargin)
 %
-% The coordinate system axes are plotted at point P (3D coordinate), and with orientation given by the
-% rotation matrix R. L is a 3-vector that specifies the lengths of the individual axes (e.g. the x-axis
-% is drawn from -L(1) to L(1)). If L is a scalar then the same length is used for all three axes. Axis
-% labels are drawn if the label (string) parameter is non-zero. The string value is used as the axis subscripts.
-% Custom arguments such as marker specifications can be forwarded to the internal plot3 function calls
-% using the variable input arguments. If a quaternion is passed via the R parameter instead of a rotation
-% matrix, this is detected and the quaternion is internally converted into a rotation matrix for processing.
+% The coordinate system axes are plotted at point P (3D coordinate), and with
+% orientation given by the rotation matrix R. L is a 3-vector that specifies
+% the lengths of the individual axes (e.g. the x-axis is drawn from -L(1) to
+% L(1)). If L is a scalar then the same length is used for all three axes.
+% Axis labels are drawn if the label (string) parameter is non-zero. The string
+% value is used as the axis subscripts. Custom arguments such as marker
+% specifications can be forwarded to the internal plot3 function calls using
+% the variable input arguments. If a quaternion is passed via the R parameter
+% instead of a rotation matrix, this is detected and the quaternion is
+% internally converted into a rotation matrix for processing.
 %
+% R        ==> Rotation matrix or quaternion to plot the axes of
+% label    ==> String to use for the axis label subscripts (e.g. use 'G' for x_G)
+% P        ==> The origin at which to plot the coordinate axes
+% L        ==> The axis lengths to use for plotting
+% varargin ==> Custom line graphics properties to set in all internal calls to plot3
 
 % Main function
 function PlotCsys(R, label, P, L, varargin)
@@ -39,7 +47,7 @@ function PlotCsys(R, label, P, L, varargin)
 		L = [L L L];
 	end
 	if any(size(R) ~= 3)
-		error('R doesn''t have the right dimensions for a rotation matrix!');
+		error('R doesn''t have the right dimensions for a rotation matrix or quaternion!');
 	end
 	if norm(R*R'-eye(3),'fro') > 1024*eps
 		warning('R is not orthogonal to 1024*eps!');

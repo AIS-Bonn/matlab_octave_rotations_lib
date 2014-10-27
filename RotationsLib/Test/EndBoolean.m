@@ -1,21 +1,24 @@
-% EndBoolean.m - Philipp Allgeuer - 01/07/14
-% Convenience function for testing boolean conditions
-% The value of the B input (passed unmodified out of the function) should be a boolean specifying
-% whether all boolean conditions were true in a test.
+% EndBoolean.m - Philipp Allgeuer - 22/10/14
+% Convenience function for testing boolean conditions.
 %
-% function B = EndBoolean(B)
+% function [B] = EndBoolean(B)
 %
+% The value of the B input (passed unmodified out of the function) should
+% be a boolean specifying whether all boolean conditions were true in a test.
+%
+% B (in)  ==> Boolean flag whether all boolean tests were passed
+% B (out) ==> Boolean flag whether all boolean tests were passed
 
 % Main function
-function B = EndBoolean(B)
+function [B] = EndBoolean(B)
 
 	% Print a message whether the boolean conditions were satisfied
 	if B
-		printf('All boolean conditions passed!                                * PASS *\n');
+		fprintf('All boolean conditions passed!                                * PASS *\n');
 	else
-		printf('Failed due to boolean conditions!                             * FAIL *\n');
+		fprintf('Failed due to boolean conditions!                             * FAIL *\n');
 	end
-	printf('\n');
+	fprintf('\n');
 
 end
 % EOF

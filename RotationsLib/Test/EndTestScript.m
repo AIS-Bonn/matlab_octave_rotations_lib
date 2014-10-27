@@ -1,28 +1,27 @@
-% EndTestScript.m - Philipp Allgeuer - 01/07/14
-% Function to be called at the conclusion of a test script.
-% Each test script may contain a multitude of individual tests.
-% If each individual test returns PASS/true, then the entire test script returns PASS/true.
+% EndTestScript.m - Philipp Allgeuer - 22/10/14
+% Function to be called at the end of a test script.
 %
 % function EndTestScript(Title, Pass)
 %
-% INPUTS
-% Title: The name to use for this test script
-% Pass:  Boolean flag specifying whether all the individual tests were passed
+% Each test script may contain a multitude of individual tests. If each individual
+% test returns PASS/true, then the entire test script returns PASS/true.
 %
+% Title ==> The name to use for this test script
+% Pass  ==> Boolean flag specifying whether all the individual tests were passed
 
 % Main function
 function EndTestScript(Title, Pass)
 
 	% Print a summary of the test script results
-	printf('----------------------------------------------------------------------\n');
-	printf('TEST SCRIPT: %s\n', Title);
+	fprintf('----------------------------------------------------------------------\n');
+	fprintf('TEST SCRIPT: %s\n', Title);
 	if Pass
-		printf('Total result: * PASS *\n');
+		fprintf('Total result: * PASS *                                        * PASS *\n');
 	else
-		printf('Total result: * FAIL *\n');
+		fprintf('Total result: * FAIL *                                        * FAIL *\n');
 	end
-	printf('Completed!\n');
-	printf('\n');
+	fprintf('Completed!\n');
+	fprintf('\n');
 
 end
 % EOF
