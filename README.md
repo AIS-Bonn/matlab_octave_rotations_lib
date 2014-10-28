@@ -1,14 +1,15 @@
 #Matlab/Octave Rotations Library#
+
 **Author:** Philipp Allgeuer
 
-**Version:** 1.0.1
+**Version:** 1.1.0
 
-**Date:** 04/10/14
+**Date:** 22/10/14
 
 ##General Overview##
 The Matlab/Octave rotations library is a collection of functions, bundled as m-scripts, that address computations and numerical handling of rotations in 3D Euclidean space. The rotation representations that are supported are rotation matrices (`RotMat`), Quaternions (`Quat`), intrinsic ZYX Euler angles (`Euler`), fused angles (`Fused`) and tilt angles (`Tilt`). Operations such as composition, inversion, ZYX yaw extraction, fused yaw extraction, random generation, equality detection, vector rotation and much more have been implemented for each rotation representation.
 
-Note that the Matlab compatability of this library has so far not been able to be tested for all of the functions of the library. This will be promptly addressed in subsequent releases.
+Note that the Matlab compatibility of this library has so far not been able to be tested for all of the functions of the library. This will be promptly addressed in subsequent releases.
 
 ###Where To Get More Help?###
 If a look into the source code does not resolve an issue you have with the library, then you can contact the author at the email address given in the *Bugs and Improvements* section.
