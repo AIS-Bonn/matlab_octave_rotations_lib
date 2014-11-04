@@ -33,8 +33,29 @@ function [Equal, Err] = EulerEqual(E, F, Tol)
 	E = EnsureEuler(E, Tol, true);
 	F = EnsureEuler(F, Tol, true);
 	
+	% Handle angle wrapping issues
+	if abs(E(1)-F(1)) > pi
+		if E(1) > F(1)
+			F(1) = F(1) + 2*pi;
+		else
+			E(1) = E(1) + 2*pi;
+		end
+	end
+	if abs(E(3)-F(3)) > pi
+		if E(3) > F(3)
+			F(3) = F(3) + 2*pi;
+		else
+			E(3) = E(3) + 2*pi;
+		end
+	end
+	
+	% Construct the vectors to compare
+	% The pitch suffers from the numerical insensitivity of asin, so the sin thereof is checked
+	EComp = [E(1) sin(E(2)) E(3)];
+	FComp = [F(1) sin(F(2)) F(3)];
+	
 	% Calculate the deviation between the two rotations
-	Err = max(abs(E-F));
+	Err = max(abs(EComp-FComp));
 	
 	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);

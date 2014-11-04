@@ -1,8 +1,8 @@
-% TESTTEMPLATE.m - Philipp Allgeuer - DATE
-% Tests:   FUNCTION_LIST1
-% Assumes: FUNCTION_LIST2
+% TestIdentity.m - Philipp Allgeuer - 22/10/14
+% Tests:   *Identity
+% Assumes: None
 %
-% function [Pass] = TESTTEMPLATE(N, Tol, Inter)
+% function [Pass] = TestIdentity(N, Tol, Inter)
 %
 % N     ==> Number of test cases to use in each test
 % Tol   ==> Numeric tolerance to use for testing
@@ -10,11 +10,11 @@
 % Pass  ==> Boolean flag whether all tests were passed
 
 % Main function
-function [Pass] = TESTTEMPLATE(N, Tol, Inter)
+function [Pass] = TestIdentity(N, Tol, Inter)
 
 	% Process function inputs
 	if nargin < 1 || ~isscalar(N) || N < 1
-		N = 100; % TODO: Set a meaningful default N
+		N = 1;
 	end
 	N = min(round(N),1000000);
 	if nargin < 2 || Tol <= 0
@@ -22,32 +22,33 @@ function [Pass] = TESTTEMPLATE(N, Tol, Inter)
 	end
 
 	% Begin test script
-	[P, Nnormal] = BeginTestScript('TESTTEMPLATE', N, Tol);
+	P = BeginTestScript('TestIdentity', N, Tol);
 
 	%
-	% Test FUNCTION
+	% Test *Identity
 	%
 	
 	% Begin test
-	[N, ErrA, ErrB] = BeginTest('FUNCTION', Nnormal);
+	BeginTest('*Identity');
 	B = BeginBoolean();
 	
 	% Boolean conditions
-	B = B && BOOLEAN_TESTS;
-	
-	% Perform the required testing
-	TESTS_THAT_CALCULATE_ERRORS_ERRA_AND_ERRB;
+	B = B && all(EulerIdentity == [0 0 0]);
+	B = B && all(FusedIdentity == [0 0 0 1]);
+	B = B && all(QuatIdentity == [1 0 0 0]);
+	B = B && all(all(RotmatIdentity == eye(3)));
+	B = B && all(TiltIdentity == [0 0 0]);
 	
 	% End test
 	P = P & EndBoolean(B);
-	P = P & EndTest(Tol, 'TESTITEMNAME1', ErrA, 'TESTITEMNAME2', ErrB);
+	P = P & EndTest();
 	
 	%
 	% End of test script
 	%
 
 	% End test script
-	EndTestScript('TESTTEMPLATE', P);
+	EndTestScript('TestIdentity', P);
 
 	% Set the output pass flag
 	if nargout >= 1

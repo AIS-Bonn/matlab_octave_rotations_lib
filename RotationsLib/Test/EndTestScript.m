@@ -19,9 +19,17 @@ function EndTestScript(Title, Pass)
 		fprintf('Total result: * PASS *                                        * PASS *\n');
 	else
 		fprintf('Total result: * FAIL *                                        * FAIL *\n');
+		warning('Test script failed!');
 	end
 	fprintf('Completed!\n');
 	fprintf('\n');
+	
+	% Flush the printed output to screen
+	if isOctave
+		fflush(stdout);
+	else
+		drawnow('update');
+	end
 
 end
 % EOF

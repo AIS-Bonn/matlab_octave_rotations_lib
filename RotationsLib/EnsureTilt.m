@@ -43,10 +43,12 @@ function [Tout, WasBad] = EnsureTilt(Tin, Tol, Unique)
 	
 	% Check whether we need to make the representation unique
 	if Unique
-		if Tout(3) <= Tol || Tout(3) >= pi-Tol
+		Near0   = (abs(cos(Tout(3)) - 1) <= Tol);
+		Near180 = (abs(cos(Tout(3)) + 1) <= Tol);
+		if Near0 || Near180
 			Tout(2) = 0;
 		end
-		if Tout(3) >= pi-Tol
+		if Near180
 			Tout(1) = 0;
 		end
 	end

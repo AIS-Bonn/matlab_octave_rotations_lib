@@ -33,7 +33,7 @@ function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
 	Fout = Fin;
 
 	% Wrap the angles to (-pi,pi]
-	Fout = pi - mod(pi - Fout, 2*pi);
+	Fout(1:3) = pi - mod(pi - Fout(1:3), 2*pi);
 	
 	% Enforce h to {-1,1}
 	if Fout(4) >= 0
@@ -50,9 +50,11 @@ function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
 
 	% Check whether we need to make the representation unique
 	if Unique
-		if L1Norm >= pi/2
+		SineSum = sin(Fout(2))^2 + sin(Fout(3))^2;
+		if SineSum >= 1 - Tol
 			Fout(4) = 1;
 		end
+		L1Norm = abs(Fout(2)) + abs(Fout(3));
 		if L1Norm <= Tol && Fout(4) == -1
 			Fout(1) = 0;
 		end

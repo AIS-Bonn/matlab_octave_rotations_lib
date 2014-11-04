@@ -16,20 +16,22 @@
 % Main function
 function [Fused, Tilt] = FusedFromQuat(Quat)
 
-	% Calculate and wrap the fused yaw
+	% Calculate the fused yaw
 	psi = 2.0*atan2(Quat(4),Quat(1));
 	psi = pi - mod(pi - psi, 2*pi);
 	
-	% Calculate the fused pitch and roll
-	stheta = 2.0*(Quat(3)*Quat(1) - Quat(2)*Quat(4));
-	sphi = 2.0*(Quat(3)*Quat(4) + Quat(2)*Quat(1));
-	stheta = max(min(stheta,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
-	sphi = max(min(sphi,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
+	% Calculate the fused pitch
+	rawstheta = 2.0*(Quat(3)*Quat(1)-Quat(2)*Quat(4));
+	stheta = max(min(rawstheta,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
 	theta = asin(stheta);
+	
+	% Calculate the fused roll
+	rawsphi = 2.0*(Quat(3)*Quat(4)+Quat(2)*Quat(1));
+	sphi = max(min(rawsphi,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
 	phi = asin(sphi);
 	
 	% See which hemisphere we're in
-	hzzG = 0.5 - (Quat(2)*Quat(2) + Quat(3)*Quat(3));
+	hzzG = (Quat(1)*Quat(1) + Quat(4)*Quat(4)) - 0.5;
 	if hzzG >= 0
 		h = 1;
 	else
@@ -41,9 +43,9 @@ function [Fused, Tilt] = FusedFromQuat(Quat)
 	
 	% Construct the output tilt angles
 	if nargout >= 2
-		hzzG = max(min(hzzG,0.5),-0.5); % Note: If Quat is valid then this should only trim at most a few eps...
-		alpha = acos(2.0*hzzG);
-		gamma = atan2(stheta,sphi);
+		gamma = atan2(rawstheta,rawsphi);
+		calpha = max(min(2.0*hzzG,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
+		alpha = acos(calpha);
 		Tilt = [psi gamma alpha];
 	end
 

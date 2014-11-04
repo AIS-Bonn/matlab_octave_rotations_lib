@@ -9,7 +9,7 @@
 
 % Display a header
 disp('');
-disp('Loading Rotations Library v1.1.0...');
+disp('Loading Rotations Library v1.2.0...');
 
 % Add the path of this script to the working path
 ScriptPath = [pwd '/LoadRotations.m'];

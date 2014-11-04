@@ -21,9 +21,8 @@ function [Tilt] = TiltFromRotmat(Rotmat)
 	% Calculate the tilt axis angle
 	gamma = atan2(-Rotmat(3,1),Rotmat(3,2));
 	
-	% Calculate and wrap the fused yaw
-	psi = atan2(Rotmat(1,3),-Rotmat(2,3)) - gamma;
-	psi = pi - mod(pi - psi, 2*pi);
+	% Calculate the fused yaw
+	psi = FYawOfRotmat(Rotmat);
 	
 	% Return the tilt angles representation
 	Tilt = [psi gamma alpha];

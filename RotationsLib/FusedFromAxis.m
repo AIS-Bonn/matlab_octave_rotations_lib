@@ -7,7 +7,7 @@
 %           either given as the vector [ux uy uz] or one of {'x', 'y', 'z'}
 % Angle ==> The angle of the rotation given by the right hand rule
 % Fused ==> Equivalent fused angles rotation
-% Quat  ==> Equivalent quaternion rotation (not available when using 'x', 'y', 'z')
+% Quat  ==> Equivalent quaternion rotation
 
 % Main function
 function [Fused, Quat] = FusedFromAxis(Axis, Angle)
@@ -22,6 +22,10 @@ function [Fused, Quat] = FusedFromAxis(Axis, Angle)
 	% Wrap the rotation angle to (-pi,pi]
 	Angle = pi - mod(pi - Angle, 2*pi);
 	
+	% Precompute the required sin and cos terms
+	hcang = cos(0.5*Angle);
+	hsang = sin(0.5*Angle);
+	
 	% Handle case of standard axis rotations
 	if strcmpi(Axis, 'x')
 		if abs(Angle) <= pi/2
@@ -31,6 +35,7 @@ function [Fused, Quat] = FusedFromAxis(Axis, Angle)
 		else
 			Fused = [0 0 -pi-Angle -1];
 		end
+		Quat = [hcang hsang 0 0];
 		return;
 	elseif strcmpi(Axis, 'y')
 		if abs(Angle) <= pi/2
@@ -40,9 +45,11 @@ function [Fused, Quat] = FusedFromAxis(Axis, Angle)
 		else
 			Fused = [0 -pi-Angle 0 -1];
 		end
+		Quat = [hcang 0 hsang 0];
 		return;
 	elseif strcmpi(Axis, 'z')
 		Fused = [Angle 0 0 1];
+		Quat = [hcang 0 0 hsang];
 		return;
 	end
 	
@@ -60,10 +67,6 @@ function [Fused, Quat] = FusedFromAxis(Axis, Angle)
 	else
 		Axis = Axis/AxisNorm;
 	end
-	
-	% Precompute the required sin and cos terms
-	hcang = cos(0.5*Angle);
-	hsang = sin(0.5*Angle);
 	
 	% Construct the required rotation
 	Quat = [hcang hsang*Axis(:)'];

@@ -13,7 +13,7 @@
 function [Tout, FYaw, TFYaw] = TiltNoFYaw(Tin)
 
 	% Calculate the fused yaw of the input
-	FYaw = T(1);
+	FYaw = Tin(1);
 	
 	% Construct the fused yaw component of the rotation
 	TFYaw = [FYaw 0 0];

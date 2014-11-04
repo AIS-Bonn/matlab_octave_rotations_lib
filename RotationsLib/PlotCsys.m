@@ -46,6 +46,9 @@ function PlotCsys(R, label, P, L, varargin)
 	if isscalar(L)
 		L = [L L L];
 	end
+	L = abs(L);
+	L = L(:)';
+	P = P(:)';
 	if any(size(R) ~= 3)
 		error('R doesn''t have the right dimensions for a rotation matrix or quaternion!');
 	end
@@ -62,7 +65,7 @@ function PlotCsys(R, label, P, L, varargin)
 	GZAxis = LocalToGlobal(LZAxis, P, R);
 	
 	% Generate the data required for the axes labels
-	TSCL = abs(L)*1.1;
+	TSCL = L*1.1;
 	LTLbl = diag(TSCL);
 	GTLbl = LocalToGlobal(LTLbl, P, R);
 	

@@ -7,7 +7,7 @@
 %           either given as the vector [ux uy uz] or one of {'x', 'y', 'z'}
 % Angle ==> The angle of the rotation given by the right hand rule
 % Tilt  ==> Equivalent tilt angles rotation
-% Quat  ==> Equivalent quaternion rotation (not available when using 'x', 'y', 'z')
+% Quat  ==> Equivalent quaternion rotation
 
 % Main function
 function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
@@ -22,6 +22,10 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 	% Wrap the rotation angle to (-pi,pi]
 	Angle = pi - mod(pi - Angle, 2*pi);
 	
+	% Precompute the required sin and cos terms
+	hcang = cos(0.5*Angle);
+	hsang = sin(0.5*Angle);
+	
 	% Handle case of standard axis rotations
 	if strcmpi(Axis, 'x')
 		if Angle >= 0
@@ -29,6 +33,7 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 		else
 			Tilt = [0 pi -Angle];
 		end
+		Quat = [hcang hsang 0 0];
 		return;
 	elseif strcmpi(Axis, 'y')
 		if Angle >= 0
@@ -36,9 +41,11 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 		else
 			Tilt = [0 -pi/2 -Angle];
 		end
+		Quat = [hcang 0 hsang 0];
 		return;
 	elseif strcmpi(Axis, 'z')
 		Tilt = [Angle 0 0];
+		Quat = [hcang 0 0 hsang];
 		return;
 	end
 	
@@ -56,10 +63,6 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 	else
 		Axis = Axis/AxisNorm;
 	end
-	
-	% Precompute the required sin and cos terms
-	hcang = cos(0.5*Angle);
-	hsang = sin(0.5*Angle);
 	
 	% Construct the required rotation
 	Quat = [hcang hsang*Axis(:)'];

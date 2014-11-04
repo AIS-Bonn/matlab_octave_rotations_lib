@@ -17,7 +17,7 @@
 function [Quat] = QuatFromRotmat(Rotmat)
 
 	% Calculate the required quaternion
-	t = trace(Rotmat);
+	t = Rotmat(1,1) + Rotmat(2,2) + Rotmat(3,3);
 	if t >= 0.0
 		r = sqrt(1+t);
 		s = 0.5/r;

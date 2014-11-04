@@ -13,8 +13,7 @@
 function [Rout, FYaw, RFYaw] = RotmatNoFYaw(Rin)
 
 	% Calculate the fused yaw of the input
-	FYaw = atan2(Rin(1,3),-Rin(2,3)) - atan2(-Rin(3,1),Rin(3,2));
-	FYaw = pi - mod(pi - FYaw, 2*pi);
+	FYaw = FYawOfRotmat(Rin);
 	
 	% Construct the fused yaw component of the rotation
 	cFYaw = cos(FYaw);

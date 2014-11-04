@@ -18,8 +18,7 @@ function [Einv] = EulerInv(E)
 	sphi = sin(E(3));
 
 	% Extract the sin of the theta angle
-	newsth = -(cpsi*sth*cphi+spsi*sphi);
-	newsth = max(min(newsth,1.0),-1.0); % Note: This should only trim at most a few eps...
+	newsth = max(min(-(cpsi*sth*cphi+spsi*sphi),1.0),-1.0); % Note: This should only trim at most a few eps...
 
 	% Calculate the required inverse Euler angles representation
 	Einv = [atan2(cpsi*sth*sphi-spsi*cphi,cpsi*cth) asin(newsth) atan2(spsi*sth*cphi-cpsi*sphi,cth*cphi)];

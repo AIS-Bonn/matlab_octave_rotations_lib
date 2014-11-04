@@ -2,7 +2,7 @@
 % Checks whether a rotation matrix is valid to within a certain
 % tolerance and fixes it if not.
 %
-% function [Rout, WasBad, Det] = EnsureRotmat(Rin, Tol)
+% function [Rout, WasBad] = EnsureRotmat(Rin, Tol)
 %
 % A 3x3 rotation matrix is valid if R'*R = I and det(R) = 1. Rotation matrices
 % that are valid are always automatically unique.
@@ -11,10 +11,9 @@
 % Tol    ==> Tolerance bound for the L_inf norm of the input/output difference
 % Rout   ==> Output rotation matrix (fixed)
 % WasBad ==> Boolean flag whether the input and output differ more than Tol
-% Det    ==> Determinant of the input rotation matrix
 
 % Main function
-function [Rout, WasBad, Det] = EnsureRotmat(Rin, Tol)
+function [Rout, WasBad] = EnsureRotmat(Rin, Tol)
 
 	% Default arguments
 	if nargin < 2
@@ -39,11 +38,6 @@ function [Rout, WasBad, Det] = EnsureRotmat(Rin, Tol)
 
 	% Work out whether we changed anything
 	WasBad = any(any(abs(Rout - Rin) > Tol));
-	
-	% Calculate the input rotation matrix determinant
-	if nargout >= 3
-		Det = det(Rin);
-	end
 
 end
 % EOF

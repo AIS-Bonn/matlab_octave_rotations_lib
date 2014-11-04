@@ -11,45 +11,68 @@
 % Main function
 function [Quat, Tilt] = QuatFromFused(Fused)
 
-	% Precalculate the sin values
-	sth  = sin(Fused(2));
-	sphi = sin(Fused(3));
+	% Precalculate the required trigonometric values
+	hpsi  = 0.5*Fused(1);
+	chpsi = cos(hpsi);
+	shpsi = sin(hpsi);
+	sth   = sin(Fused(2));
+	sphi  = sin(Fused(3));
 	
-	% Calculate the tilt angle alpha
+	% Calculate the cos of the tilt angle
 	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0
-		alpha = pi/2;
+		calpha = 0;
 	else
 		if Fused(4) >= 0
 			calpha =  sqrt(1-crit);
 		else
 			calpha = -sqrt(1-crit);
 		end
-		alpha = acos(calpha);
 	end
 	
-	% Calculate the tilt axis angle gamma
-	gamma = atan2(sth,sphi);
+	% Construct the output quaternion using the best conditioned expression
+	if calpha >= 0
+		
+		% Precalculate terms involved in the quaternion expression
+		C = 1 + calpha;
+		
+		% Calculate the required quaternion
+		Quat = [C*chpsi sphi*chpsi-sth*shpsi sphi*shpsi+sth*chpsi C*shpsi];
+		Quat = Quat/sqrt(C*C+crit); % Note: norm(Quat) = sqrt(C*C+sth*sth+sphi*sphi) >= 1
 	
-	% Evaluate the required intermediate angles
-	halpha = 0.5*alpha;
-	hpsi = 0.5*Fused(1);
-	hgampsi = gamma + hpsi;
+		% Return the tilt angles representation
+		if nargout >= 2
+			gamma = atan2(sth,sphi);
+			alpha = acos(calpha);
+			Tilt = [Fused(1) gamma alpha];
+		end
+		
+	else
+		
+		% Calculate the sin of the tilt angle
+		if crit >= 1.0
+			salpha = 1.0;
+		else
+			salpha = sqrt(crit);
+		end
+		
+		% Precalculate terms involved in the quaternion expression
+		C = 1 - calpha;
+		gamma = atan2(sth,sphi);
+		hgampsi = gamma + hpsi;
+		chgampsi = cos(hgampsi);
+		shgampsi = sin(hgampsi);
+		
+		% Calculate the required quaternion
+		Quat = [salpha*chpsi C*chgampsi C*shgampsi salpha*shpsi];
+		Quat = Quat/sqrt(C*C+crit); % Note: norm(Quat) = sqrt(C*C+crit) >= 1
 	
-	% Precalculate trigonometric terms involved in the quaternion expression
-	chalpha = cos(halpha);
-	shalpha = sin(halpha);
-	chpsi = cos(hpsi);
-	shpsi = sin(hpsi);
-	chgampsi = cos(hgampsi);
-	shgampsi = sin(hgampsi);
-	
-	% Calculate the required quaternion
-	Quat = [chalpha*chpsi shalpha*chgampsi shalpha*shgampsi chalpha*shpsi];
-	
-	% Return the tilt angles representation
-	if nargout >= 2
-		Tilt = [Fused(1) gamma alpha];
+		% Return the tilt angles representation
+		if nargout >= 2
+			alpha = acos(calpha);
+			Tilt = [Fused(1) gamma alpha];
+		end
+		
 	end
 
 end

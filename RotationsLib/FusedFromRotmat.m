@@ -15,19 +15,17 @@
 
 % Main function
 function [Fused, Tilt] = FusedFromRotmat(Rotmat)
-
-	% Calculate the fused pitch and roll
-	stheta = -Rotmat(3,1);
-	sphi = Rotmat(3,2);
-	stheta = max(min(stheta,1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
-	sphi = max(min(sphi,1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
-	theta = asin(stheta);
-	phi = asin(sphi);
 	
-	% Calculate and wrap the fused yaw
-	gamma = atan2(stheta,sphi);
-	psi = atan2(Rotmat(1,3),-Rotmat(2,3)) - gamma;
-	psi = pi - mod(pi - psi, 2*pi);
+	% Calculate the fused yaw
+	psi = FYawOfRotmat(Rotmat);
+
+	% Calculate the fused pitch
+	stheta = max(min(-Rotmat(3,1),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
+	theta = asin(stheta);
+	
+	% Calculate the fused roll
+	sphi = max(min(Rotmat(3,2),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
+	phi = asin(sphi);
 
 	% See which hemisphere we're in
 	if Rotmat(3,3) >= 0
@@ -41,6 +39,7 @@ function [Fused, Tilt] = FusedFromRotmat(Rotmat)
 	
 	% Construct the output tilt angles
 	if nargout >= 2
+		gamma = atan2(-Rotmat(3,1),Rotmat(3,2));
 		calpha = max(min(Rotmat(3,3),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
 		alpha = acos(calpha);
 		Tilt = [psi gamma alpha];

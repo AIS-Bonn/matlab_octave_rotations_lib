@@ -1,7 +1,7 @@
 % FusedFromEuler.m - Philipp Allgeuer - 22/10/14
 % Converts a ZYX Euler angles rotation to the corresponding fused angles representation.
 %
-% function [Fused, Tilt] = FusedFromEuler(Euler)
+% function [Fused, Rotmat, Tilt] = FusedFromEuler(Euler)
 %
 % The output ranges are:
 % Fused yaw:   psi   is in (-pi,pi]
@@ -9,37 +9,29 @@
 % Fused roll:  phi   is in [-pi/2,pi/2]
 % Hemisphere:  h     is in {-1,1}
 % 
-% Euler ==> Input ZYX Euler angles rotation
-% Fused ==> Equivalent fused angles rotation
-% Tilt  ==> Equivalent tilt angles rotation
+% Euler  ==> Input ZYX Euler angles rotation
+% Fused  ==> Equivalent fused angles rotation
+% Rotmat ==> Equivalent rotation matrix
+% Tilt   ==> Equivalent tilt angles rotation
 
 % Main function
-function [Fused, Tilt] = FusedFromEuler(Euler)
+function [Fused, Rotmat, Tilt] = FusedFromEuler(Euler)
 
-	% Precalculate the sin and cos values
-	cepsi = cos(Euler(1));
-	ceth  = cos(Euler(2));
-	cephi = cos(Euler(3));
-	sepsi = sin(Euler(1));
-	seth  = sin(Euler(2));
-	sephi = sin(Euler(3));
-	
-	% Calculate intermediate terms
-	R32 = ceth*sephi;
-	sce = seth*cephi;
+	% Calculation of the fused yaw in a numerically stable manner requires the complete rotation matrix representation
+	Rotmat = RotmatFromEuler(Euler);
 
-	% Calculate and wrap the fused yaw
-	gamma = atan2(seth,R32);
-	psi = atan2(cepsi*sce+sepsi*sephi,cepsi*sephi-sepsi*sce) - gamma;
-	psi = pi - mod(pi - psi, 2*pi);
+	% Calculate the fused yaw
+	psi = FYawOfRotmat(Rotmat);
 
-	% Calculate the fused pitch and roll
+	% Calculate the fused pitch
 	theta = Euler(2); % ZYX Euler pitch is equivalent to fused pitch!
-	phi = asin(R32);
+	
+	% Calculate the fused roll
+	sphi = max(min(Rotmat(3,2),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
+	phi = asin(sphi);
 	
 	% See which hemisphere we're in
-	calpha = ceth*cephi;
-	if calpha >= 0
+	if Rotmat(3,3) >= 0
 		h = 1;
 	else
 		h = -1;
@@ -49,7 +41,9 @@ function [Fused, Tilt] = FusedFromEuler(Euler)
 	Fused = [psi theta phi h];
 	
 	% Construct the output tilt angles
-	if nargout >= 2
+	if nargout >= 3
+		gamma = atan2(-Rotmat(3,1),Rotmat(3,2));
+		calpha = max(min(Rotmat(3,3),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
 		alpha = acos(calpha);
 		Tilt = [psi gamma alpha];
 	end

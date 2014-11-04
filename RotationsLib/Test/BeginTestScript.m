@@ -33,6 +33,13 @@ function [Pass, Nnormal, Nlarge, Nsmall, Ntiny] = BeginTestScript(Title, N, Tol)
 	
 	% Initialise the pass flag
 	Pass = true;
+	
+	% Flush the printed output to screen
+	if isOctave
+		fflush(stdout);
+	else
+		drawnow('update');
+	end
 
 end
 % EOF

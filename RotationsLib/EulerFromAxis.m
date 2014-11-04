@@ -7,7 +7,7 @@
 %           either given as the vector [ux uy uz] or one of {'x', 'y', 'z'}
 % Angle ==> The angle of the rotation given by the right hand rule
 % Euler ==> Equivalent ZYX Euler angles rotation
-% Quat  ==> Equivalent quaternion rotation (not available when using 'x', 'y', 'z')
+% Quat  ==> Equivalent quaternion rotation
 
 % Main function
 function [Euler, Quat] = EulerFromAxis(Axis, Angle)
@@ -22,9 +22,14 @@ function [Euler, Quat] = EulerFromAxis(Axis, Angle)
 	% Wrap the rotation angle to (-pi,pi]
 	Angle = pi - mod(pi - Angle, 2*pi);
 	
+	% Precompute the required sin and cos terms
+	hcang = cos(0.5*Angle);
+	hsang = sin(0.5*Angle);
+	
 	% Handle case of standard axis rotations
 	if strcmpi(Axis, 'x')
 		Euler = [0 0 Angle];
+		Quat = [hcang hsang 0 0];
 		return;
 	elseif strcmpi(Axis, 'y')
 		if abs(Angle) <= pi/2
@@ -34,9 +39,11 @@ function [Euler, Quat] = EulerFromAxis(Axis, Angle)
 		else
 			Euler = [pi -pi-Angle pi];
 		end
+		Quat = [hcang 0 hsang 0];
 		return;
 	elseif strcmpi(Axis, 'z')
 		Euler = [Angle 0 0];
+		Quat = [hcang 0 0 hsang];
 		return;
 	end
 	
@@ -54,10 +61,6 @@ function [Euler, Quat] = EulerFromAxis(Axis, Angle)
 	else
 		Axis = Axis/AxisNorm;
 	end
-	
-	% Precompute the required sin and cos terms
-	hcang = cos(0.5*Angle);
-	hsang = sin(0.5*Angle);
 	
 	% Construct the required rotation
 	Quat = [hcang hsang*Axis(:)'];

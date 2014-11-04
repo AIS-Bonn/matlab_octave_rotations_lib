@@ -15,8 +15,7 @@
 function [Euler] = EulerFromQuat(Quat)
 
 	% Extract the sin of the theta angle
-	sth = 2.0*(Quat(1)*Quat(3)-Quat(4)*Quat(2));
-	sth = max(min(sth,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
+	sth = max(min(2.0*(Quat(1)*Quat(3)-Quat(4)*Quat(2)),1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
 
 	% Calculate the required Euler angles
 	Q3sq = Quat(3)*Quat(3);

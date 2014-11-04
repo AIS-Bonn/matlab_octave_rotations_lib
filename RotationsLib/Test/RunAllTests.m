@@ -26,15 +26,17 @@ function [Pass] = RunAllTests(Speed, Inter)
 	end
 
 	% Process speed parameter
-	switch Speed
-		case 'Fast'
+	switch lower(Speed)
+		case 'fast'
 			S = 1;
-		case 'Normal'
+		case 'normal'
 			S = 5;
-		case 'Slow'
+		case 'slow'
 			S = 20;
-		case 'Ultraslow'
+		case 'ultraslow'
 			S = 50;
+		case 'timewarpslow' % Intended for developer only...
+			S = 500;
 		otherwise
 			error('Unrecognised speed parameter!');
 	end
@@ -58,22 +60,89 @@ function [Pass] = RunAllTests(Speed, Inter)
 	LTol = 512*eps;
 	MTol = 128*eps;
 	HTol = 32*eps;
+	
+	% Retrieve the start time
+	StartTime = tic;
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Start of testing  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	% Tests:   *Identity
+	% Assumes: None
+	P = P & TestIdentity(1*S, HTol, Inter);
 
 	% Tests:   Rand*, RandAng, RandVec, RandUnitVec
 	% Assumes: None
-	P = P & TestRand(1000000*S, MTol, Inter);
+	P = P & TestRand(10000*S, MTol, Inter);
+	
+	% Tests:   PlotCsys
+	% Assumes: Rand*
+	P = P & TestPlotCsys(1*S, MTol, Inter);
+	
+	% Tests:   *Equal, Ensure*
+	% Assumes: Rand*
+	P = P & TestEqual(600*S, MTol, Inter);
+	
+	% Tests:   *From*
+	% Assumes: Rand*, *Equal
+	P = P & TestConversions(250*S, HTol, Inter);
 
 	% Tests:   Compose*
 	% Assumes: Rand*, *Equal, RotmatFrom*, *FromRotmat
 	P = P & TestCompose(500*S, HTol, Inter);
+	
+	% Tests:   *FromAxis
+	% Assumes: RandVec, RandAng, *Equal, *FromQuat
+	P = P & TestFromAxis(600*S, MTol, Inter);
+	
+	% Tests:   *Inv
+	% Assumes: Rand*, QuatFrom*, Compose*, *Equal
+	P = P & TestInv(1000*S, LTol, Inter);
+	
+	% Tests:   *NoEYaw
+	% Assumes: Rand*, *Equal, EulerFrom*, RotmatFromQuat
+	P = P & TestNoEYaw(1600*S, MTol, Inter);
+	
+	% Tests:   *NoFYaw
+	% Assumes: Rand*, FusedEqual, FusedFrom*
+	P = P & TestNoFYaw(1500*S, MTol, Inter);
+	
+	% Tests:   *RotVec
+	% Assumes: Rand*, RandVec, RotmatFrom*
+	P = P & TestRotVec(700*S, MTol, Inter);
+	
+	% Tests:   EYawOf*
+	% Assumes: Rand*, EulerFrom*
+	P = P & TestEYawOf(3000*S, HTol, Inter);
+	
+	% Tests:   FYawOf*
+	% Assumes: Rand*, FusedFrom*
+	P = P & TestFYawOf(3000*S, HTol, Inter);
+	
+	% Tests:   AngVelFrom*
+	% Assumes: Rand*, RandUnitVec, QuatFrom*, QuatInv, ComposeQuat
+	P = P & TestAngVelFrom(650*S, MTol, Inter);
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  End of testing  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	% Calculate the total testing time
+	if isOctave
+		TimeTested = double(tic - StartTime) * 1e-6;
+	else
+		TimeTested = toc(StartTime);
+	end
+	Hours = floor(TimeTested/3600);
+	TimeTested = TimeTested - Hours*3600;
+	Mins = floor(TimeTested/60);
+	Secs = TimeTested - Mins*60;
+	
+	% Display the total testing time
+	fprintf('##############################\n');
+	fprintf('Total time taken: %02d:%02d:%06.3f\n', Hours, Mins, Secs);
+	fprintf('\n');
 
 	% Convert the pass flag into a string
 	if P

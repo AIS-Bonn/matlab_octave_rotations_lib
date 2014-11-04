@@ -25,9 +25,23 @@ function [Equal, Err] = FusedEqual(F, G, Tol)
 	% Convert both fused angles into their unique representations
 	F = EnsureFused(F, Tol, true);
 	G = EnsureFused(G, Tol, true);
+	
+	% Handle angle wrapping issues
+	if abs(F(1)-G(1)) > pi
+		if F(1) > G(1)
+			G(1) = G(1) + 2*pi;
+		else
+			F(1) = F(1) + 2*pi;
+		end
+	end
+	
+	% Construct the vectors to compare
+	% The fused pitch and roll suffer from the numerical insensitivity of asin, so the sin thereof is checked
+	FComp = [F(1) sin(F(2)) sin(F(3)) F(4)];
+	GComp = [G(1) sin(G(2)) sin(G(3)) G(4)];
 
 	% Calculate the deviation between the two rotations
-	Err = max(abs(F-G));
+	Err = max(abs(FComp-GComp));
 
 	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);

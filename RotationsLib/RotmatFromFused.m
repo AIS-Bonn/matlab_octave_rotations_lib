@@ -20,7 +20,7 @@ function [Rotmat, Tilt] = RotmatFromFused(Fused)
 	sth  = sin(Fused(2));
 	sphi = sin(Fused(3));
 	
-	% Calculate the sin and cos of the tilt angle alpha
+	% Calculate the sin and cos of the tilt angle
 	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0
 		salpha = 1.0;

@@ -17,6 +17,7 @@ function [B] = EndBoolean(B)
 		fprintf('All boolean conditions passed!                                * PASS *\n');
 	else
 		fprintf('Failed due to boolean conditions!                             * FAIL *\n');
+		warning('Boolean test(s) failed!');
 	end
 	fprintf('\n');
 

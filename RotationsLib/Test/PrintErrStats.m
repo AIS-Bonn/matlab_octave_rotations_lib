@@ -83,6 +83,13 @@ function [Pass] = PrintErrStats(Err, Title, Tol)
 		end
 	end
 	fprintf('\n');
+	
+	% Flush the printed output to screen
+	if isOctave
+		fflush(stdout);
+	else
+		drawnow('update');
+	end
 
 end
 % EOF

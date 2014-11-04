@@ -20,9 +20,9 @@ function [Pass] = TestRand(N, Tol, Inter)
 
 	% Process function inputs
 	if nargin < 1 || ~isscalar(N) || N < 1
-		N = 1000000;
+		N = 10000;
 	end
-	N = round(N);
+	N = min(round(N),1000000);
 	if nargin < 2 || Tol <= 0
 		Tol = 128*eps;
 	end
@@ -218,7 +218,7 @@ function [Pass] = TestRand(N, Tol, Inter)
 	if Inter
 		BeginTest('Interactive');
 		B = BeginBoolean();
-		B = B & TestRandInter();
+		B = B && TestRandInter();
 		P = P & EndBoolean(B);
 		P = P & EndTest();
 	end
@@ -234,14 +234,21 @@ function [Pass] = TestRand(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
+	
+	% Clear the function variable workspace
+	if isOctave
+		clear -x Pass
+	else
+		clearvars -except Pass
+	end
 
 end
 
 % Interactive testing component
-function P = TestRandInter()
+function [B] = TestRandInter()
 
 	% Initialise variables
-	P = true;
+	B = true;
 	h = [];
 
 	% Rand fused angle plots
@@ -267,13 +274,21 @@ function P = TestRandInter()
 	fprintf('Press enter to close any opened figures and continue...');
 	pause;
 	fprintf('\n');
-	close(h);
+	for f = h
+		if ishandle(f)
+			close(f);
+		end
+	end
+	pause(0.3);
 
 end
 
 % Function to test ranges
-function B = TestRanges(B, D, N, ElemSize, LBnd, UBnd)
+function [B] = TestRanges(B, D, N, ElemSize, LBnd, UBnd)
 
+	% Decide on an acceptable actual/expected proximity factor given the number of samples N
+	Fact = min(max(1500/N,0.01),1);
+	
 	% Calculate the actual and expected bounds
 	actmin = min(D);
 	expmin = LBnd;
@@ -286,9 +301,9 @@ function B = TestRanges(B, D, N, ElemSize, LBnd, UBnd)
 	% Boolean conditions
 	B = B && all(size(D) == [N ElemSize]);
 	B = B && all(all(D >= repmat(expmin,N,1))) && all(all(D <= repmat(expmax,N,1)));
-	B = B && all(actmin <= expmin + 0.01*expdiff);
-	B = B && all(actmax >= expmax - 0.01*expdiff);
-	B = B && all(actmean >= expmean - 0.1*expdiff) && all(actmean <= expmean + 0.1*expdiff);
+	B = B && all(actmin <= expmin + Fact*expdiff);
+	B = B && all(actmax >= expmax - Fact*expdiff);
+	B = B && all(actmean >= expmean - 2*Fact*expdiff) && all(actmean <= expmean + 2*Fact*expdiff);
 	
 	% Human checking
 	fprintf('Minimums:   %s\n'  ,sprintf('%10.4g ',actmin));

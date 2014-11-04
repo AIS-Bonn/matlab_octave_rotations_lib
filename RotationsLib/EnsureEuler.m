@@ -40,10 +40,10 @@ function [Eout, WasBad] = EnsureEuler(Ein, Tol, Unique)
 	
 	% Make positive and negative gimbal lock representations unique
 	if Unique
-		if abs(Eout(2) - pi/2) <= Tol
+		if abs(sin(Eout(2)) - 1) <= Tol
 			Eout(3) = Eout(3) - Eout(1);
 			Eout(1) = 0;
-		elseif abs(Eout(2) + pi/2) <= Tol
+		elseif abs(sin(Eout(2)) + 1) <= Tol
 			Eout(3) = Eout(3) + Eout(1);
 			Eout(1) = 0;
 		end

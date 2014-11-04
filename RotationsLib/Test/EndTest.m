@@ -22,7 +22,12 @@ function [Pass] = EndTest(Tol, varargin)
 	% Print the error statistics and see whether the test was passed
 	Pass = true;
 	for k = 1:2:(nargin-2)
-		Pass = Pass & PrintErrStats(varargin{k+1},varargin{k}, Tol);
+		Flag = PrintErrStats(varargin{k+1}, varargin{k}, Tol);
+		Pass = Pass & Flag;
+		if ~Flag
+			warning('Error test(s) failed!');
+			disp(' ');
+		end
 	end
 	
 	% Stop timing
