@@ -1,4 +1,4 @@
-% RotmatFromAxis.m - Philipp Allgeuer - 22/10/14
+% RotmatFromAxis.m - Philipp Allgeuer - 05/11/14
 % Constructs a rotation matrix based on an axis-angle specification.
 %
 % function [Rotmat] = RotmatFromAxis(Axis, Angle)

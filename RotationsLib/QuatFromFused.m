@@ -1,4 +1,4 @@
-% QuatFromFused.m - Philipp Allgeuer - 22/10/14
+% QuatFromFused.m - Philipp Allgeuer - 05/11/14
 % Converts a fused angles rotation to the corresponding quaternion representation.
 %
 % function [Quat, Tilt] = QuatFromFused(Fused)

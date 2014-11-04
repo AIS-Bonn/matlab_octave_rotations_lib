@@ -1,4 +1,4 @@
-% FYawOfRotmat.m - Philipp Allgeuer - 22/10/14
+% FYawOfRotmat.m - Philipp Allgeuer - 05/11/14
 % Calculates the fused yaw of a rotation matrix.
 %
 % function [FYaw] = FYawOfRotmat(Rotmat)

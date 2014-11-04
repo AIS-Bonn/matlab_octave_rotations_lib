@@ -1,4 +1,4 @@
-% TestInv.m - Philipp Allgeuer - 22/10/14
+% TestInv.m - Philipp Allgeuer - 05/11/14
 % Tests:   *Inv
 % Assumes: Rand*, QuatFrom*, Compose*, *Equal
 %
@@ -50,7 +50,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 	
 	% End test
 	P = P & EndBoolean(B);
-	P = P & EndTest(Tol, 'Composition E*inv(E)', ErrA, 'Composition inv(E)*E', ErrB);
+	P = P & EndTest(4*Tol, 'Composition E*inv(E)', ErrA, 'Composition inv(E)*E', ErrB);
 
 	%
 	% Test FusedInv
@@ -78,7 +78,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 	
 	% End test
 	P = P & EndBoolean(B);
-	P = P & EndTest(Tol, 'Composition F*inv(F)', ErrA, 'Composition inv(F)*F', ErrB);
+	P = P & EndTest(4*Tol, 'Composition F*inv(F)', ErrA, 'Composition inv(F)*F', ErrB);
 
 	%
 	% Test QuatInv
@@ -158,7 +158,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 	
 	% End test
 	P = P & EndBoolean(B);
-	P = P & EndTest(Tol, 'Composition T*inv(T)', ErrA, 'Composition inv(T)*T', ErrB);
+	P = P & EndTest(4*Tol, 'Composition T*inv(T)', ErrA, 'Composition inv(T)*T', ErrB);
 	
 	%
 	% End of test script

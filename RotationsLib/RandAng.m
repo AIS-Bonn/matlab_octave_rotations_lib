@@ -1,4 +1,4 @@
-% RandAng.m - Philipp Allgeuer - 22/10/14
+% RandAng.m - Philipp Allgeuer - 05/11/14
 % Generates a random angle.
 %
 % function [Ang] = RandAng(N, Range)

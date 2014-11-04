@@ -1,4 +1,4 @@
-% EndBoolean.m - Philipp Allgeuer - 22/10/14
+% EndBoolean.m - Philipp Allgeuer - 05/11/14
 % Convenience function for testing boolean conditions.
 %
 % function [B] = EndBoolean(B)

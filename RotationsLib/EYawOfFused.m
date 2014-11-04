@@ -1,4 +1,4 @@
-% EYawOfFused.m - Philipp Allgeuer - 22/10/14
+% EYawOfFused.m - Philipp Allgeuer - 05/11/14
 % Calculates the ZYX yaw of a fused angles rotation.
 %
 % function [EYaw] = EYawOfFused(Fused)

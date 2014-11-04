@@ -1,4 +1,4 @@
-% TiltFromRotmat.m - Philipp Allgeuer - 22/10/14
+% TiltFromRotmat.m - Philipp Allgeuer - 05/11/14
 % Converts a rotation matrix to the corresponding tilt angles representation.
 %
 % function [Tilt] = TiltFromRotmat(Rotmat)

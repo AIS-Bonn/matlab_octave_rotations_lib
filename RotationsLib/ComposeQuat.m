@@ -1,4 +1,4 @@
-% ComposeQuat.m - Philipp Allgeuer - 22/10/14
+% ComposeQuat.m - Philipp Allgeuer - 05/11/14
 % Composes multiple quaternion rotations and returns the equivalent
 % total rotation.
 % 

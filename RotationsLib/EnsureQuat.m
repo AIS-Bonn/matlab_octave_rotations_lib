@@ -1,4 +1,4 @@
-% EnsureQuat.m - Philipp Allgeuer - 22/10/14
+% EnsureQuat.m - Philipp Allgeuer - 05/11/14
 % Checks whether a quaternion rotation is valid to within a certain
 % tolerance and fixes it if not.
 %

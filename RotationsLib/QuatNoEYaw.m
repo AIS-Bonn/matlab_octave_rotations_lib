@@ -1,4 +1,4 @@
-% QuatNoEYaw.m - Philipp Allgeuer - 22/10/14
+% QuatNoEYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the ZYX yaw component of a quaternion rotation.
 %
 % function [Qout, EYaw, QEYaw] = QuatNoEYaw(Qin)

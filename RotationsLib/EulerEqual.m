@@ -1,4 +1,4 @@
-% EulerEqual.m - Philipp Allgeuer - 22/10/14
+% EulerEqual.m - Philipp Allgeuer - 05/11/14
 % Returns whether two ZYX Euler angles rotations represent the same rotation.
 %
 % function [Equal, Err] = EulerEqual(E, F, Tol)

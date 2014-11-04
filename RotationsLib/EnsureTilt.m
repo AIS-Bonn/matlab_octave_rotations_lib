@@ -1,4 +1,4 @@
-% EnsureTilt.m - Philipp Allgeuer - 22/10/14
+% EnsureTilt.m - Philipp Allgeuer - 05/11/14
 % Checks whether a tilt angles rotation is valid to within a certain
 % tolerance and fixes it if not.
 %

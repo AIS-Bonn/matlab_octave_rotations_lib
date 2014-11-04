@@ -1,4 +1,4 @@
-% EYawOfTilt.m - Philipp Allgeuer - 22/10/14
+% EYawOfTilt.m - Philipp Allgeuer - 05/11/14
 % Calculates the ZYX yaw of a tilt angles rotation.
 %
 % function [EYaw] = EYawOfTilt(Tilt)

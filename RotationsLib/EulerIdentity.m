@@ -1,4 +1,4 @@
-% EulerIdentity.m - Philipp Allgeuer - 22/10/14
+% EulerIdentity.m - Philipp Allgeuer - 05/11/14
 % Returns the identity ZYX Euler angles rotation.
 %
 % function [EI] = EulerIdentity()

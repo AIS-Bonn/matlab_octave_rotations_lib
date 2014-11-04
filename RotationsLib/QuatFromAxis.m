@@ -1,4 +1,4 @@
-% QuatFromAxis.m - Philipp Allgeuer - 22/10/14
+% QuatFromAxis.m - Philipp Allgeuer - 05/11/14
 % Constructs a quaternion rotation based on an axis-angle specification.
 %
 % function [Quat] = QuatFromAxis(Axis, Angle)

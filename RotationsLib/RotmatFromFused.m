@@ -1,4 +1,4 @@
-% RotmatFromFused.m - Philipp Allgeuer - 22/10/14
+% RotmatFromFused.m - Philipp Allgeuer - 05/11/14
 % Converts a fused angles rotation to the corresponding rotation matrix representation.
 %
 % function [Rotmat, Tilt] = RotmatFromFused(Fused)

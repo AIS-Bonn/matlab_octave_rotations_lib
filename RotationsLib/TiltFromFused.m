@@ -1,4 +1,4 @@
-% TiltFromFused.m - Philipp Allgeuer - 22/10/14
+% TiltFromFused.m - Philipp Allgeuer - 05/11/14
 % Converts a fused angles rotation to the corresponding tilt angles representation.
 %
 % function [Tilt] = TiltFromFused(Fused)

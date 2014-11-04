@@ -1,4 +1,4 @@
-% EnsureRotmat.m - Philipp Allgeuer - 22/10/14
+% EnsureRotmat.m - Philipp Allgeuer - 05/11/14
 % Checks whether a rotation matrix is valid to within a certain
 % tolerance and fixes it if not.
 %

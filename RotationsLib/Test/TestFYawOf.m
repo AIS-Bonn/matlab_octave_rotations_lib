@@ -1,4 +1,4 @@
-% TestFYawOf.m - Philipp Allgeuer - 22/10/14
+% TestFYawOf.m - Philipp Allgeuer - 05/11/14
 % Tests:   FYawOf*
 % Assumes: Rand*, FusedFrom*
 %

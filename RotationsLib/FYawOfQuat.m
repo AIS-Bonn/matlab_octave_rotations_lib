@@ -1,4 +1,4 @@
-% FYawOfQuat.m - Philipp Allgeuer - 22/10/14
+% FYawOfQuat.m - Philipp Allgeuer - 05/11/14
 % Calculates the fused yaw of a quaternion rotation.
 %
 % function [FYaw] = FYawOfQuat(Quat)

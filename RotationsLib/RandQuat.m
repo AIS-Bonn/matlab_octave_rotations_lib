@@ -1,4 +1,4 @@
-% RandQuat.m - Philipp Allgeuer - 22/10/14
+% RandQuat.m - Philipp Allgeuer - 05/11/14
 % Generates random quaternion rotations.
 %
 % function [Q] = RandQuat(N)

@@ -1,4 +1,4 @@
-% RotmatNoEYaw.m - Philipp Allgeuer - 22/10/14
+% RotmatNoEYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the ZYX yaw component of a rotation matrix.
 %
 % function [Rout, EYaw, REYaw] = RotmatNoEYaw(Rin)

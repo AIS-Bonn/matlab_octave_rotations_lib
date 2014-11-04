@@ -1,4 +1,4 @@
-% RandTilt.m - Philipp Allgeuer - 22/10/14
+% RandTilt.m - Philipp Allgeuer - 05/11/14
 % Generates random tilt angles rotations.
 %
 % function [T] = RandTilt(N)

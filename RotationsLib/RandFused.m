@@ -1,4 +1,4 @@
-% RandFused.m - Philipp Allgeuer - 22/10/14
+% RandFused.m - Philipp Allgeuer - 05/11/14
 % Generates random fused angles rotations.
 %
 % function [F] = RandFused(N)

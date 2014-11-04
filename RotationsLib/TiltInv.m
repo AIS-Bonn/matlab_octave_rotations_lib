@@ -1,4 +1,4 @@
-% TiltInv.m - Philipp Allgeuer - 22/10/14
+% TiltInv.m - Philipp Allgeuer - 05/11/14
 % Calculates the inverse of a tilt angles rotation.
 %
 % function [Tinv] = TiltInv(T)

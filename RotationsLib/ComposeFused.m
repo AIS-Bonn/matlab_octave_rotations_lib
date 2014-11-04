@@ -1,4 +1,4 @@
-% ComposeFused.m - Philipp Allgeuer - 22/10/14
+% ComposeFused.m - Philipp Allgeuer - 05/11/14
 % Composes multiple fused angles rotations and returns the equivalent
 % total rotation.
 % 

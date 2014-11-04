@@ -1,4 +1,4 @@
-% FusedIdentity.m - Philipp Allgeuer - 22/10/14
+% FusedIdentity.m - Philipp Allgeuer - 05/11/14
 % Returns the identity fused angles rotation.
 %
 % function [FI] = FusedIdentity()

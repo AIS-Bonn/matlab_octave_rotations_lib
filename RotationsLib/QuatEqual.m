@@ -1,4 +1,4 @@
-% QuatEqual.m - Philipp Allgeuer - 22/10/14
+% QuatEqual.m - Philipp Allgeuer - 05/11/14
 % Returns whether two quaternion rotations represent the same rotation.
 %
 % function [Equal, Err] = QuatEqual(P, Q, Tol)

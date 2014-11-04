@@ -1,4 +1,4 @@
-% TestCompose.m - Philipp Allgeuer - 22/10/14
+% TestCompose.m - Philipp Allgeuer - 05/11/14
 % Tests:   Compose*
 % Assumes: Rand*, *Equal, RotmatFrom*, *FromRotmat
 %

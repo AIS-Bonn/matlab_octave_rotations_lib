@@ -1,4 +1,4 @@
-% BeginBoolean.m - Philipp Allgeuer - 22/10/14
+% BeginBoolean.m - Philipp Allgeuer - 05/11/14
 % Convenience function for testing boolean conditions.
 %
 % function [B] = BeginBoolean()

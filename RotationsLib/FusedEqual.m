@@ -1,4 +1,4 @@
-% FusedEqual.m - Philipp Allgeuer - 22/10/14
+% FusedEqual.m - Philipp Allgeuer - 05/11/14
 % Returns whether two fused angles rotations represent the same rotation.
 %
 % function [Equal, Err] = FusedEqual(F, G, Tol)

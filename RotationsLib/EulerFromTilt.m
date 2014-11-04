@@ -1,4 +1,4 @@
-% EulerFromTilt.m - Philipp Allgeuer - 22/10/14
+% EulerFromTilt.m - Philipp Allgeuer - 05/11/14
 % Converts a tilt angles rotation to the corresponding ZYX Euler angles representation.
 %
 % function [Euler] = EulerFromTilt(Tilt)

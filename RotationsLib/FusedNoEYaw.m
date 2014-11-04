@@ -1,4 +1,4 @@
-% FusedNoEYaw.m - Philipp Allgeuer - 22/10/14
+% FusedNoEYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the ZYX yaw component of a fused angles rotation.
 %
 % function [Fout, EYaw, FEYaw] = FusedNoEYaw(Fin)

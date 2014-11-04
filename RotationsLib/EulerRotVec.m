@@ -1,4 +1,4 @@
-% EulerRotVec.m - Philipp Allgeuer - 22/10/14
+% EulerRotVec.m - Philipp Allgeuer - 05/11/14
 % Rotate a vector by a given ZYX Euler angles rotation.
 %
 % function [Vout] = EulerRotVec(Euler, Vin)

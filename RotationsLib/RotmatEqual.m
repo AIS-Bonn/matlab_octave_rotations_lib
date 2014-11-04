@@ -1,4 +1,4 @@
-% RotmatEqual.m - Philipp Allgeuer - 22/10/14
+% RotmatEqual.m - Philipp Allgeuer - 05/11/14
 % Returns whether two rotation matrices represent the same rotation.
 %
 % function [Equal, Err] = RotmatEqual(Ra, Rb, Tol)

@@ -1,4 +1,4 @@
-% EulerInv.m - Philipp Allgeuer - 22/10/14
+% EulerInv.m - Philipp Allgeuer - 05/11/14
 % Calculates the inverse of a ZYX Euler angles rotation.
 %
 % function [Einv] = EulerInv(E)

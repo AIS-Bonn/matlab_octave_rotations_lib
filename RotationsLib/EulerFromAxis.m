@@ -1,4 +1,4 @@
-% EulerFromAxis.m - Philipp Allgeuer - 22/10/14
+% EulerFromAxis.m - Philipp Allgeuer - 05/11/14
 % Constructs a ZYX Euler angles rotation based on an axis-angle specification.
 %
 % function [Euler, Quat] = EulerFromAxis(Axis, Angle)

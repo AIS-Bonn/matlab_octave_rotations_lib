@@ -1,4 +1,4 @@
-% EYawOfQuat.m - Philipp Allgeuer - 22/10/14
+% EYawOfQuat.m - Philipp Allgeuer - 05/11/14
 % Calculates the ZYX yaw of a quaternion rotation.
 %
 % function [EYaw] = EYawOfQuat(Quat)

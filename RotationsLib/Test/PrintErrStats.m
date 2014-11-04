@@ -1,4 +1,4 @@
-% PrintErrStats.m - Philipp Allgeuer - 22/10/14
+% PrintErrStats.m - Philipp Allgeuer - 05/11/14
 % Prints statistics about an error array that was generated as part of a test item.
 %
 % function [Pass] = PrintErrStats(Err, Title, Tol)

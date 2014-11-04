@@ -1,4 +1,4 @@
-% TiltNoFYaw.m - Philipp Allgeuer - 22/10/14
+% TiltNoFYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the fused yaw component of a tilt angles rotation.
 %
 % function [Tout, FYaw, TFYaw] = TiltNoFYaw(Tin)

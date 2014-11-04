@@ -1,4 +1,4 @@
-% RotmatIdentity.m - Philipp Allgeuer - 22/10/14
+% RotmatIdentity.m - Philipp Allgeuer - 05/11/14
 % Returns the identity rotation matrix.
 %
 % function [RI] = RotmatIdentity()

@@ -1,4 +1,4 @@
-% ComposeEuler.m - Philipp Allgeuer - 22/10/14
+% ComposeEuler.m - Philipp Allgeuer - 05/11/14
 % Composes multiple ZYX Euler angles rotations and returns the equivalent
 % total rotation.
 % 

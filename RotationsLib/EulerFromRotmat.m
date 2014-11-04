@@ -1,4 +1,4 @@
-% EulerFromRotmat.m - Philipp Allgeuer - 22/10/14
+% EulerFromRotmat.m - Philipp Allgeuer - 05/11/14
 % Converts a rotation matrix to the corresponding ZYX Euler angles representation.
 %
 % function [Euler] = EulerFromRotmat(Rotmat)

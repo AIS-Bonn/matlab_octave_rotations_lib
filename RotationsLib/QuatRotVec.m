@@ -1,4 +1,4 @@
-% QuatRotVec.m - Philipp Allgeuer - 22/10/14
+% QuatRotVec.m - Philipp Allgeuer - 05/11/14
 % Rotate a vector by a given quaternion rotation.
 %
 % function [Vout] = QuatRotVec(Quat, Vin)

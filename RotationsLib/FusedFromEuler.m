@@ -1,4 +1,4 @@
-% FusedFromEuler.m - Philipp Allgeuer - 22/10/14
+% FusedFromEuler.m - Philipp Allgeuer - 05/11/14
 % Converts a ZYX Euler angles rotation to the corresponding fused angles representation.
 %
 % function [Fused, Rotmat, Tilt] = FusedFromEuler(Euler)

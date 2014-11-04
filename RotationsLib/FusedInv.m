@@ -1,4 +1,4 @@
-% FusedInv.m - Philipp Allgeuer - 22/10/14
+% FusedInv.m - Philipp Allgeuer - 05/11/14
 % Calculates the inverse of a fused angles rotation.
 %
 % function [Finv] = FusedInv(F)

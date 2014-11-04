@@ -1,4 +1,4 @@
-% EndTest.m - Philipp Allgeuer - 22/10/14
+% EndTest.m - Philipp Allgeuer - 05/11/14
 % Function to be called at the end of an individual test.
 %
 % function [Pass] = EndTest(Tol, varargin)

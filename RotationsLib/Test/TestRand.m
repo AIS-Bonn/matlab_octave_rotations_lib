@@ -1,4 +1,4 @@
-% TestRand.m - Philipp Allgeuer - 22/10/14
+% TestRand.m - Philipp Allgeuer - 05/11/14
 % Tests:   Rand*, RandAng, RandVec, RandUnitVec
 % Assumes: None
 %

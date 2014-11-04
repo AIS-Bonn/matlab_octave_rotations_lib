@@ -1,4 +1,4 @@
-% AngVelFromEulerVel.m - Philipp Allgeuer - 22/10/14
+% AngVelFromEulerVel.m - Philipp Allgeuer - 05/11/14
 % Convert a ZYX Euler angles velocity to an angular velocity vector
 %
 % function [AngVel] = AngVelFromEulerVel(Euler, EulerVel)

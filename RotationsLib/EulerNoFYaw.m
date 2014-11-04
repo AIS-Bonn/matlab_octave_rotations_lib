@@ -1,4 +1,4 @@
-% EulerNoFYaw.m - Philipp Allgeuer - 22/10/14
+% EulerNoFYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the fused yaw component of a ZYX Euler angles rotation.
 %
 % function [Eout, FYaw, EFYaw] = EulerNoFYaw(Ein)

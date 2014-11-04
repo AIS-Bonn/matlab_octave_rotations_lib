@@ -1,4 +1,4 @@
-% QuatInv.m - Philipp Allgeuer - 22/10/14
+% QuatInv.m - Philipp Allgeuer - 05/11/14
 % Calculates the inverse of a quaternion rotation.
 %
 % function [Qinv] = QuatInv(Q)

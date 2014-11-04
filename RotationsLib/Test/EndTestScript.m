@@ -1,4 +1,4 @@
-% EndTestScript.m - Philipp Allgeuer - 22/10/14
+% EndTestScript.m - Philipp Allgeuer - 05/11/14
 % Function to be called at the end of a test script.
 %
 % function EndTestScript(Title, Pass)

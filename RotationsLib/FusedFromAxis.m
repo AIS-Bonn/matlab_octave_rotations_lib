@@ -1,4 +1,4 @@
-% FusedFromAxis.m - Philipp Allgeuer - 22/10/14
+% FusedFromAxis.m - Philipp Allgeuer - 05/11/14
 % Constructs a fused angles rotation based on an axis-angle specification.
 %
 % function [Fused, Quat] = FusedFromAxis(Axis, Angle)

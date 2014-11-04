@@ -1,4 +1,4 @@
-% FusedRotVec.m - Philipp Allgeuer - 22/10/14
+% FusedRotVec.m - Philipp Allgeuer - 05/11/14
 % Rotate a vector by a given fused angles rotation.
 %
 % function [Vout] = FusedRotVec(Fused, Vin)

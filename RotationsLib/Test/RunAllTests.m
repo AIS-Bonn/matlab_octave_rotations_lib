@@ -1,4 +1,4 @@
-% RunAllTests.m - Philipp Allgeuer - 22/10/14
+% RunAllTests.m - Philipp Allgeuer - 05/11/14
 % Run all available/known test scripts of the Rotations Library.
 %
 % function [Pass] = RunAllTests(Speed, Inter)

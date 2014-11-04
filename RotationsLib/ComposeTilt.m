@@ -1,4 +1,4 @@
-% ComposeTilt.m - Philipp Allgeuer - 22/10/14
+% ComposeTilt.m - Philipp Allgeuer - 05/11/14
 % Composes multiple tilt angles rotations and returns the equivalent
 % total rotation.
 % 

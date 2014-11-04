@@ -1,4 +1,4 @@
-% TiltFromAxis.m - Philipp Allgeuer - 22/10/14
+% TiltFromAxis.m - Philipp Allgeuer - 05/11/14
 % Constructs a tilt angles rotation based on an axis-angle specification.
 %
 % function [Tilt, Quat] = TiltFromAxis(Axis, Angle)

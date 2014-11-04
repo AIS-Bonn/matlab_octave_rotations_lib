@@ -1,4 +1,4 @@
-% QuatNoFYaw.m - Philipp Allgeuer - 22/10/14
+% QuatNoFYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the fused yaw component of a quaternion rotation.
 %
 % function [Qout, FYaw, QFYaw] = QuatNoFYaw(Qin)

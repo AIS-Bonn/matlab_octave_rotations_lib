@@ -1,4 +1,4 @@
-% BeginTestScript.m - Philipp Allgeuer - 22/10/14
+% BeginTestScript.m - Philipp Allgeuer - 05/11/14
 % Function to be called at the beginning of a test script.
 %
 % function [Pass, Nnormal, Nlarge, Nsmall, Ntiny] = BeginTestScript(Title, N, Tol)

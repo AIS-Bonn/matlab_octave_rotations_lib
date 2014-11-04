@@ -1,4 +1,4 @@
-% TestEYawOf.m - Philipp Allgeuer - 22/10/14
+% TestEYawOf.m - Philipp Allgeuer - 05/11/14
 % Tests:   EYawOf*
 % Assumes: Rand*, EulerFrom*
 %

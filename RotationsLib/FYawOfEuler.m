@@ -1,4 +1,4 @@
-% FYawOfEuler.m - Philipp Allgeuer - 22/10/14
+% FYawOfEuler.m - Philipp Allgeuer - 05/11/14
 % Calculates the fused yaw of a ZYX Euler angles rotation.
 %
 % function [FYaw, Rotmat] = FYawOfEuler(Euler)

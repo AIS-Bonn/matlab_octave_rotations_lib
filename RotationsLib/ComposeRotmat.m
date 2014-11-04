@@ -1,4 +1,4 @@
-% ComposeRotmat.m - Philipp Allgeuer - 22/10/14
+% ComposeRotmat.m - Philipp Allgeuer - 05/11/14
 % Composes multiple rotation matrices and returns the equivalent
 % total rotation.
 % 

@@ -1,4 +1,4 @@
-% isOctave.m - Philipp Allgeuer - 22/10/14
+% isOctave.m - Philipp Allgeuer - 05/11/14
 % Check whether the execution environment is Octave or Matlab.
 %
 % function [IsOct] = isOctave()

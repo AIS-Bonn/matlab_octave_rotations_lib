@@ -1,4 +1,4 @@
-% QuatFromTilt.m - Philipp Allgeuer - 22/10/14
+% QuatFromTilt.m - Philipp Allgeuer - 05/11/14
 % Converts a tilt angles rotation to the corresponding quaternion representation.
 %
 % function [Quat] = QuatFromTilt(Tilt)

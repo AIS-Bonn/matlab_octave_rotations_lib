@@ -1,4 +1,4 @@
-% BeginTest.m - Philipp Allgeuer - 22/10/14
+% BeginTest.m - Philipp Allgeuer - 05/11/14
 % Function to be called at the beginning of an individual test.
 %
 % function [N, varargout] = BeginTest(Title, N, ErrSize)

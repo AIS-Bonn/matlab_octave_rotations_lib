@@ -1,4 +1,4 @@
-% FusedNoFYaw.m - Philipp Allgeuer - 22/10/14
+% FusedNoFYaw.m - Philipp Allgeuer - 05/11/14
 % Removes the fused yaw component of a fused angles rotation.
 %
 % function [Fout, FYaw, FFYaw] = FusedNoFYaw(Fin)

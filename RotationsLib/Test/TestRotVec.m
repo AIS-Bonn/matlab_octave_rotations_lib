@@ -1,4 +1,4 @@
-% TestRotVec.m - Philipp Allgeuer - 22/10/14
+% TestRotVec.m - Philipp Allgeuer - 05/11/14
 % Tests:   *RotVec
 % Assumes: Rand*, RandVec, RotmatFrom*
 %

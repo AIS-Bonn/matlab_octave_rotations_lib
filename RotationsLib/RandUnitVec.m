@@ -1,4 +1,4 @@
-% RandUnitVec.m - Philipp Allgeuer - 22/10/14
+% RandUnitVec.m - Philipp Allgeuer - 05/11/14
 % Generates random M-vectors of unit norm.
 %
 % function [V] = RandUnitVec(N, M)

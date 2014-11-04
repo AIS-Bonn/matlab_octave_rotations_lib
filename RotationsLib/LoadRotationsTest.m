@@ -1,4 +1,4 @@
-% LoadRotationsTest.m - Philipp Allgeuer - 22/10/14
+% LoadRotationsTest.m - Philipp Allgeuer - 05/11/14
 % Add the Rotations Library and corresponding test directory to the working path.
 %
 % If the current directory is the rotations library directory then simply
@@ -9,7 +9,7 @@
 
 % Display a header
 disp('');
-disp('Loading Rotations Library and Test v1.2.0...');
+disp('Loading Rotations Library and Test v1.2.1...');
 
 % Add the path of this script and the Test subdirectory thereof to the working path
 ScriptPath = [pwd '/LoadRotationsTest.m'];

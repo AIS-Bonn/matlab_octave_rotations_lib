@@ -1,4 +1,4 @@
-% TestNoFYaw.m - Philipp Allgeuer - 22/10/14
+% TestNoFYaw.m - Philipp Allgeuer - 05/11/14
 % Tests:   *NoFYaw
 % Assumes: Rand*, FusedEqual, FusedFrom*
 %

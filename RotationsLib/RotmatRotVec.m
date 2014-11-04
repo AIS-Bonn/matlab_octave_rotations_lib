@@ -1,4 +1,4 @@
-% RotmatRotVec.m - Philipp Allgeuer - 22/10/14
+% RotmatRotVec.m - Philipp Allgeuer - 05/11/14
 % Rotate a vector by a given rotation matrix.
 %
 % function [Vout] = RotmatRotVec(Rotmat, Vin)

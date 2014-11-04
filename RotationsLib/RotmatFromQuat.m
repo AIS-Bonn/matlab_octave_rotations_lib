@@ -1,4 +1,4 @@
-% RotmatFromQuat.m - Philipp Allgeuer - 22/10/14
+% RotmatFromQuat.m - Philipp Allgeuer - 05/11/14
 % Converts a quaternion rotation to the corresponding rotation matrix representation.
 %
 % function [Rotmat] = RotmatFromQuat(Quat)

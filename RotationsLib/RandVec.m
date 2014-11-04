@@ -1,4 +1,4 @@
-% RandVec.m - Philipp Allgeuer - 22/10/14
+% RandVec.m - Philipp Allgeuer - 05/11/14
 % Generates random 3-vectors of up to a given norm.
 %
 % function [V] = RandVec(N, MaxNorm)

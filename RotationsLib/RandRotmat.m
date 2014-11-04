@@ -1,4 +1,4 @@
-% RandRotmat.m - Philipp Allgeuer - 22/10/14
+% RandRotmat.m - Philipp Allgeuer - 05/11/14
 % Generates random rotation matrices.
 %
 % function [R] = RandRotmat(N)

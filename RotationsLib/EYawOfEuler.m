@@ -1,4 +1,4 @@
-% EYawOfEuler.m - Philipp Allgeuer - 22/10/14
+% EYawOfEuler.m - Philipp Allgeuer - 05/11/14
 % Calculates the ZYX yaw of a ZYX Euler angles rotation.
 %
 % function [EYaw] = EYawOfEuler(Euler)

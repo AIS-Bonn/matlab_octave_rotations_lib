@@ -1,4 +1,4 @@
-% RotmatInv.m - Philipp Allgeuer - 22/10/14
+% RotmatInv.m - Philipp Allgeuer - 05/11/14
 % Calculates the inverse of a rotation matrix.
 %
 % function [Rinv] = RotmatInv(R)

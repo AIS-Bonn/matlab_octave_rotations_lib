@@ -2,9 +2,9 @@
 
 **Author:** Philipp Allgeuer
 
-**Version:** 1.2.0
+**Version:** 1.2.1
 
-**Date:** 22/10/14
+**Date:** 05/11/14
 
 ##General Overview##
 The Matlab/Octave rotations library is a collection of functions, bundled as
@@ -59,7 +59,8 @@ Every function of the library is documented and well-commented, so a good
 starting point on how to use a particular function is the `help` command. A good
 starting point in understanding the conventions and formats used for the five
 rotation representations is `help Ensure*` and `help *Equal`, where `*`
-is any of `Euler`, `Fused`, `Quat`, `Rotmat` and `Tilt`.
+is any of `Euler`, `Fused`, `Quat`, `Rotmat` and `Tilt`. A summary of the five
+rotation representations is shown in the following table.
 
 **Representation** | **Code** | **Format** | **Universal set**
 --- |:---:| --- | ---
@@ -76,7 +77,7 @@ of the author, and are discussed academically in:
 in *Proceedings of the 9th Workshop on Humanoid Soccer Robots, IEEE-RAS Int.
 Conference on Humanoid Robots*, Madrid, Spain, 2014.
 
-###Where To Get More Help?###
+##Where To Get More Help?##
 If a look into the source code does not resolve an issue you have with the
 library, then you can contact the author at the email address given in the *Bugs
 and Improvements* section.

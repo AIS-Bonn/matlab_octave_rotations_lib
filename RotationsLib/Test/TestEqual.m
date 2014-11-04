@@ -1,4 +1,4 @@
-% TestEqual.m - Philipp Allgeuer - 22/10/14
+% TestEqual.m - Philipp Allgeuer - 05/11/14
 % Tests:   *Equal, Ensure*
 % Assumes: Rand*
 %

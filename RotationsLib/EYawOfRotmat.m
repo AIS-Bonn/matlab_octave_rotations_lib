@@ -1,4 +1,4 @@
-% EYawOfRotmat.m - Philipp Allgeuer - 22/10/14
+% EYawOfRotmat.m - Philipp Allgeuer - 05/11/14
 % Calculates the ZYX yaw of a rotation matrix.
 %
 % function [EYaw] = EYawOfRotmat(Rotmat)

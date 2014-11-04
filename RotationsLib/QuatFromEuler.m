@@ -1,4 +1,4 @@
-% QuatFromEuler.m - Philipp Allgeuer - 22/10/14
+% QuatFromEuler.m - Philipp Allgeuer - 05/11/14
 % Converts a ZYX Euler angles rotation to the corresponding quaternion representation.
 %
 % function [Quat] = QuatFromEuler(Euler)
