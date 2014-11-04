@@ -63,11 +63,11 @@ is any of `Euler`, `Fused`, `Quat`, `Rotmat` and `Tilt`.
 
 **Representation** | **Code** | **Format** | **Universal set**
 --- |:---:| --- | ---
-ZYX Euler angles | `Euler` | `[psi theta phi] = (yaw, pitch, roll)` | (-&pi;,&pi;] &times; [-&pi;/2,&pi;/2] &times; (-&pi;,&pi;]
-Fused angles | `Fused` | `[psi theta phi h] = (fused yaw, fused pitch, fused roll)` | (-&pi;,&pi;] &times; [-&pi;/2,&pi;/2] &times; [-&pi;/2,&pi;/2] &times; {-1,1}
+ZYX Euler angles | `Euler` | `[psi theta phi] = <br>(yaw, pitch, roll)` | (-&pi;,&pi;] &times; [-&pi;/2,&pi;/2] &times; (-&pi;,&pi;]
+Fused angles | `Fused` | `[psi theta phi h] = <br>(fused yaw, fused pitch, fused roll)` | (-&pi;,&pi;] &times; [-&pi;/2,&pi;/2] &times; [-&pi;/2,&pi;/2] &times; {-1,1}
 Quaternion | `Quat` | `[w x y z]` | &#x211a;
 Rotation matrix | `Rotmat` | `3x3 matrix` | SO(3)
-Tilt angles | `Tilt` | `[psi gamma alpha] = (fused yaw, tilt axis angle, tilt angle)` | (-&pi;,&pi;] &times; (-&pi;,&pi;] &times; [0,&pi;]
+Tilt angles | `Tilt` | `[psi gamma alpha] = <br>(fused yaw, tilt axis angle, tilt angle)` | (-&pi;,&pi;] &times; (-&pi;,&pi;] &times; [0,&pi;]
 
 The *fused angles* and *tilt angles* rotation representations are the invention
 of the author, and are discussed academically in:
