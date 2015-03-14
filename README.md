@@ -71,7 +71,7 @@ Rotation matrix | `Rotmat` | `3x3 matrix` | SO(3)
 Tilt angles | `Tilt` | `[psi gamma alpha] =`<br>`(fused yaw, tilt axis angle, tilt angle)` | (-&pi;,&pi;] &times; (-&pi;,&pi;] &times; [0,&pi;]
 
 The *fused angles* and *tilt angles* rotation representations are the invention
-of the author.
+of the author. 
 
 ##Where To Get More Help?##
 If a look into the source code does not resolve an issue you have with the
