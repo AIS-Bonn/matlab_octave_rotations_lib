@@ -71,11 +71,7 @@ Rotation matrix | `Rotmat` | `3x3 matrix` | SO(3)
 Tilt angles | `Tilt` | `[psi gamma alpha] =`<br>`(fused yaw, tilt axis angle, tilt angle)` | (-&pi;,&pi;] &times; (-&pi;,&pi;] &times; [0,&pi;]
 
 The *fused angles* and *tilt angles* rotation representations are the invention
-of the author, and are discussed academically in:
-
-> P. Allgeuer and S. Behnke, "Fused Angles for Body Orientation Representation",
-in *Proceedings of the 9th Workshop on Humanoid Soccer Robots, IEEE-RAS Int.
-Conference on Humanoid Robots*, Madrid, Spain, 2014.
+of the author.
 
 ##Where To Get More Help?##
 If a look into the source code does not resolve an issue you have with the
