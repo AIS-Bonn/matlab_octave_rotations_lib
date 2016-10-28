@@ -15,7 +15,8 @@ fused angles (`Fused`) and tilt angles (`Tilt`). Operations such as composition,
 inversion, ZYX yaw extraction, fused yaw extraction, random generation, equality
 detection, vector rotation and much more have been implemented for each rotation
 representation. Unit tests for each function are provided to ensure that the
-library is performant.
+library is performant. For more information on fused angles and tilt angles,
+please refer to http://www.ais.uni-bonn.de/~pallgeuer/papers/IROS_2015_fused.pdf.
 
 ##Getting Started##
 Clone the rotations library into the required local target directory. Usually
