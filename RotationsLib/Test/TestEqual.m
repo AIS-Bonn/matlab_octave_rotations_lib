@@ -47,8 +47,8 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		B = B && EulerEqual(Er, [pi+Er(1) pi-Er(2) pi+Er(3)], Tol);
 		B = B && EulerEqual([Er(1) pi/2 Er(3)], [0 pi/2 Er(3)-Er(1)+2*pi*(randi(9)-5)], Tol);
 		B = B && EulerEqual([Er(1) -pi/2 Er(3)], [0 -pi/2 Er(3)+Er(1)+2*pi*(randi(9)-5)], Tol);
-		B = B && EulerEqual([Er(1) asin(1) Er(3)], [Er(1) asin(1-0.5*Tol*rand) Er(3)], Tol);
-		B = B && EulerEqual([Er(1) asin(-1) Er(3)], [Er(1) asin(-1+0.5*Tol*rand) Er(3)], Tol);
+		B = B && EulerEqual([Er(1) asin(1) Er(3)], [Er(1) asin(1-0.49*Tol*rand) Er(3)], Tol);
+		B = B && EulerEqual([Er(1) asin(-1) Er(3)], [Er(1) asin(-1+0.49*Tol*rand) Er(3)], Tol);
 		B = B && ~EulerEqual(Er, Er+[1 0 2], Tol);
 	end
 	
@@ -75,10 +75,10 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		Scale = (pi/2)/(abs(Fr(2))+abs(Fr(3)));
 		B = B && FusedEqual([Fr(1) Fr(2:3)*Scale 1], [Fr(1) Fr(2:3)*Scale*(1+rand) -1], Tol);
 		B = B && FusedEqual([Fr(1) 0.5*Tol*(2*rand(1,2)-1) -1],[Fr(1)+2*pi*rand 0.5*Tol*(2*rand(1,2)-1) -1], Tol);
-		B = B && FusedEqual([Fr(1) asin(1) 0 Fr(4)], [Fr(1) asin(1-0.5*Tol*rand) 0 Fr(4)], Tol);
-		B = B && FusedEqual([Fr(1) 0 asin(1) Fr(4)], [Fr(1) 0 asin(1-0.5*Tol*rand) Fr(4)], Tol);
-		B = B && FusedEqual([Fr(1) asin(-1) 0 Fr(4)], [Fr(1) asin(-1+0.5*Tol*rand) 0 Fr(4)], Tol);
-		B = B && FusedEqual([Fr(1) 0 asin(-1) Fr(4)], [Fr(1) 0 asin(-1+0.5*Tol*rand) Fr(4)], Tol);
+		B = B && FusedEqual([Fr(1) asin(1) 0 Fr(4)], [Fr(1) asin(1-0.49*Tol*rand) 0 Fr(4)], Tol);
+		B = B && FusedEqual([Fr(1) 0 asin(1) Fr(4)], [Fr(1) 0 asin(1-0.49*Tol*rand) Fr(4)], Tol);
+		B = B && FusedEqual([Fr(1) asin(-1) 0 Fr(4)], [Fr(1) asin(-1+0.49*Tol*rand) 0 Fr(4)], Tol);
+		B = B && FusedEqual([Fr(1) 0 asin(-1) Fr(4)], [Fr(1) 0 asin(-1+0.49*Tol*rand) Fr(4)], Tol);
 		B = B && ~FusedEqual(Fr, Fr+[2 1 0 0], Tol);
 	end
 	
@@ -152,8 +152,8 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		Tr = RandTilt;
 		B = B && TiltEqual(Tr, Tr+2*pi*(randi(9,1,3)-5), Tol);
 		B = B && TiltEqual(Tr, [Tr(1) Tr(2)+pi -Tr(3)], Tol);
-		B = B && TiltEqual([Tr(1:2) acos(1)], [Tr(1:2) acos(1-0.5*Tol*rand)], Tol);
-		B = B && TiltEqual([Tr(1:2) acos(-1)], [Tr(1:2) acos(-1+0.5*Tol*rand)], Tol);
+		B = B && TiltEqual([Tr(1:2) acos(1)], [Tr(1:2) acos(1-0.49*Tol*rand)], Tol);
+		B = B && TiltEqual([Tr(1:2) acos(-1)], [Tr(1:2) acos(-1+0.49*Tol*rand)], Tol);
 		B = B && ~TiltEqual(Tr, Tr+[1 0 2], Tol);
 	end
 	

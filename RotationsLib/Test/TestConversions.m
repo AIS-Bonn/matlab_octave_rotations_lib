@@ -69,9 +69,9 @@ function [Pass] = TestConversions(N, Tol, Inter)
 	end
 	
 	% End test
-	fprintf('Using special tolerance %g for error testing.\n\n', 1e-8);
+	fprintf('Using special tolerance %g for error testing.\n\n', 1.5e-8);
 	P = P & EndBoolean(B);
-	P = P & EndTest(1e-8, 'Euler 2-conversions', ErrA, 'Fused 2-conversions', ErrB, 'Quat 2-conversions', ErrC, 'Rotmat 2-conversions', ErrD, 'Tilt 2-conversions', ErrE);
+	P = P & EndTest(1.5e-8, 'Euler 2-conversions', ErrA, 'Fused 2-conversions', ErrB, 'Quat 2-conversions', ErrC, 'Rotmat 2-conversions', ErrD, 'Tilt 2-conversions', ErrE);
 
 	%
 	% Test 3-conversions
@@ -122,9 +122,9 @@ function [Pass] = TestConversions(N, Tol, Inter)
 	end
 	
 	% End test
-	fprintf('Using special tolerance %g for error testing.\n\n', 1e-8);
+	fprintf('Using special tolerance %g for error testing.\n\n', 1.5e-8);
 	P = P & EndBoolean(B);
-	P = P & EndTest(1e-8, 'Euler-Quat 3-conversions', ErrA, 'Fused-Rotmat 3-conversions', ErrB, 'Quat-Tilt 3-conversions', ErrC, 'Rotmat-Euler 3-conversions', ErrD, 'Tilt-Fused 3-conversions', ErrE);
+	P = P & EndTest(1.5e-8, 'Euler-Quat 3-conversions', ErrA, 'Fused-Rotmat 3-conversions', ErrB, 'Quat-Tilt 3-conversions', ErrC, 'Rotmat-Euler 3-conversions', ErrD, 'Tilt-Fused 3-conversions', ErrE);
 	
 	%
 	% Test additional outputs

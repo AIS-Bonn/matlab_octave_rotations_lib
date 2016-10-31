@@ -44,9 +44,9 @@ function [Pass] = TestAngVelFrom(N, Tol, Inter)
 	end
 	
 	% End test
-	fprintf('Using special tolerance %g for error testing.\n\n', 1e-8);
+	fprintf('Using special tolerance %g for error testing.\n\n', 1.5e-8);
 	P = P & EndBoolean(B);
-	P = P & EndTest(1e-8, 'AngVel error', ErrA);
+	P = P & EndTest(1.5e-8, 'AngVel error', ErrA);
 	
 	%
 	% End of test script

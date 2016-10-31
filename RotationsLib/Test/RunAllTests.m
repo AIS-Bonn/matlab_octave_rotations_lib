@@ -57,8 +57,8 @@ function [Pass] = RunAllTests(Speed, Inter)
 	P = true;
 
 	% Error tolerances to choose from for each test script
-	LTol = 512*eps;
-	MTol = 128*eps;
+	LTol = 2048*eps;
+	MTol = 256*eps;
 	HTol = 32*eps;
 	
 	% Retrieve the start time
@@ -100,6 +100,10 @@ function [Pass] = RunAllTests(Speed, Inter)
 	% Assumes: Rand*, QuatFrom*, Compose*, *Equal
 	P = P & TestInv(1000*S, LTol, Inter);
 	
+	% Tests:   QuatSlerp
+	% Assumes: RandQuat, ComposeQuat, QuatInv
+	P = P & TestSlerp(200*S, HTol, Inter);
+	
 	% Tests:   *NoEYaw
 	% Assumes: Rand*, *Equal, EulerFrom*, RotmatFromQuat
 	P = P & TestNoEYaw(1600*S, MTol, Inter);
@@ -119,6 +123,22 @@ function [Pass] = RunAllTests(Speed, Inter)
 	% Tests:   FYawOf*
 	% Assumes: Rand*, FusedFrom*
 	P = P & TestFYawOf(3000*S, HTol, Inter);
+	
+	% Tests:   ZVecFrom*
+	% Assumes: Rand*, RotmatFrom*
+	P = P & TestZVecFrom(3000*S, HTol, Inter);
+	
+	% Tests:   FromZVec*
+	% Assumes: RandUnitVec, ZVecFrom*, FYawOf*
+	P = P & TestFromZVec(3000*S, HTol, Inter);
+	
+	% Tests:   *FromFYawBzG
+	% Assumes: RandUnitVec, FYawOf*, ZVecFrom*
+	P = P & TestFromFYawBzG(3000*S, LTol, Inter);
+	
+	% Tests:   *FromFYawGzB
+	% Assumes: RandUnitVec, FYawOf*, RotmatFrom*
+	P = P & TestFromFYawGzB(3000*S, LTol, Inter);
 	
 	% Tests:   AngVelFrom*
 	% Assumes: Rand*, RandUnitVec, QuatFrom*, QuatInv, ComposeQuat

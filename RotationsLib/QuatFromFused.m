@@ -38,7 +38,7 @@ function [Quat, Tilt] = QuatFromFused(Fused)
 		
 		% Calculate the required quaternion
 		Quat = [C*chpsi sphi*chpsi-sth*shpsi sphi*shpsi+sth*chpsi C*shpsi];
-		Quat = Quat/sqrt(C*C+crit); % Note: norm(Quat) = sqrt(C*C+sth*sth+sphi*sphi) >= 1
+		Quat = Quat/sqrt(C*C+crit); % Note: norm(Quat) = sqrt(C*C+sth*sth+sphi*sphi) = sqrt(2*C) > 1
 	
 		% Return the tilt angles representation
 		if nargout >= 2
@@ -65,7 +65,7 @@ function [Quat, Tilt] = QuatFromFused(Fused)
 		
 		% Calculate the required quaternion
 		Quat = [salpha*chpsi C*chgampsi C*shgampsi salpha*shpsi];
-		Quat = Quat/sqrt(C*C+crit); % Note: norm(Quat) = sqrt(C*C+crit) >= 1
+		Quat = Quat/sqrt(C*C+crit); % Note: norm(Quat) = sqrt(C*C+sth*sth+sphi*sphi) = sqrt(2*C) > 1
 	
 		% Return the tilt angles representation
 		if nargout >= 2

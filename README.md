@@ -2,9 +2,9 @@
 
 **Author:** Philipp Allgeuer
 
-**Version:** 1.2.1
+**Version:** 1.3.0
 
-**Date:** 05/11/14
+**Date:** 31/10/16
 
 ##General Overview##
 The Matlab/Octave rotations library is a collection of functions, bundled as
@@ -17,6 +17,8 @@ detection, vector rotation and much more have been implemented for each rotation
 representation. Unit tests for each function are provided to ensure that the
 library is performant. For more information on fused angles and tilt angles,
 please refer to http://www.ais.uni-bonn.de/~pallgeuer/papers/IROS_2015_fused.pdf.
+The *fused angles* and *tilt angles* rotation representations are the invention
+of the author. 
 
 ##Getting Started##
 Clone the rotations library into the required local target directory. Usually
@@ -71,8 +73,10 @@ Quaternion | `Quat` | `[w x y z]` | &#x211a;
 Rotation matrix | `Rotmat` | `3x3 matrix` | SO(3)
 Tilt angles | `Tilt` | `[psi gamma alpha] =`<br>`(fused yaw, tilt axis angle, tilt angle)` | (-&pi;,&pi;] &times; (-&pi;,&pi;] &times; [0,&pi;]
 
-The *fused angles* and *tilt angles* rotation representations are the invention
-of the author. 
+Note that in the library, `ZVec` refers to the bottom row of the rotation matrix 
+representation. This corresponds to the global z-axis, expressed in terms of the 
+rotated coordinate frame. `Axis` refers to the representation of a rotation by 
+its axis and angle of rotation.
 
 ##Where To Get More Help?##
 If a look into the source code does not resolve an issue you have with the

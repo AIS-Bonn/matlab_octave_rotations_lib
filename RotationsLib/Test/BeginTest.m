@@ -8,11 +8,11 @@
 %
 % Title     ==> The name to use for this test
 % N (in)    ==> The number of test cases to use in the test
-% ErrSize   ==> A vector of zero-initialised error array sizes to be generated
+% ErrSize   ==> A vector of values specifying the required number of columns in each error array
 % N (out)   ==> The number of test cases to use in the test (unmodified from the input)
-% varargout ==> The zero-initialised error arrays (column vectors) requested via the ErrSize input.
+% varargout ==> The zero-initialised error arrays (NxM where the M values come from the ErrSize input).
 %               If more outputs are present than numel(ErrSize), the additional arrays default to
-%               being of length N.
+%               being of width 1 (column vectors).
 
 % Main function
 function [N, varargout] = BeginTest(Title, N, ErrSize)
@@ -24,7 +24,7 @@ function [N, varargout] = BeginTest(Title, N, ErrSize)
 	fprintf('----------------------------------------------------------------------\n');
 	fprintf('TEST: %s\n\n', Title);
 	
-	% Initialise the required error vectors with zeros
+	% Initialise the required error arrays with zeros
 	if nargin >= 2
 		N = round(N);
 	end
@@ -33,7 +33,7 @@ function [N, varargout] = BeginTest(Title, N, ErrSize)
 	end
 	for k = 1:(nargout-1)
 		if k <= numel(ErrSize)
-			varargout{k} = zeros(ErrSize(k),1);
+			varargout{k} = zeros(N,ErrSize(k));
 		else
 			varargout{k} = zeros(N,1);
 		end
