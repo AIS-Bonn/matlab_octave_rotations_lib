@@ -12,7 +12,7 @@
 function [Quat] = QuatFromZVec(ZVec)
 	
 	% Calculate the w component
-	wsq = coerce(0.5*(1 + ZVec(3)), 0, 1); % Note: If ZVec is a unit vector then this should only trim at most a few eps...
+	wsq = min(max(0.5*(1 + ZVec(3)), 0), 1); % Note: If ZVec is a unit vector then this should only trim at most a few eps...
 	w = sqrt(wsq);
 	
 	% Calculate the x and y components

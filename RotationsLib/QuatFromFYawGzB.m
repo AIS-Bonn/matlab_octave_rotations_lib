@@ -13,7 +13,7 @@ function [qGB] = QuatFromFYawGzB(FYaw, GzB)
 	shpsi = sin(0.5*FYaw);
 	
 	% Calculate the w and z components
-	wsqpluszsq = coerce(0.5*(1 + GzB(3)), 0, 1); % Note: If GzB is a unit vector then this should only trim at most a few eps...
+	wsqpluszsq = min(max(0.5*(1 + GzB(3)), 0), 1); % Note: If GzB is a unit vector then this should only trim at most a few eps...
 	wznorm = sqrt(wsqpluszsq);
 	w = wznorm * chpsi;
 	z = wznorm * shpsi;
