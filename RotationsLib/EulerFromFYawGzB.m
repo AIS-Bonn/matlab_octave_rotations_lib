@@ -11,12 +11,12 @@ function [EGB] = EulerFromFYawGzB(FYaw, GzB)
 	% Precalculate trigonometric terms
 	cfyaw = cos(FYaw);
 	sfyaw = sin(FYaw);
-	
+
 	% Calculate the Euler pitch
 	stheta = cfyaw*GzB(1) + sfyaw*GzB(2);
 	stheta = max(min(stheta,1.0),-1.0); % Note: If GzB is a unit vector then this should only trim at most a few eps...
 	theta = asin(stheta);
-	
+
 	% Calculate the Euler roll
 	sfphi = sfyaw*GzB(1) - cfyaw*GzB(2);
 	phi = atan2(sfphi, GzB(3));
@@ -29,7 +29,7 @@ function [EGB] = EulerFromFYawGzB(FYaw, GzB)
 		sphi = sin(phi);
 		EYaw = FYaw + atan2(sphi,stheta*cphi) - atan2(sfphi,stheta);
 	end
-	EYaw = pi - mod(pi - EYaw, 2*pi);
+	EYaw = wrap(EYaw);
 
 	% Construct the output Euler angles
 	EGB = [EYaw theta phi];

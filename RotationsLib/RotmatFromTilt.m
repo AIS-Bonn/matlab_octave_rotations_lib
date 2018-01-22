@@ -23,13 +23,13 @@ function [Rotmat] = RotmatFromTilt(Tilt)
 	psigam = Tilt(1) + Tilt(2);
 	cpsigam = cos(psigam);
 	spsigam = sin(psigam);
-	
+
 	% Precalculate additional terms involved in the rotation matrix expression
 	A = cgam * cpsigam;
 	B = sgam * cpsigam;
 	C = cgam * spsigam;
 	D = sgam * spsigam;
-	
+
 	% Calculate the required rotation matrix
 	Rotmat = [ A+D*calpha  B-C*calpha   salpha*spsigam;
 	           C-B*calpha  D+A*calpha  -salpha*cpsigam;

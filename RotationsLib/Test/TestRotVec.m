@@ -27,11 +27,11 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 	%
 	% Test EulerRotVec
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('EulerRotVec', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vin = RandVec(1,3);
@@ -41,7 +41,7 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 		B = B && all(EulerRotVec(Er,[0;0;0]) == [0;0;0]);
 		ErrA(k) = norm(EulerRotVec(Er,Vin) - Rr*Vin);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Rotated vector norm error', ErrA);
@@ -49,11 +49,11 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 	%
 	% Test FusedRotVec
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FusedRotVec', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vin = RandVec(1,3);
@@ -63,7 +63,7 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 		B = B && all(FusedRotVec(Fr,[0;0;0]) == [0;0;0]);
 		ErrA(k) = norm(FusedRotVec(Fr,Vin) - Rr*Vin);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Rotated vector norm error', ErrA);
@@ -71,11 +71,11 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 	%
 	% Test QuatRotVec
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('QuatRotVec', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vin = RandVec(1,3);
@@ -85,7 +85,7 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 		B = B && all(QuatRotVec(Qr,[0;0;0]) == [0;0;0]);
 		ErrA(k) = norm(QuatRotVec(Qr,Vin) - Rr*Vin);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Rotated vector norm error', ErrA);
@@ -93,11 +93,11 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 	%
 	% Test RotmatRotVec
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('RotmatRotVec', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vin = RandVec(1,3);
@@ -106,7 +106,7 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 		B = B && all(RotmatRotVec(Rr,[0;0;0]) == [0;0;0]);
 		ErrA(k) = norm(RotmatRotVec(Rr,Vin) - Rr*Vin);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Rotated vector norm error', ErrA);
@@ -114,11 +114,11 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 	%
 	% Test TiltRotVec
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('TiltRotVec', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vin = RandVec(1,3);
@@ -128,11 +128,11 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 		B = B && all(TiltRotVec(Tr,[0;0;0]) == [0;0;0]);
 		ErrA(k) = norm(TiltRotVec(Tr,Vin) - Rr*Vin);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Rotated vector norm error', ErrA);
-	
+
 	%
 	% End of test script
 	%
@@ -144,7 +144,7 @@ function [Pass] = TestRotVec(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

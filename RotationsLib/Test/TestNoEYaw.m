@@ -27,18 +27,18 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 	%
 	% Test EulerNoEYaw
 	%
-	
+
 	% Begin test
 	N = BeginTest('EulerNoEYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(EulerNoEYaw([0 0 0]) == [0 0 0]);
 	for k = 1:N
 		Er = RandEuler;
 		B = B && all(EulerNoEYaw(Er) == [0 Er(2:3)]);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest();
@@ -46,14 +46,14 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 	%
 	% Test FusedNoEYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FusedNoEYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(FusedNoEYaw([0 0 0 1]) == [0 0 0 1]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Fr = RandFused;
@@ -61,7 +61,7 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 		Enoyaw = EulerFromFused(FusedNoEYaw(Fr));
 		[~, ErrA(k)] = EulerEqual([0 Er(2:3)], Enoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Euler representation error', ErrA);
@@ -69,14 +69,14 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 	%
 	% Test QuatNoEYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('QuatNoEYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(QuatNoEYaw([1 0 0 0]) == [1 0 0 0]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Qr = RandQuat;
@@ -84,7 +84,7 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 		Rnoyaw = RotmatFromQuat(QuatNoEYaw(Qr));
 		[~, ErrA(k)] = RotmatEqual(RotmatNoEYaw(Rr), Rnoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Rotmat representation error', ErrA);
@@ -92,14 +92,14 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 	%
 	% Test RotmatNoEYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('RotmatNoEYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(all(RotmatNoEYaw(eye(3)) == eye(3)));
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Rr = RandRotmat;
@@ -107,7 +107,7 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 		Enoyaw = EulerFromRotmat(RotmatNoEYaw(Rr));
 		[~, ErrA(k)] = EulerEqual([0 Er(2:3)], Enoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Euler representation error', ErrA);
@@ -115,14 +115,14 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 	%
 	% Test TiltNoEYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('TiltNoEYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(TiltNoEYaw([0 0 0]) == [0 0 0]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Tr = RandTilt;
@@ -130,11 +130,11 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 		Enoyaw = EulerFromTilt(TiltNoEYaw(Tr));
 		[~, ErrA(k)] = EulerEqual([0 Er(2:3)], Enoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Euler representation error', ErrA);
-	
+
 	%
 	% End of test script
 	%
@@ -146,7 +146,7 @@ function [Pass] = TestNoEYaw(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

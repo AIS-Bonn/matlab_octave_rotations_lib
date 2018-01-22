@@ -17,7 +17,7 @@ function [Tilt] = TiltFromFused(Fused)
 	% Precalculate the sin values
 	sth  = sin(Fused(2));
 	sphi = sin(Fused(3));
-	
+
 	% Calculate the cos of the tilt angle alpha
 	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0
@@ -29,11 +29,11 @@ function [Tilt] = TiltFromFused(Fused)
 			calpha = -sqrt(1-crit);
 		end
 	end
-	
+
 	% Calculate the tilt axis angle and the tilt angle
 	gamma = atan2(sth,sphi);
 	alpha = acos(calpha);
-	
+
 	% Return the tilt angles representation
 	Tilt = [Fused(1) gamma alpha];
 

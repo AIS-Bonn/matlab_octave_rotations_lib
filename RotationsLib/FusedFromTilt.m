@@ -14,6 +14,9 @@
 
 % Main function
 function [Fused] = FusedFromTilt(Tilt)
+	
+	% Get the required value of pi
+	PI = GetPI(Tilt);
 
 	% Precalculate sin and cos values
 	cgamma = cos(Tilt(2));
@@ -23,9 +26,9 @@ function [Fused] = FusedFromTilt(Tilt)
 	% Calculate theta and phi
 	theta = asin(salpha*sgamma);
 	phi   = asin(salpha*cgamma);
-	
+
 	% See which hemisphere we're in
-	if Tilt(3) <= pi/2
+	if abs(Tilt(3)) <= PI/2
 		h = 1;
 	else
 		h = -1;

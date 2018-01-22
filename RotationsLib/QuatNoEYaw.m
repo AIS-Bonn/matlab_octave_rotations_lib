@@ -13,13 +13,13 @@
 function [Qout, EYaw, QEYaw] = QuatNoEYaw(Qin)
 
 	% Calculate the ZYX yaw of the input
-	EYaw = atan2(Qin(1)*Qin(4)+Qin(2)*Qin(3),0.5-(Qin(3)*Qin(3)+Qin(4)*Qin(4)));
-	
+	EYaw = atan2(2.0*(Qin(1)*Qin(4)+Qin(2)*Qin(3)),1.0-2.0*(Qin(3)*Qin(3)+Qin(4)*Qin(4)));
+
 	% Construct the ZYX yaw component of the rotation
-	hcEYaw = cos(0.5*EYaw);
-	hsEYaw = sin(0.5*EYaw);
+	hcEYaw = cos(EYaw/2);
+	hsEYaw = sin(EYaw/2);
 	QEYaw = [hcEYaw 0 0 hsEYaw];
-	
+
 	% Remove the ZYX yaw component of the rotation
 	Qout = hcEYaw*Qin + hsEYaw*[Qin(4) Qin(3) -Qin(2) -Qin(1)];
 

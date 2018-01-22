@@ -17,9 +17,9 @@ function [EYaw] = EYawOfTilt(Tilt)
 	sgam = sin(Tilt(2));
 	calpha = cos(Tilt(3));
 	A = sgam*calpha;
-	
+
 	% Calculate the ZYX yaw
 	EYaw = atan2(cgam*spsigam-A*cpsigam, cgam*cpsigam+A*spsigam);
-	
+
 end
 % EOF

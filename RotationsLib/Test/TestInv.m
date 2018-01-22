@@ -27,17 +27,17 @@ function [Pass] = TestInv(N, Tol, Inter)
 	%
 	% Test EulerInv
 	%
-	
+
 	% Begin test
 	[N, ErrA, ErrB] = BeginTest('EulerInv', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Set the identity
 	Ident = [0 0 0];
-	
+
 	% Boolean conditions
 	B = B && EulerEqual(EulerInv(Ident), Ident, Tol);
-	
+
 	% Calculate inversion errors
 	for k = 1:N
 		Er = RandEuler;
@@ -47,7 +47,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 		[~, ErrA(k)] = QuatEqual(ComposeQuat(QEr,QErinv), [1 0 0 0], Tol);
 		[~, ErrB(k)] = QuatEqual(ComposeQuat(QErinv,QEr), [1 0 0 0], Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(4*Tol, 'Composition E*inv(E)', ErrA, 'Composition inv(E)*E', ErrB);
@@ -55,17 +55,17 @@ function [Pass] = TestInv(N, Tol, Inter)
 	%
 	% Test FusedInv
 	%
-	
+
 	% Begin test
 	[N, ErrA, ErrB] = BeginTest('FusedInv', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Set the identity
 	Ident = [0 0 0 1];
-	
+
 	% Boolean conditions
 	B = B && FusedEqual(FusedInv(Ident), Ident, Tol);
-	
+
 	% Calculate inversion errors
 	for k = 1:N
 		Fr = RandFused;
@@ -75,7 +75,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 		[~, ErrA(k)] = QuatEqual(ComposeQuat(QFr,QFrinv), [1 0 0 0], Tol);
 		[~, ErrB(k)] = QuatEqual(ComposeQuat(QFrinv,QFr), [1 0 0 0], Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(4*Tol, 'Composition F*inv(F)', ErrA, 'Composition inv(F)*F', ErrB);
@@ -83,17 +83,17 @@ function [Pass] = TestInv(N, Tol, Inter)
 	%
 	% Test QuatInv
 	%
-	
+
 	% Begin test
 	[N, ErrA, ErrB] = BeginTest('QuatInv', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Set the identity
 	Ident = [1 0 0 0];
-	
+
 	% Boolean conditions
 	B = B && QuatEqual(QuatInv(Ident), Ident, Tol);
-	
+
 	% Calculate inversion errors
 	for k = 1:N
 		Qr = RandQuat;
@@ -101,7 +101,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 		[~, ErrA(k)] = QuatEqual(ComposeQuat(Qr,Qrinv), Ident, Tol);
 		[~, ErrB(k)] = QuatEqual(ComposeQuat(Qrinv,Qr), Ident, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Composition Q*inv(Q)', ErrA, 'Composition inv(Q)*Q', ErrB);
@@ -109,17 +109,17 @@ function [Pass] = TestInv(N, Tol, Inter)
 	%
 	% Test RotmatInv
 	%
-	
+
 	% Begin test
 	[N, ErrA, ErrB] = BeginTest('RotmatInv', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Set the identity
 	Ident = eye(3);
-	
+
 	% Boolean conditions
 	B = B && RotmatEqual(RotmatInv(Ident), Ident, Tol);
-	
+
 	% Calculate inversion errors
 	for k = 1:N
 		Rr = RandRotmat;
@@ -127,7 +127,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 		[~, ErrA(k)] = RotmatEqual(ComposeRotmat(Rr,Rrinv), Ident, Tol);
 		[~, ErrB(k)] = RotmatEqual(ComposeRotmat(Rrinv,Rr), Ident, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Composition R*inv(R)', ErrA, 'Composition inv(R)*R', ErrB);
@@ -135,17 +135,17 @@ function [Pass] = TestInv(N, Tol, Inter)
 	%
 	% Test TiltInv
 	%
-	
+
 	% Begin test
 	[N, ErrA, ErrB] = BeginTest('TiltInv', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Set the identity
 	Ident = [0 0 0];
-	
+
 	% Boolean conditions
 	B = B && TiltEqual(TiltInv(Ident), Ident, Tol);
-	
+
 	% Calculate inversion errors
 	for k = 1:N
 		Tr = RandTilt;
@@ -155,11 +155,11 @@ function [Pass] = TestInv(N, Tol, Inter)
 		[~, ErrA(k)] = QuatEqual(ComposeQuat(QTr,QTrinv), [1 0 0 0], Tol);
 		[~, ErrB(k)] = QuatEqual(ComposeQuat(QTrinv,QTr), [1 0 0 0], Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(4*Tol, 'Composition T*inv(T)', ErrA, 'Composition inv(T)*T', ErrB);
-	
+
 	%
 	% End of test script
 	%
@@ -171,7 +171,7 @@ function [Pass] = TestInv(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

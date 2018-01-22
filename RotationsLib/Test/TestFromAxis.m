@@ -27,11 +27,11 @@ function [Pass] = TestFromAxis(N, Tol, Inter)
 	%
 	% Test QuatFromAxis
 	%
-	
+
 	% Begin test
 	N = BeginTest('QuatFromAxis', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vec = RandVec(1,5.0)';
@@ -48,19 +48,19 @@ function [Pass] = TestFromAxis(N, Tol, Inter)
 		B = B && all(QuatFromAxis('z',Ang) - [C 0 0 S] <= Tol);
 		B = B && all(QuatFromAxis(Vec,Ang) - [C S*Vec/norm(Vec)] <= Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest();
-	
+
 	%
 	% Test RotmatFromAxis
 	%
-	
+
 	% Begin test
 	N = BeginTest('RotmatFromAxis', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vec = RandVec(1,5.0)';
@@ -71,140 +71,140 @@ function [Pass] = TestFromAxis(N, Tol, Inter)
 		B = B && RotmatEqual(RotmatFromAxis('z',Ang), RotmatFromQuat(QuatFromAxis('z',Ang)), Tol);
 		B = B && RotmatEqual(RotmatFromAxis(Vec,Ang), RotmatFromQuat(QuatFromAxis(Vec,Ang)), Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest();
-	
+
 	%
 	% Test EulerFromAxis
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('EulerFromAxis', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vec = RandVec(1,5.0)';
 		Ang = 3*RandAng;
 		B = B && EulerEqual(EulerFromAxis(Vec,0), [0 0 0], 2*eps);
-		
+
 		RefQuat = QuatFromAxis('x',Ang);
 		[Euler, Quat] = EulerFromAxis('x', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = EulerEqual(Euler, EulerFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis('y',Ang);
 		[Euler, Quat] = EulerFromAxis('y', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = EulerEqual(Euler, EulerFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis('z',Ang);
 		[Euler, Quat] = EulerFromAxis('z', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = EulerEqual(Euler, EulerFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis(Vec,Ang);
 		[Euler, Quat] = EulerFromAxis(Vec, Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = EulerEqual(Euler, EulerFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Euler representation error', ErrA);
-	
+
 	%
 	% Test FusedFromAxis
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FusedFromAxis', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vec = RandVec(1,5.0)';
 		Ang = 3*RandAng;
 		B = B && FusedEqual(FusedFromAxis(Vec,0), [0 0 0 1], 2*eps);
-		
+
 		RefQuat = QuatFromAxis('x',Ang);
 		[Fused, Quat] = FusedFromAxis('x', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = FusedEqual(Fused, FusedFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis('y',Ang);
 		[Fused, Quat] = FusedFromAxis('y', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = FusedEqual(Fused, FusedFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis('z',Ang);
 		[Fused, Quat] = FusedFromAxis('z', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = FusedEqual(Fused, FusedFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis(Vec,Ang);
 		[Fused, Quat] = FusedFromAxis(Vec, Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = FusedEqual(Fused, FusedFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Fused representation error', ErrA);
-	
+
 	%
 	% Test TiltFromAxis
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('TiltFromAxis', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Vec = RandVec(1,5.0)';
 		Ang = 3*RandAng;
 		B = B && TiltEqual(TiltFromAxis(Vec,0), [0 0 0], 2*eps);
-		
+
 		RefQuat = QuatFromAxis('x',Ang);
 		[Tilt, Quat] = TiltFromAxis('x', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = TiltEqual(Tilt, TiltFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis('y',Ang);
 		[Tilt, Quat] = TiltFromAxis('y', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = TiltEqual(Tilt, TiltFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis('z',Ang);
 		[Tilt, Quat] = TiltFromAxis('z', Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = TiltEqual(Tilt, TiltFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
-		
+
 		RefQuat = QuatFromAxis(Vec,Ang);
 		[Tilt, Quat] = TiltFromAxis(Vec, Ang);
 		B = B && QuatEqual(Quat, RefQuat, Tol);
 		[~, Error] = TiltEqual(Tilt, TiltFromQuat(RefQuat), Tol);
 		ErrA(k) = max(ErrA(k), Error);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Tilt representation error', ErrA);
-	
+
 	%
 	% End of test script
 	%
@@ -216,7 +216,7 @@ function [Pass] = TestFromAxis(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

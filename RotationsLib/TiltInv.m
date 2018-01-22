@@ -8,11 +8,14 @@
 
 % Main function
 function [Tinv] = TiltInv(T)
+	
+	% Get the required value of pi
+	PI = GetPI(T);
 
 	% Calculate the inverse tilt axis angle
-	gammainv = T(1) + T(2) - pi;
-	gammainv = pi - mod(pi - gammainv, 2*pi);
-	
+	gammainv = T(1) + T(2) - PI;
+	gammainv = wrap(gammainv);
+
 	% Construct the inverse rotation
 	Tinv = [-T(1) gammainv T(3)];
 

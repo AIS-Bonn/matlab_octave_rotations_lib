@@ -12,7 +12,7 @@ function [ZVec] = ZVecFromFused(Fused)
 	% Precalculate the sin values
 	sth  = sin(Fused(2));
 	sphi = sin(Fused(3));
-	
+
 	% Calculate the cos of the tilt angle
 	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0

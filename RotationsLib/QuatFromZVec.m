@@ -10,11 +10,11 @@
 
 % Main function
 function [Quat] = QuatFromZVec(ZVec)
-	
+
 	% Calculate the w component
-	wsq = min(max(0.5*(1 + ZVec(3)), 0), 1); % Note: If ZVec is a unit vector then this should only trim at most a few eps...
+	wsq = min(max((1 + ZVec(3))/2, 0), 1); % Note: If ZVec is a unit vector then this should only trim at most a few eps...
 	w = sqrt(wsq);
-	
+
 	% Calculate the x and y components
 	xsqplusysq = 1 - wsq;
 	xtilde = ZVec(2);
@@ -28,7 +28,7 @@ function [Quat] = QuatFromZVec(ZVec)
 		x = factor * xtilde;
 		y = factor * ytilde;
 	end
-	
+
 	% Construct the output quaternion
 	Quat = [w x y 0];
 

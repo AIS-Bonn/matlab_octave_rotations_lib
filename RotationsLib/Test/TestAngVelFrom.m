@@ -27,11 +27,11 @@ function [Pass] = TestAngVelFrom(N, Tol, Inter)
 	%
 	% Test AngVelFromEulerVel
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('AngVelFromEulerVel', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Perform the required testing
 	for k = 1:N
 		dt = 1e-6;
@@ -42,12 +42,12 @@ function [Pass] = TestAngVelFrom(N, Tol, Inter)
 		dQ = ComposeQuat(QuatFromEuler(Er+dE*dt), QuatInv(QuatFromEuler(Er-dE*dt)));
 		ErrA(k) = norm(AngVel - (dQ(2:4)'/dt));
 	end
-	
+
 	% End test
 	fprintf('Using special tolerance %g for error testing.\n\n', 1.5e-8);
 	P = P & EndBoolean(B);
 	P = P & EndTest(1.5e-8, 'AngVel error', ErrA);
-	
+
 	%
 	% End of test script
 	%
@@ -59,7 +59,7 @@ function [Pass] = TestAngVelFrom(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

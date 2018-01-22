@@ -21,7 +21,7 @@ function [Rout, WasBad] = EnsureRotmat(Rin, Tol)
 	else
 		Tol = abs(Tol);
 	end
-	
+
 	% Make a copy of the input
 	Rout = Rin;
 
@@ -30,7 +30,7 @@ function [Rout, WasBad] = EnsureRotmat(Rin, Tol)
 	if ~isreal(Rout)
 		Rout = eye(3);
 	end
-	
+
 	% Filter out invalid left hand coordinate systems
 	if det(Rout) < 0
 		Rout = eye(3);

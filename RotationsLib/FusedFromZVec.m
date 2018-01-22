@@ -14,7 +14,7 @@ function [Fused] = FusedFromZVec(ZVec)
 	% Calculate the fused pitch
 	stheta = max(min(-ZVec(1),1.0),-1.0); % Note: If ZVec is a unit vector then this should only trim at most a few eps...
 	theta = asin(stheta);
-	
+
 	% Calculate the fused roll
 	sphi = max(min(ZVec(2),1.0),-1.0); % Note: If ZVec is a unit vector then this should only trim at most a few eps...
 	phi = asin(sphi);

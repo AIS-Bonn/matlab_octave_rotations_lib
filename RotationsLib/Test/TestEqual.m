@@ -31,11 +31,11 @@ function [Pass] = TestEqual(N, Tol, Inter)
 	%
 	% Test EulerEqual
 	%
-	
+
 	% Begin test
 	N = BeginTest('EulerEqual', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	Er = RandEuler;
 	[Equal, Err] = EulerEqual(Er, Er, 0);
@@ -51,7 +51,7 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		B = B && EulerEqual([Er(1) asin(-1) Er(3)], [Er(1) asin(-1+0.49*Tol*rand) Er(3)], Tol);
 		B = B && ~EulerEqual(Er, Er+[1 0 2], Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
@@ -59,11 +59,11 @@ function [Pass] = TestEqual(N, Tol, Inter)
 	%
 	% Test FusedEqual
 	%
-	
+
 	% Begin test
 	N = BeginTest('FusedEqual', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	Fr = RandFused;
 	[Equal, Err] = FusedEqual(Fr, Fr, 0);
@@ -81,7 +81,7 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		B = B && FusedEqual([Fr(1) 0 asin(-1) Fr(4)], [Fr(1) 0 asin(-1+0.49*Tol*rand) Fr(4)], Tol);
 		B = B && ~FusedEqual(Fr, Fr+[2 1 0 0], Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
@@ -89,11 +89,11 @@ function [Pass] = TestEqual(N, Tol, Inter)
 	%
 	% Test QuatEqual
 	%
-	
+
 	% Begin test
 	N = BeginTest('QuatEqual', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	Qr = RandQuat;
 	[Equal, Err] = QuatEqual(Qr, Qr, 0);
@@ -107,7 +107,7 @@ function [Pass] = TestEqual(N, Tol, Inter)
 			B = B && ~QuatEqual(Qr, [Qr(1) -Qr(2:4)], Tol);
 		end
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
@@ -115,11 +115,11 @@ function [Pass] = TestEqual(N, Tol, Inter)
 	%
 	% Test RotmatEqual
 	%
-	
+
 	% Begin test
 	N = BeginTest('RotmatEqual', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	Rr = RandRotmat;
 	[Equal, Err] = RotmatEqual(Rr, Rr, 0);
@@ -130,7 +130,7 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		B = B &&  RotmatEqual(Rr, Rr+Tol*(2*rand(3,3)-1), Tol);
 		B = B && ~RotmatEqual(Rr, Rr+1.1*(Tol./(2*rand(3,3)-1)), Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
@@ -138,11 +138,11 @@ function [Pass] = TestEqual(N, Tol, Inter)
 	%
 	% Test TiltEqual
 	%
-	
+
 	% Begin test
 	N = BeginTest('TiltEqual', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	Tr = RandTilt;
 	[Equal, Err] = TiltEqual(Tr, Tr, 0);
@@ -156,19 +156,19 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		B = B && TiltEqual([Tr(1:2) acos(-1)], [Tr(1:2) acos(-1+0.49*Tol*rand)], Tol);
 		B = B && ~TiltEqual(Tr, Tr+[1 0 2], Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
-	
+
 	%
 	% Test EnsureQuat
 	%
-	
+
 	% Begin test
 	N = BeginTest('EnsureQuat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	[Qout, WasBad, Norm] = EnsureQuat([1 0 0 0], 0, true);
 	B = B && all(Qout == [1 0 0 0]) && ~WasBad && (Norm == 1);
@@ -182,19 +182,19 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		[Qout, WasBad, Norm] = EnsureQuat(Mag*Qr, Tol, false);
 		B = B && all(abs(Qout - Qr) <= Tol) && WasBad && (abs(Norm - Mag) <= Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
-	
+
 	%
 	% Test EnsureRotmat
 	%
-	
+
 	% Begin test
 	N = BeginTest('EnsureRotmat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	[~, WasBad] = EnsureRotmat([1 0 0.1;0 1 0;0 0 1], Tol);
 	B = B && WasBad;
@@ -210,11 +210,11 @@ function [Pass] = TestEqual(N, Tol, Inter)
 		B = B && all(all(abs(Rnew'*Rnew-eye(3)) <= Tol));
 		B = B && all(abs(cross(Rnew(:,1),Rnew(:,2)) - Rnew(:,3)) <= Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
-	
+
 	%
 	% End of test script
 	%
@@ -226,7 +226,7 @@ function [Pass] = TestEqual(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

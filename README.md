@@ -2,23 +2,25 @@
 
 **Author:** Philipp Allgeuer
 
-**Version:** 1.3.0
+**Version:** 1.4.0
 
-**Date:** 31/10/16
+**Date:** 22/01/18
 
 ##General Overview##
-The Matlab/Octave rotations library is a collection of functions, bundled as
-m-scripts, that address computations and numerical handling of rotations in 3D
-Euclidean space. The rotation representations that are supported are rotation
-matrices (`Rotmat`), Quaternions (`Quat`), intrinsic ZYX Euler angles (`Euler`),
-fused angles (`Fused`) and tilt angles (`Tilt`). Operations such as composition,
-inversion, ZYX yaw extraction, fused yaw extraction, random generation, equality
-detection, vector rotation and much more have been implemented for each rotation
-representation. Unit tests for each function are provided to ensure that the
-library is performant. For more information on fused angles and tilt angles,
-please refer to http://www.ais.uni-bonn.de/~pallgeuer/papers/IROS_2015_fused.pdf.
-The *fused angles* and *tilt angles* rotation representations are the invention
-of the author. 
+The Matlab/Octave rotations library is a collection of functions, bundled as 
+m-scripts, that address computations and numerical handling of rotations in 3D 
+Euclidean space. The rotation representations that are supported are rotation 
+matrices (`Rotmat`), Quaternions (`Quat`), intrinsic ZYX Euler angles (`Euler`), 
+fused angles (`Fused`) and tilt angles (`Tilt`). Operations such as composition, 
+inversion, ZYX yaw extraction, fused yaw extraction, random generation, equality 
+detection, vector rotation and much more have been implemented for each rotation 
+representation. Tilt vector addition and the relative and absolute tilt phase 
+spaces are also supported. Unit tests for each function are provided to ensure 
+that the library is performant. For more information on fused angles and tilt 
+angles, please refer to 
+http://www.ais.uni-bonn.de/~pallgeuer/papers/IROS_2015_fused.pdf. The *fused 
+angles* and *tilt angles* rotation representations are the invention of the 
+author, as with the tilt phase space. 
 
 ##Getting Started##
 Clone the rotations library into the required local target directory. Usually

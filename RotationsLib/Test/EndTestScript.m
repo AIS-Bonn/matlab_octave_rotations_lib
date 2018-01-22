@@ -23,7 +23,7 @@ function EndTestScript(Title, Pass)
 	end
 	fprintf('Completed!\n');
 	fprintf('\n');
-	
+
 	% Flush the printed output to screen
 	if isOctave
 		fflush(stdout);

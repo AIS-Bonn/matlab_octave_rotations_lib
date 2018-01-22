@@ -23,7 +23,7 @@ function [F] = RandFused(N)
 		warning('N should be an integer scalar.');
 		N = floor(N);
 	end
-	
+
 	% Generate the required number of random rotations
 	yaw = pi*(2*rand(N,1)-1);
 	lam = 2*rand(N,2)-1;

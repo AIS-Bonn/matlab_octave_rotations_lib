@@ -9,7 +9,7 @@
 
 % Display a header
 disp('');
-disp('Loading Rotations Library and Test v1.3.0...');
+disp('Loading Rotations Library and Test v1.4.0...');
 
 % Add the path of this script and the Test subdirectory thereof to the working path
 ScriptPath = [pwd '/LoadRotationsTest.m'];

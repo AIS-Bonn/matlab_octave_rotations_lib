@@ -19,25 +19,28 @@ function [Euler, Quat] = EulerFromAxis(Axis, Angle)
 		return;
 	end
 	
+	% Get the required value of pi
+	PI = GetPI(Angle);
+
 	% Wrap the rotation angle to (-pi,pi]
-	Angle = pi - mod(pi - Angle, 2*pi);
-	
+	Angle = wrap(Angle);
+
 	% Precompute the required sin and cos terms
-	hcang = cos(0.5*Angle);
-	hsang = sin(0.5*Angle);
-	
+	hcang = cos(Angle/2);
+	hsang = sin(Angle/2);
+
 	% Handle case of standard axis rotations
 	if strcmpi(Axis, 'x')
 		Euler = [0 0 Angle];
 		Quat = [hcang hsang 0 0];
 		return;
 	elseif strcmpi(Axis, 'y')
-		if abs(Angle) <= pi/2
+		if abs(Angle) <= PI/2
 			Euler = [0 Angle 0];
-		elseif Angle >= pi/2
-			Euler = [pi pi-Angle pi];
+		elseif Angle >= PI/2
+			Euler = [PI PI-Angle PI];
 		else
-			Euler = [pi -pi-Angle pi];
+			Euler = [PI -PI-Angle PI];
 		end
 		Quat = [hcang 0 hsang 0];
 		return;
@@ -46,12 +49,12 @@ function [Euler, Quat] = EulerFromAxis(Axis, Angle)
 		Quat = [hcang 0 0 hsang];
 		return;
 	end
-	
+
 	% Axis error checking
 	if ~(isnumeric(Axis) && isvector(Axis) && length(Axis) == 3)
 		error('Axis must be a 3-vector, or one of {''x'',''y'',''z''}.');
 	end
-	
+
 	% Normalise the axis vector
 	AxisNorm = norm(Axis);
 	if AxisNorm <= 0
@@ -61,7 +64,7 @@ function [Euler, Quat] = EulerFromAxis(Axis, Angle)
 	else
 		Axis = Axis/AxisNorm;
 	end
-	
+
 	% Construct the required rotation
 	Quat = [hcang hsang*Axis(:)'];
 	Euler = EulerFromQuat(Quat);

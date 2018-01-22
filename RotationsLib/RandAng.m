@@ -38,7 +38,7 @@ function [Ang] = RandAng(N, Range)
 	if Range(2) < Range(1)
 		Range = [Range(2) Range(1)];
 	end
-	
+
 	% Generate the required number of random angles
 	Diff = Range(2) - Range(1);
 	Ang = Range(1) + Diff*rand(N,1);

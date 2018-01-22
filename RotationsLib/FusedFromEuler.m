@@ -25,21 +25,21 @@ function [Fused, Rotmat, Tilt] = FusedFromEuler(Euler)
 
 	% Calculate the fused pitch
 	theta = Euler(2); % ZYX Euler pitch is equivalent to fused pitch!
-	
+
 	% Calculate the fused roll
 	sphi = max(min(Rotmat(3,2),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
 	phi = asin(sphi);
-	
+
 	% See which hemisphere we're in
 	if Rotmat(3,3) >= 0
 		h = 1;
 	else
 		h = -1;
 	end
-	
+
 	% Construct the output fused angles
 	Fused = [psi theta phi h];
-	
+
 	% Construct the output tilt angles
 	if nargout >= 3
 		gamma = atan2(-Rotmat(3,1),Rotmat(3,2));

@@ -27,14 +27,14 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 	%
 	% Test EulerNoFYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('EulerNoFYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(EulerNoFYaw([0 0 0]) == [0 0 0]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Er = RandEuler;
@@ -42,7 +42,7 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 		Fnoyaw = FusedFromEuler(EulerNoFYaw(Er));
 		[~, ErrA(k)] = FusedEqual([0 Fr(2:4)], Fnoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Fused representation error', ErrA);
@@ -50,18 +50,18 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 	%
 	% Test FusedNoFYaw
 	%
-	
+
 	% Begin test
 	N = BeginTest('FusedNoFYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(FusedNoFYaw([0 0 0 1]) == [0 0 0 1]);
 	for k = 1:N
 		Fr = RandFused;
 		B = B && all(FusedNoFYaw(Fr) == [0 Fr(2:4)]);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest();
@@ -69,14 +69,14 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 	%
 	% Test QuatNoFYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('QuatNoFYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(QuatNoFYaw([1 0 0 0]) == [1 0 0 0]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Qr = RandQuat;
@@ -84,7 +84,7 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 		Fnoyaw = FusedFromQuat(QuatNoFYaw(Qr));
 		[~, ErrA(k)] = FusedEqual([0 Fr(2:4)], Fnoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Fused representation error', ErrA);
@@ -92,14 +92,14 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 	%
 	% Test RotmatNoFYaw
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('RotmatNoFYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(all(RotmatNoFYaw(eye(3)) == eye(3)));
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Rr = RandRotmat;
@@ -107,7 +107,7 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 		Fnoyaw = FusedFromRotmat(RotmatNoFYaw(Rr));
 		[~, ErrA(k)] = FusedEqual([0 Fr(2:4)], Fnoyaw, Tol);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Fused representation error', ErrA);
@@ -115,22 +115,22 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 	%
 	% Test TiltNoFYaw
 	%
-	
+
 	% Begin test
 	N = BeginTest('TiltNoFYaw', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(TiltNoFYaw([0 0 0]) == [0 0 0]);
 	for k = 1:N
 		Tr = RandTilt;
 		B = B && all(TiltNoFYaw(Tr) == [0 Tr(2:3)]);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest();
-	
+
 	%
 	% End of test script
 	%
@@ -142,7 +142,7 @@ function [Pass] = TestNoFYaw(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

@@ -36,11 +36,11 @@ function [Pass] = TestRand(N, Tol, Inter)
 	%
 	% Test RandEuler
 	%
-	
+
 	% Begin test
 	N = BeginTest('RandEuler', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Generate a set of random rotations
 	D = RandEuler(N);
 
@@ -54,18 +54,18 @@ function [Pass] = TestRand(N, Tol, Inter)
 	%
 	% Test RandFused
 	%
-	
+
 	% Begin test
 	N = BeginTest('RandFused', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Generate a set of random rotations
 	D = RandFused(N);
 
 	% Range checking
 	B = TestRanges(B, D, N, 4, [-pi -pi/2 -pi/2 -1], [pi pi/2 pi/2 1]);
 	B = B && all((D(:,4) == 1) | (D(:,4) == -1));
-	
+
 	% Test the validity criterion
 	crit = sin(D(:,2)).^2 + sin(D(:,3)).^2;
 	B = B && all(crit >= 0.0) && all(crit <= 1.0);
@@ -77,17 +77,17 @@ function [Pass] = TestRand(N, Tol, Inter)
 	%
 	% Test RandQuat
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('RandQuat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Generate a set of random rotations
 	D = RandQuat(N);
 
 	% Range checking
 	B = TestRanges(B, D, N, 4, -ones(1,4), ones(1,4));
-	
+
 	% Check the quaternion norm
 	ErrA = sqrt(D(:,1).^2 + D(:,2).^2 + D(:,3).^2 + D(:,4).^2) - 1.0;
 
@@ -98,11 +98,11 @@ function [Pass] = TestRand(N, Tol, Inter)
 	%
 	% Test RandRotmat
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('RandRotmat', Ntiny);
 	B = BeginBoolean();
-	
+
 	% Generate a set of random rotations
 	R = RandRotmat(N);
 	D = zeros(N,9);
@@ -113,7 +113,7 @@ function [Pass] = TestRand(N, Tol, Inter)
 
 	% Range checking
 	B = TestRanges(B, D, N, 9, -ones(1,9), ones(1,9));
-	
+
 	% Check that the rotation matrices are valid by re-orthogonalising them and seeing if they stay the same
 	for k = 1:N
 		T = R(:,:,k);
@@ -128,11 +128,11 @@ function [Pass] = TestRand(N, Tol, Inter)
 	%
 	% Test RandTilt
 	%
-	
+
 	% Begin test
 	N = BeginTest('RandTilt', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Generate a set of random rotations
 	D = RandTilt(N);
 
@@ -178,7 +178,7 @@ function [Pass] = TestRand(N, Tol, Inter)
 	% Check the vector 2-norm is in range
 	Mag = sqrt(V(1,:).^2 + V(2,:).^2 + V(3,:).^2);
 	B = B && all(Mag >= 0) && all(Mag <= 3);
-	
+
 	% Human checking
 	fprintf('Min mag:   0.0 => %.3g\n'  , min(Mag));
 	fprintf('Mean mag:  1.5 => %.3g\n'  , mean(Mag));
@@ -209,11 +209,11 @@ function [Pass] = TestRand(N, Tol, Inter)
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Magnitude error', MagErr);
-	
+
 	%
 	% Interactive testing
 	%
-	
+
 	% Run the interactive testing component
 	if Inter
 		BeginTest('Interactive');
@@ -222,7 +222,7 @@ function [Pass] = TestRand(N, Tol, Inter)
 		P = P & EndBoolean(B);
 		P = P & EndTest();
 	end
-	
+
 	%
 	% End of test script
 	%
@@ -234,7 +234,7 @@ function [Pass] = TestRand(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass
@@ -253,7 +253,7 @@ function [B] = TestRandInter()
 
 	% Rand fused angle plots
 	D = RandFused(10000);
-	
+
 	% Fused yaw plot
 	h = [h figure()];
 	hist(D(:,1),30);
@@ -261,7 +261,7 @@ function [B] = TestRandInter()
 	xlabel('Fused yaw');
 	ylabel('Count');
 	grid on;
-	
+
 	% Fused roll/pitch plot
 	h = [h figure()];
 	plot(D(:,2),D(:,3),'b.');
@@ -269,7 +269,7 @@ function [B] = TestRandInter()
 	xlabel('Fused pitch');
 	ylabel('Fused roll');
 	grid on;
-	
+
 	% Wait for the user to appreciate the interactive testing
 	fprintf('Press enter to close any opened figures and continue...');
 	pause;
@@ -288,7 +288,7 @@ function [B] = TestRanges(B, D, N, ElemSize, LBnd, UBnd)
 
 	% Decide on an acceptable actual/expected proximity factor given the number of samples N
 	Fact = min(max(1500/N,0.01),1);
-	
+
 	% Calculate the actual and expected bounds
 	actmin = min(D);
 	expmin = LBnd;
@@ -297,14 +297,14 @@ function [B] = TestRanges(B, D, N, ElemSize, LBnd, UBnd)
 	actmean = mean(D);
 	expmean = 0.5*(LBnd+UBnd);
 	expdiff = expmax - expmin;
-	
+
 	% Boolean conditions
 	B = B && all(size(D) == [N ElemSize]);
 	B = B && all(all(D >= repmat(expmin,N,1))) && all(all(D <= repmat(expmax,N,1)));
 	B = B && all(actmin <= expmin + Fact*expdiff);
 	B = B && all(actmax >= expmax - Fact*expdiff);
 	B = B && all(actmean >= expmean - 2*Fact*expdiff) && all(actmean <= expmean + 2*Fact*expdiff);
-	
+
 	% Human checking
 	fprintf('Minimums:   %s\n'  ,sprintf('%10.4g ',actmin));
 	fprintf('Should be:  %s\n\n',sprintf('%10.4g ',expmin));

@@ -34,7 +34,7 @@ function [V] = RandUnitVec(N, M)
 		warning('M should be an integer scalar.');
 		M = floor(M);
 	end
-	
+
 	% Generate the required number of random unit vectors
 	V = 2*rand(M,N) - 1;
 	Vnorm = sqrt(sum(V.^2,1));

@@ -19,11 +19,11 @@ function [N, varargout] = BeginTest(Title, N, ErrSize)
 
 	% Start timing
 	tic;
-	
+
 	% Print a test header
 	fprintf('----------------------------------------------------------------------\n');
 	fprintf('TEST: %s\n\n', Title);
-	
+
 	% Initialise the required error arrays with zeros
 	if nargin >= 2
 		N = round(N);
@@ -38,7 +38,7 @@ function [N, varargout] = BeginTest(Title, N, ErrSize)
 			varargout{k} = zeros(N,1);
 		end
 	end
-	
+
 	% Flush the printed output to screen
 	if isOctave
 		fflush(stdout);

@@ -28,13 +28,16 @@ function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
 	if nargin < 3
 		Unique = false;
 	end
+	
+	% Get the required value of pi
+	PI = GetPI(Fin);
 
 	% Make a copy of the input
 	Fout = Fin;
 
 	% Wrap the angles to (-pi,pi]
-	Fout(1:3) = pi - mod(pi - Fout(1:3), 2*pi);
-	
+	Fout(1:3) = wrap(Fout(1:3));
+
 	% Enforce h to {-1,1}
 	if Fout(4) >= 0
 		Fout(4) = 1;
@@ -44,8 +47,8 @@ function [Fout, WasBad] = EnsureFused(Fin, Tol, Unique)
 
 	% Check the L1 norm
 	L1Norm = abs(Fout(2)) + abs(Fout(3));
-	if L1Norm > pi/2
-		Fout(2:3) = (pi/2)*Fout(2:3)/L1Norm;
+	if L1Norm > PI/2
+		Fout(2:3) = (PI/2)*Fout(2:3)/L1Norm;
 	end
 
 	% Check whether we need to make the representation unique

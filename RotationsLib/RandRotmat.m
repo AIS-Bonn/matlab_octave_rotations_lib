@@ -23,7 +23,7 @@ function [R] = RandRotmat(N)
 		warning('N should be an integer scalar.');
 		N = floor(N);
 	end
-	
+
 	% Generate the required number of random rotations
 	Q = RandQuat(N);
 	R = zeros(3, 3, N);

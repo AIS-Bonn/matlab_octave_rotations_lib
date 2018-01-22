@@ -22,12 +22,12 @@ function [Euler] = EulerFromTilt(Tilt)
 	psigam = Tilt(1) + Tilt(2);
 	cpsigam = cos(psigam);
 	spsigam = sin(psigam);
-	
+
 	% Precalculate additional required terms
 	sphi = cgam*salpha;
 	stheta = sgam*salpha; % No need to manually coerce to [-1,1] due to construction
 	A = sgam*calpha;
-	
+
 	% Calculate the required Euler angles representation
 	Euler = [atan2(cgam*spsigam-A*cpsigam,cgam*cpsigam+A*spsigam) asin(stheta) atan2(sphi,calpha)];
 

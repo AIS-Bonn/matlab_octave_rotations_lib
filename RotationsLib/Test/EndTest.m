@@ -18,7 +18,7 @@ function [Pass] = EndTest(Tol, varargin)
 	if nargin < 1 || Tol <= 0
 		Tol = 128*eps;
 	end
-	
+
 	% Print the error statistics and see whether the test was passed
 	Pass = true;
 	for k = 1:2:(nargin-2)
@@ -29,13 +29,13 @@ function [Pass] = EndTest(Tol, varargin)
 			disp(' ');
 		end
 	end
-	
+
 	% Stop timing
 	toc;
-	
+
 	% Trailing display
 	fprintf('\n');
-	
+
 	% Flush the printed output to screen
 	if isOctave
 		fflush(stdout);

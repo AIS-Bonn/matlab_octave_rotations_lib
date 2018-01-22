@@ -22,12 +22,12 @@ function [Equal, Err] = QuatEqual(P, Q, Tol)
 	else
 		Tol = abs(Tol);
 	end
-	
+
 	% Calculate the deviation between the two rotations
 	ErrPos = max(abs(P-Q));
 	ErrNeg = max(abs(P+Q));
 	Err = min(ErrPos,ErrNeg);
-	
+
 	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);
 

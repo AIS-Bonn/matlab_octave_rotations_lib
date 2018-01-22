@@ -23,11 +23,11 @@ function [Pass] = TestPlotCsys(N, Tol, Inter)
 
 	% Begin test script
 	P = BeginTestScript('TestPlotCsys', N, Tol);
-	
+
 	%
 	% Interactive testing
 	%
-	
+
 	% Run the interactive testing component
 	if Inter
 		BeginTest('Interactive');
@@ -36,7 +36,7 @@ function [Pass] = TestPlotCsys(N, Tol, Inter)
 		P = P & EndBoolean(B);
 		P = P & EndTest();
 	end
-	
+
 	%
 	% End of test script
 	%
@@ -48,7 +48,7 @@ function [Pass] = TestPlotCsys(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass
@@ -64,7 +64,7 @@ function [B] = TestPlotCsysInter()
 	% Initialise variables
 	B = true;
 	h = [];
-	
+
 	% Plot 1
 	h = [h figure()];
 	PlotCsys;
@@ -82,7 +82,7 @@ function [B] = TestPlotCsysInter()
 	disp(' - Random csys with labels {x_R,y_R,z_R}');
 	disp(' - Random csys with labels {x_Q,y_Q,z_Q}');
 	disp(' ');
-	
+
 	% Plot 2
 	h = [h figure()];
 	PlotCsys(eye(3),'G',[0 0 0],3);
@@ -100,7 +100,7 @@ function [B] = TestPlotCsysInter()
 	disp(' - Random csys of size 1 centered at [-2 2 1] with labels {x_R,y_R,z_R}');
 	disp(' - Random csys of size [2 1 1.5] centered at [1 -1 0] with labels {x_Qs,y_Qs,z_Qs}');
 	disp(' ');
-	
+
 	% Plot 3
 	h = [h figure()];
 	PlotCsys(eye(3),'G');
@@ -118,7 +118,7 @@ function [B] = TestPlotCsysInter()
 	disp(' - Random csys with linewidth 2.0 and labels {x_rand,y_rand,z_rand}');
 	disp(' - Random csys with linewidth 1.5, dashed linestyle and labels {x_D,y_D,z_D}');
 	disp(' ');
-	
+
 	% Wait for the user to appreciate the interactive testing
 	fprintf('Press enter to close any opened figures and continue...');
 	pause;

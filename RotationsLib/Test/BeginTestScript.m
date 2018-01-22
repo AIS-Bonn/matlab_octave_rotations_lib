@@ -24,16 +24,16 @@ function [Pass, Nnormal, Nlarge, Nsmall, Ntiny] = BeginTestScript(Title, N, Tol)
 	fprintf('N = %d\n',N);
 	fprintf('Tol = %.3e\n',Tol);
 	fprintf('\n');
-	
+
 	% Work out the various options for N
 	Nlarge = max(round(10*N),5);
 	Nnormal = max(round(N),5);
 	Nsmall = max(round(N/10),5);
 	Ntiny = max(round(N/300),5);
-	
+
 	% Initialise the pass flag
 	Pass = true;
-	
+
 	% Flush the printed output to screen
 	if isOctave
 		fflush(stdout);

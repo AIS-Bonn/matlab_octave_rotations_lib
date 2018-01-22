@@ -20,14 +20,14 @@ function [Tilt, Rotmat] = TiltFromEuler(Euler)
 
 	% Calculate the fused yaw
 	psi = FYawOfRotmat(Rotmat);
-	
+
 	% Calculate the tilt axis angle
 	gamma = atan2(-Rotmat(3,1),Rotmat(3,2));
-	
+
 	% Calculate the tilt angle
 	calpha = max(min(Rotmat(3,3),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
 	alpha = acos(calpha);
-	
+
 	% Return the tilt angles representation
 	Tilt = [psi gamma alpha];
 

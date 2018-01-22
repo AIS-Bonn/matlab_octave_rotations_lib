@@ -14,10 +14,10 @@ function [Fout, FYaw, FFYaw] = FusedNoFYaw(Fin)
 
 	% Calculate the fused yaw of the input
 	FYaw = Fin(1);
-	
+
 	% Construct the fused yaw component of the rotation
 	FFYaw = [FYaw 0 0 1];
-	
+
 	% Remove the fused yaw component of the rotation
 	Fout = [0 Fin(2:4)];
 

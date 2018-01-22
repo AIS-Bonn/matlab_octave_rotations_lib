@@ -28,19 +28,22 @@ function [Tout, WasBad] = EnsureTilt(Tin, Tol, Unique)
 	if nargin < 3
 		Unique = false;
 	end
+	
+	% Get the required value of pi
+	PI = GetPI(Tin);
 
 	% Make a copy of the input
 	Tout = Tin;
 
 	% Wrap the angles to (-pi,pi]
-	Tout = pi - mod(pi - Tout, 2*pi);
+	Tout = wrap(Tout);
 
 	% Handle case of negative alpha
 	if Tout(3) < 0
-		Tout(2) = pi - mod(-Tout(2), 2*pi); % Equivalent to wrapToPi(Tout(2)+pi)
+		Tout(2) = wrap(Tout(2) + PI);
 		Tout(3) = -Tout(3);
 	end
-	
+
 	% Check whether we need to make the representation unique
 	if Unique
 		Near0   = (abs(cos(Tout(3)) - 1) <= Tol);

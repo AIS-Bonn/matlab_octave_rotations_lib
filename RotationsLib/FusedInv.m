@@ -21,16 +21,16 @@ function [Finv] = FusedInv(F)
 	else
 		salpha = sqrt(crit);
 	end
-	
+
 	% Precalculate trigonometric values
 	psigam = F(1) + gamma;
 	cpsigam = cos(psigam);
 	spsigam = sin(psigam);
-	
+
 	% Calculate the inverse fused pitch and roll
 	thinv = asin(-salpha*spsigam);
 	phinv = asin(-salpha*cpsigam);
-	
+
 	% Construct the inverse rotation
 	Finv = [-F(1) thinv phinv F(4)];
 

@@ -23,7 +23,7 @@ function [E] = RandEuler(N)
 		warning('N should be an integer scalar.');
 		N = floor(N);
 	end
-	
+
 	% Generate the required number of random rotations
 	E = (2*rand(N,3)-1)*(pi*diag([1 0.5 1]));
 

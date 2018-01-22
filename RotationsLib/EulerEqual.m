@@ -28,35 +28,38 @@ function [Equal, Err] = EulerEqual(E, F, Tol)
 	else
 		Tol = abs(Tol);
 	end
+	
+	% Get the required value of pi
+	PI = GetPI(E);
 
 	% Convert both Euler angles into their unique representations
 	E = EnsureEuler(E, Tol, true);
 	F = EnsureEuler(F, Tol, true);
-	
+
 	% Handle angle wrapping issues
-	if abs(E(1)-F(1)) > pi
+	if abs(E(1)-F(1)) > PI
 		if E(1) > F(1)
-			F(1) = F(1) + 2*pi;
+			F(1) = F(1) + 2*PI;
 		else
-			E(1) = E(1) + 2*pi;
+			E(1) = E(1) + 2*PI;
 		end
 	end
-	if abs(E(3)-F(3)) > pi
+	if abs(E(3)-F(3)) > PI
 		if E(3) > F(3)
-			F(3) = F(3) + 2*pi;
+			F(3) = F(3) + 2*PI;
 		else
-			E(3) = E(3) + 2*pi;
+			E(3) = E(3) + 2*PI;
 		end
 	end
-	
+
 	% Construct the vectors to compare
 	% The pitch suffers from the numerical insensitivity of asin, so the sin thereof is checked
 	EComp = [E(1) sin(E(2)) E(3)];
 	FComp = [F(1) sin(F(2)) F(3)];
-	
+
 	% Calculate the deviation between the two rotations
 	Err = max(abs(EComp-FComp));
-	
+
 	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);
 

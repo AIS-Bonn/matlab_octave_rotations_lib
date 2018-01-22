@@ -27,21 +27,21 @@ function [Pass] = TESTTEMPLATE(N, Tol, Inter)
 	%
 	% Test FUNCTION
 	%
-	
+
 	% Begin test
 	[N, ErrA, ErrB] = BeginTest('FUNCTION', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && BOOLEAN_TESTS;
-	
+
 	% Perform the required testing
 	TESTS_THAT_CALCULATE_ERRORS_ERRA_AND_ERRB;
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'TESTITEMNAME1', ErrA, 'TESTITEMNAME2', ErrB);
-	
+
 	%
 	% End of test script
 	%
@@ -53,7 +53,7 @@ function [Pass] = TESTTEMPLATE(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

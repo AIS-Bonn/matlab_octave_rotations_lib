@@ -11,7 +11,7 @@ function [FYaw] = FYawOfQuat(Quat)
 
 	% Calculate the fused yaw of the rotation
 	FYaw = 2.0*atan2(Quat(4),Quat(1));
-	FYaw = pi - mod(pi - FYaw, 2*pi);
+	FYaw = wrap(FYaw);
 
 end
 % EOF

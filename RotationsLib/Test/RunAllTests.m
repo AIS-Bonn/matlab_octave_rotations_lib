@@ -60,14 +60,14 @@ function [Pass] = RunAllTests(Speed, Inter)
 	LTol = 2048*eps;
 	MTol = 256*eps;
 	HTol = 32*eps;
-	
+
 	% Retrieve the start time
 	StartTime = tic;
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Start of testing  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+
 	% Tests:   *Identity
 	% Assumes: None
 	P = P & TestIdentity(1*S, HTol, Inter);
@@ -75,15 +75,15 @@ function [Pass] = RunAllTests(Speed, Inter)
 	% Tests:   Rand*, RandAng, RandVec, RandUnitVec
 	% Assumes: None
 	P = P & TestRand(10000*S, MTol, Inter);
-	
+
 	% Tests:   PlotCsys
 	% Assumes: Rand*
 	P = P & TestPlotCsys(1*S, MTol, Inter);
-	
+
 	% Tests:   *Equal, Ensure*
 	% Assumes: Rand*
 	P = P & TestEqual(600*S, MTol, Inter);
-	
+
 	% Tests:   *From*
 	% Assumes: Rand*, *Equal
 	P = P & TestConversions(250*S, HTol, Inter);
@@ -91,55 +91,55 @@ function [Pass] = RunAllTests(Speed, Inter)
 	% Tests:   Compose*
 	% Assumes: Rand*, *Equal, RotmatFrom*, *FromRotmat
 	P = P & TestCompose(500*S, HTol, Inter);
-	
+
 	% Tests:   *FromAxis
 	% Assumes: RandVec, RandAng, *Equal, *FromQuat
 	P = P & TestFromAxis(600*S, MTol, Inter);
-	
+
 	% Tests:   *Inv
 	% Assumes: Rand*, QuatFrom*, Compose*, *Equal
 	P = P & TestInv(1000*S, LTol, Inter);
-	
+
 	% Tests:   QuatSlerp
 	% Assumes: RandQuat, ComposeQuat, QuatInv
 	P = P & TestSlerp(200*S, HTol, Inter);
-	
+
 	% Tests:   *NoEYaw
 	% Assumes: Rand*, *Equal, EulerFrom*, RotmatFromQuat
 	P = P & TestNoEYaw(1600*S, MTol, Inter);
-	
+
 	% Tests:   *NoFYaw
 	% Assumes: Rand*, FusedEqual, FusedFrom*
 	P = P & TestNoFYaw(1500*S, MTol, Inter);
-	
+
 	% Tests:   *RotVec
 	% Assumes: Rand*, RandVec, RotmatFrom*
 	P = P & TestRotVec(700*S, MTol, Inter);
-	
+
 	% Tests:   EYawOf*
 	% Assumes: Rand*, EulerFrom*
 	P = P & TestEYawOf(3000*S, HTol, Inter);
-	
+
 	% Tests:   FYawOf*
 	% Assumes: Rand*, FusedFrom*
 	P = P & TestFYawOf(3000*S, HTol, Inter);
-	
+
 	% Tests:   ZVecFrom*
 	% Assumes: Rand*, RotmatFrom*
 	P = P & TestZVecFrom(3000*S, HTol, Inter);
-	
+
 	% Tests:   FromZVec*
 	% Assumes: RandUnitVec, ZVecFrom*, FYawOf*
 	P = P & TestFromZVec(3000*S, HTol, Inter);
-	
+
 	% Tests:   *FromFYawBzG
 	% Assumes: RandUnitVec, FYawOf*, ZVecFrom*
 	P = P & TestFromFYawBzG(3000*S, LTol, Inter);
-	
+
 	% Tests:   *FromFYawGzB
 	% Assumes: RandUnitVec, FYawOf*, RotmatFrom*
 	P = P & TestFromFYawGzB(3000*S, LTol, Inter);
-	
+
 	% Tests:   AngVelFrom*
 	% Assumes: Rand*, RandUnitVec, QuatFrom*, QuatInv, ComposeQuat
 	P = P & TestAngVelFrom(650*S, MTol, Inter);
@@ -147,7 +147,7 @@ function [Pass] = RunAllTests(Speed, Inter)
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  End of testing  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+
 	% Calculate the total testing time
 	if isOctave
 		TimeTested = double(tic - StartTime) * 1e-6;
@@ -158,7 +158,7 @@ function [Pass] = RunAllTests(Speed, Inter)
 	TimeTested = TimeTested - Hours*3600;
 	Mins = floor(TimeTested/60);
 	Secs = TimeTested - Mins*60;
-	
+
 	% Display the total testing time
 	fprintf('##############################\n');
 	fprintf('Total time taken: %02d:%02d:%06.3f\n', Hours, Mins, Secs);

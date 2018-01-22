@@ -22,7 +22,7 @@ function [Rotmat] = RotmatFromEuler(Euler)
 	spsi = sin(Euler(1));
 	sth  = sin(Euler(2));
 	sphi = sin(Euler(3));
-	
+
 	% Calculate the required rotation matrix
 	Rotmat = [cpsi*cth cpsi*sth*sphi-spsi*cphi cpsi*sth*cphi+spsi*sphi;
 	          spsi*cth spsi*sth*sphi+cpsi*cphi spsi*sth*cphi-cpsi*sphi;

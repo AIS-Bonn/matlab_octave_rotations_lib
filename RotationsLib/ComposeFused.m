@@ -35,6 +35,6 @@ function [Fout, Rout] = ComposeFused(varargin)
 		end
 		Fout = FusedFromRotmat(Rout);
 	end
-	
+
 end
 % EOF

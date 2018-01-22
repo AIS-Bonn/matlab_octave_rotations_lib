@@ -14,13 +14,13 @@ function [Qout, FYaw, QFYaw] = QuatNoFYaw(Qin)
 
 	% Calculate the fused yaw of the input
 	FYaw = 2.0*atan2(Qin(4),Qin(1));
-	FYaw = pi - mod(pi - FYaw, 2*pi);
-	
+	FYaw = wrap(FYaw);
+
 	% Construct the fused yaw component of the rotation
-	hcFYaw = cos(0.5*FYaw);
-	hsFYaw = sin(0.5*FYaw);
+	hcFYaw = cos(FYaw/2);
+	hsFYaw = sin(FYaw/2);
 	QFYaw = [hcFYaw 0 0 hsFYaw];
-	
+
 	% Remove the fused yaw component of the rotation
 	Qout = hcFYaw*Qin + hsFYaw*[Qin(4) Qin(3) -Qin(2) -Qin(1)];
 

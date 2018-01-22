@@ -11,7 +11,7 @@ function [RGB, qGB] = RotmatFromFYawGzB(FYaw, GzB)
 
 	% Calculate the quaternion representation of the required rotation
 	qGB = QuatFromFYawGzB(FYaw, GzB);
-	
+
 	% Return the required rotation matrix representation
 	RGB = RotmatFromQuat(qGB);
 

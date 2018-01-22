@@ -18,7 +18,7 @@ function [Euler, Tilt] = EulerFromFused(Fused)
 	% Precalculate the sin values
 	sth  = sin(Fused(2));
 	sphi = sin(Fused(3));
-	
+
 	% Calculate the cos of the tilt angle alpha
 	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0
@@ -30,7 +30,7 @@ function [Euler, Tilt] = EulerFromFused(Fused)
 			calpha = -sqrt(1-crit);
 		end
 	end
-	
+
 	% Calculate the tilt axis angle gamma
 	gamma = atan2(sth,sphi);
 
@@ -41,10 +41,10 @@ function [Euler, Tilt] = EulerFromFused(Fused)
 	cpsigam = cos(psigam);
 	spsigam = sin(psigam);
 	A = sgam*calpha;
-	
+
 	% Calculate the required Euler angles representation
 	Euler = [atan2(cgam*spsigam-A*cpsigam,cgam*cpsigam+A*spsigam) Fused(2) atan2(sphi,calpha)]; % Note: Fused pitch is equivalent to ZYX Euler pitch!
-	
+
 	% Calculate the required tilt angles representation
 	if nargout >= 2
 		Tilt = [Fused(1) gamma acos(calpha)];

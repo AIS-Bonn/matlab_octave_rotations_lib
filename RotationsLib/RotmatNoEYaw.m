@@ -14,12 +14,12 @@ function [Rout, EYaw, REYaw] = RotmatNoEYaw(Rin)
 
 	% Calculate the ZYX yaw of the input
 	EYaw = atan2(Rin(2,1),Rin(1,1));
-	
+
 	% Construct the ZYX yaw component of the rotation
 	cEYaw = cos(EYaw);
 	sEYaw = sin(EYaw);
 	REYaw = [cEYaw -sEYaw 0;sEYaw cEYaw 0;0 0 1];
-	
+
 	% Remove the ZYX yaw component of the rotation
 	Rout = REYaw' * Rin;
 

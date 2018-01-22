@@ -10,7 +10,7 @@
 function [EYaw] = EYawOfQuat(Quat)
 
 	% Calculate the ZYX yaw of the rotation
-	EYaw = atan2(Quat(1)*Quat(4)+Quat(2)*Quat(3), 0.5-(Quat(3)*Quat(3)+Quat(4)*Quat(4)));
+	EYaw = atan2(2.0*(Quat(1)*Quat(4)+Quat(2)*Quat(3)), 1.0-2.0*(Quat(3)*Quat(3)+Quat(4)*Quat(4)));
 
 end
 % EOF

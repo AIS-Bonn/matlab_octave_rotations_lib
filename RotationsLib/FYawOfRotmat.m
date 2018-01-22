@@ -20,7 +20,7 @@ function [FYaw] = FYawOfRotmat(Rotmat)
 	else
 		FYaw = 2*atan2(Rotmat(1,3)+Rotmat(3,1), Rotmat(3,2)-Rotmat(2,3));
 	end
-	FYaw = pi - mod(pi - FYaw, 2*pi);
+	FYaw = wrap(FYaw);
 
 end
 % EOF

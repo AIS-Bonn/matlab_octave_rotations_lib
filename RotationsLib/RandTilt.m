@@ -23,7 +23,7 @@ function [T] = RandTilt(N)
 		warning('N should be an integer scalar.');
 		N = floor(N);
 	end
-	
+
 	% Generate the required number of random rotations
 	T = (2*rand(N,3)-1)*(pi*diag([1 1 0.5])) + repmat([0 0 0.5*pi],N,1);
 

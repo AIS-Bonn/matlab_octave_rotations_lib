@@ -14,10 +14,10 @@ function [Eout, FYaw, EFYaw] = EulerNoFYaw(Ein)
 
 	% Calculate the fused yaw of the input
 	FYaw = FYawOfEuler(Ein);
-	
+
 	% Construct the fused yaw component of the rotation
 	EFYaw = [FYaw 0 0];
-	
+
 	% Remove the fused yaw component of the rotation
 	Eout = [Ein(1)-FYaw Ein(2:3)];
 

@@ -27,18 +27,18 @@ function [Pass] = TestConversions(N, Tol, Inter)
 	%
 	% Test 2-conversions
 	%
-	
+
 	% Begin test
 	N = BeginTest('2-conversions', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Initialise the error vectors
 	ErrA = zeros(N,4);
 	ErrB = zeros(N,4);
 	ErrC = zeros(N,4);
 	ErrD = zeros(N,4);
 	ErrE = zeros(N,4);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Er = RandEuler;
@@ -67,7 +67,7 @@ function [Pass] = TestConversions(N, Tol, Inter)
 		[~, ErrE(k,3)] = TiltEqual(Tr, TiltFromQuat(QuatFromTilt(Tr)));
 		[~, ErrE(k,4)] = TiltEqual(Tr, TiltFromRotmat(RotmatFromTilt(Tr)));
 	end
-	
+
 	% End test
 	fprintf('Using special tolerance %g for error testing.\n\n', 1.5e-8);
 	P = P & EndBoolean(B);
@@ -76,18 +76,18 @@ function [Pass] = TestConversions(N, Tol, Inter)
 	%
 	% Test 3-conversions
 	%
-	
+
 	% Begin test
 	N = BeginTest('3-conversions', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Initialise the error vectors
 	ErrA = zeros(N,3);
 	ErrB = zeros(N,3);
 	ErrC = zeros(N,3);
 	ErrD = zeros(N,3);
 	ErrE = zeros(N,3);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Er = RandEuler;
@@ -95,56 +95,56 @@ function [Pass] = TestConversions(N, Tol, Inter)
 		[~, ErrA(k,1)] = QuatEqual(QuatFromFused(FusedFromEuler(Er)), QEr);
 		[~, ErrA(k,2)] = QuatEqual(QuatFromRotmat(RotmatFromEuler(Er)), QEr);
 		[~, ErrA(k,3)] = QuatEqual(QuatFromTilt(TiltFromEuler(Er)), QEr);
-		
+
 		Fr = RandFused;
 		RFr = RotmatFromFused(Fr);
 		[~, ErrB(k,1)] = RotmatEqual(RotmatFromEuler(EulerFromFused(Fr)), RFr);
 		[~, ErrB(k,2)] = RotmatEqual(RotmatFromQuat(QuatFromFused(Fr)), RFr);
 		[~, ErrB(k,3)] = RotmatEqual(RotmatFromTilt(TiltFromFused(Fr)), RFr);
-		
+
 		Qr = RandQuat;
 		TQr = TiltFromQuat(Qr);
 		[~, ErrC(k,1)] = TiltEqual(TiltFromEuler(EulerFromQuat(Qr)), TQr);
 		[~, ErrC(k,2)] = TiltEqual(TiltFromFused(FusedFromQuat(Qr)), TQr);
 		[~, ErrC(k,3)] = TiltEqual(TiltFromRotmat(RotmatFromQuat(Qr)), TQr);
-		
+
 		Rr = RandRotmat;
 		ERr = EulerFromRotmat(Rr);
 % 		[~, ErrD(k,1)] = EulerEqual(EulerFromFused(FusedFromRotmat(Rr)), ERr); % Note: The EulerFromFused function is sensitive to noise very near gimbal lock and infrequently gives errors in excess of 1e-10.
 		[~, ErrD(k,2)] = EulerEqual(EulerFromQuat(QuatFromRotmat(Rr)), ERr);
 		[~, ErrD(k,3)] = EulerEqual(EulerFromTilt(TiltFromRotmat(Rr)), ERr);
-		
+
 		Tr = RandTilt;
 		FTr = FusedFromTilt(Tr);
 		[~, ErrE(k,1)] = FusedEqual(FusedFromEuler(EulerFromTilt(Tr)), FTr);
 		[~, ErrE(k,2)] = FusedEqual(FusedFromQuat(QuatFromTilt(Tr)), FTr);
 		[~, ErrE(k,3)] = FusedEqual(FusedFromRotmat(RotmatFromTilt(Tr)), FTr);
 	end
-	
+
 	% End test
 	fprintf('Using special tolerance %g for error testing.\n\n', 1.5e-8);
 	P = P & EndBoolean(B);
 	P = P & EndTest(1.5e-8, 'Euler-Quat 3-conversions', ErrA, 'Fused-Rotmat 3-conversions', ErrB, 'Quat-Tilt 3-conversions', ErrC, 'Rotmat-Euler 3-conversions', ErrD, 'Tilt-Fused 3-conversions', ErrE);
-	
+
 	%
 	% Test additional outputs
 	%
-	
+
 	% Begin test
 	N = BeginTest('Additional outputs', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Initialise the error vectors
 	ErrA = zeros(N,4);
 	ErrB = zeros(N,4);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Er = RandEuler;
 		Fr = RandFused;
 		Qr = RandQuat;
 		Rr = RandRotmat;
-		
+
 		TFr = TiltFromFused(Fr);
 		[~, Tilt] = EulerFromFused(Fr);
 		[~, ErrA(k,1)] = TiltEqual(Tilt, TFr);
@@ -152,30 +152,30 @@ function [Pass] = TestConversions(N, Tol, Inter)
 		[~, ErrA(k,2)] = TiltEqual(Tilt, TFr);
 		[~, Tilt] = RotmatFromFused(Fr);
 		[~, ErrA(k,3)] = TiltEqual(Tilt, TFr);
-		
+
 		REr = RotmatFromEuler(Er);
 		[~, Rotmat] = TiltFromEuler(Er);
 		[~, ErrA(k,4)] = RotmatEqual(Rotmat, REr);
-		
+
 		REr = RotmatFromEuler(Er);
 		TEr = TiltFromEuler(Er);
 		[~, Rotmat, Tilt] = FusedFromEuler(Er);
 		[~, ErrB(k,1)] = RotmatEqual(Rotmat, REr);
 		[~, ErrB(k,2)] = TiltEqual(Tilt, TEr);
-		
+
 		TQr = TiltFromQuat(Qr);
 		[~, Tilt] = FusedFromQuat(Qr);
 		[~, ErrB(k,3)] = TiltEqual(Tilt, TQr);
-		
+
 		TRr = TiltFromRotmat(Rr);
 		[~, Tilt] = FusedFromRotmat(Rr);
 		[~, ErrB(k,4)] = TiltEqual(Tilt, TRr);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Group 1', ErrA, 'Group 2', ErrB);
-	
+
 	%
 	% End of test script
 	%
@@ -187,7 +187,7 @@ function [Pass] = TestConversions(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

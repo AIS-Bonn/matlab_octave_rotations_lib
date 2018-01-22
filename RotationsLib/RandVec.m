@@ -30,7 +30,7 @@ function [V] = RandVec(N, MaxNorm)
 	if MaxNorm < 0
 		MaxNorm = 0;
 	end
-	
+
 	% Generate the required number of random vectors
 	RealNorm = MaxNorm * rand(1,N);
 	V = 2*rand(3,N) - 1;

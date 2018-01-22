@@ -16,15 +16,15 @@ function [Tilt] = TiltFromQuat(Quat)
 
 	% Calculate the fused yaw
 	psi = 2.0*atan2(Quat(4),Quat(1));
-	psi = pi - mod(pi - psi, 2*pi);
-	
+	psi = wrap(psi);
+
 	% Calculate the tilt axis angle
 	gamma = atan2(Quat(1)*Quat(3)-Quat(2)*Quat(4),Quat(1)*Quat(2)+Quat(3)*Quat(4));
-	
+
 	% Calculate the tilt angle
 	calpha = max(min(2*(Quat(1)*Quat(1)+Quat(4)*Quat(4))-1,1.0),-1.0); % Note: If Quat is valid then this should only trim at most a few eps...
 	alpha = acos(calpha);
-	
+
 	% Return the tilt angles representation
 	Tilt = [psi gamma alpha];
 

@@ -21,20 +21,23 @@ function [Equal, Err] = TiltEqual(T, U, Tol)
 	else
 		Tol = abs(Tol);
 	end
+	
+	% Get the required value of pi
+	PI = GetPI(T);
 
 	% Convert both tilt angles into their unique representations
 	T = EnsureTilt(T, Tol, true);
 	U = EnsureTilt(U, Tol, true);
-	
+
 	% Handle angle wrapping issues
-	if abs(T(1)-U(1)) > pi
+	if abs(T(1)-U(1)) > PI
 		if T(1) > U(1)
-			U(1) = U(1) + 2*pi;
+			U(1) = U(1) + 2*PI;
 		else
-			T(1) = T(1) + 2*pi;
+			T(1) = T(1) + 2*PI;
 		end
 	end
-	
+
 	% Construct the vectors to compare
 	% The tilt axis angle has a singularity when the tilt angle is zero, so a geometrically relevant term is checked instead of the tilt axis angle directly
 	% The tilt angle suffers from the numerical sensitivity of acos, so the cos thereof is checked
@@ -46,6 +49,6 @@ function [Equal, Err] = TiltEqual(T, U, Tol)
 
 	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);
-	
+
 end
 % EOF

@@ -12,7 +12,7 @@ function [FYaw, Rotmat] = FYawOfEuler(Euler)
 
 	% Calculation of the fused yaw in a numerically stable manner requires the complete rotation matrix representation
 	Rotmat = RotmatFromEuler(Euler);
-	
+
 	% Calculate the fused yaw
 	FYaw = FYawOfRotmat(Rotmat);
 

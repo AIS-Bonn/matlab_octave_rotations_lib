@@ -10,12 +10,12 @@ function [IsOct] = isOctave()
 
 	% Declare persistent boolean flag
 	persistent O;
-	
+
 	% Define the flag if required
 	if isempty(O)
 		O = (exist('OCTAVE_VERSION', 'builtin') ~= 0);
 	end
-	
+
 	% Copy the flag to the output
 	IsOct = O;
 

@@ -27,14 +27,14 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 	%
 	% Test FYawOfEuler
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FYawOfEuler', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && (FYawOfEuler([0 0 0]) == 0);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Er = RandEuler;
@@ -50,7 +50,7 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 		end
 		ErrA(k) = abs(EFYaw - FFYaw);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'FYaw error', ErrA);
@@ -58,18 +58,18 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 	%
 	% Test FYawOfFused
 	%
-	
+
 	% Begin test
 	N = BeginTest('FYawOfFused', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && (FYawOfFused([0 0 0 1]) == 0);
 	for k = 1:N
 		Fr = RandFused;
 		B = B && (FYawOfFused(Fr) == Fr(1));
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol);
@@ -77,14 +77,14 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 	%
 	% Test FYawOfQuat
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FYawOfQuat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && (FYawOfQuat([1 0 0 0]) == 0);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Qr = RandQuat;
@@ -100,7 +100,7 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 		end
 		ErrA(k) = abs(QFYaw - FFYaw);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'FYaw error', ErrA);
@@ -108,14 +108,14 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 	%
 	% Test FYawOfRotmat
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FYawOfRotmat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && (FYawOfRotmat(eye(3)) == 0);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Rr = RandRotmat;
@@ -131,7 +131,7 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 		end
 		ErrA(k) = abs(RFYaw - FFYaw);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'FYaw error', ErrA);
@@ -139,14 +139,14 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 	%
 	% Test FYawOfTilt
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('FYawOfTilt', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && (FYawOfTilt([0 0 0]) == 0);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Tr = RandTilt;
@@ -162,11 +162,11 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 		end
 		ErrA(k) = abs(TFYaw - FFYaw);
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'FYaw error', ErrA);
-	
+
 	%
 	% End of test script
 	%
@@ -178,7 +178,7 @@ function [Pass] = TestFYawOf(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

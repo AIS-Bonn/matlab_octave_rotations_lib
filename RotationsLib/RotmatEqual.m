@@ -21,10 +21,10 @@ function [Equal, Err] = RotmatEqual(Ra, Rb, Tol)
 	else
 		Tol = abs(Tol);
 	end
-	
+
 	% Calculate the deviation between the two rotations
 	Err = max(abs(Ra(:)-Rb(:)));
-	
+
 	% Check whether the two rotations are within tolerance
 	Equal = (Err <= Tol);
 

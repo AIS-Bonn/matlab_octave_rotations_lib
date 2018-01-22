@@ -14,7 +14,7 @@ function [Rotmat, Quat] = RotmatFromZVec(ZVec)
 
 	% Calculate the quaternion representation of the required rotation
 	Quat = QuatFromZVec(ZVec);
-	
+
 	% Return the required rotation matrix representation
 	Rotmat = RotmatFromQuat(Quat);
 

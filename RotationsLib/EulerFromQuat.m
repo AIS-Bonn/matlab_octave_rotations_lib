@@ -19,7 +19,7 @@ function [Euler] = EulerFromQuat(Quat)
 
 	% Calculate the required Euler angles
 	Q3sq = Quat(3)*Quat(3);
-	Euler = [atan2(Quat(1)*Quat(4)+Quat(2)*Quat(3),0.5-(Q3sq+Quat(4)*Quat(4))) asin(sth) atan2(Quat(1)*Quat(2)+Quat(3)*Quat(4),0.5-(Quat(2)*Quat(2)+Q3sq))];
-	
+	Euler = [atan2(2.0*(Quat(1)*Quat(4)+Quat(2)*Quat(3)),1.0-2.0*(Q3sq+Quat(4)*Quat(4))) asin(sth) atan2(2.0*(Quat(1)*Quat(2)+Quat(3)*Quat(4)),1.0-2.0*(Quat(2)*Quat(2)+Q3sq))];
+
 end
 % EOF

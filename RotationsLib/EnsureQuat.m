@@ -26,10 +26,10 @@ function [Qout, WasBad, Norm] = EnsureQuat(Qin, Tol, Unique)
 	if nargin < 3
 		Unique = false;
 	end
-	
+
 	% Make a copy of the input
 	Qout = Qin;
-	
+
 	% Renormalise the quaternion
 	Norm = norm(Qout);
 	if Norm <= 0
@@ -37,14 +37,14 @@ function [Qout, WasBad, Norm] = EnsureQuat(Qin, Tol, Unique)
 	else
 		Qout = Qout / Norm; % Scale to unit norm
 	end
-	
+
 	% Make the quaternion unique
 	if Unique
 		if Qout(1) < 0
 			Qout = -Qout;
 		end
 	end
-	
+
 	% Work out whether we changed anything
 	WasBad = any(abs(Qout - Qin) > Tol);
 

@@ -17,13 +17,13 @@ function [Tilt] = TiltFromRotmat(Rotmat)
 	% Calculate the tilt angle alpha
 	calpha = max(min(Rotmat(3,3),1.0),-1.0); % Note: If Rotmat is valid then this should only trim at most a few eps...
 	alpha = acos(calpha);
-	
+
 	% Calculate the tilt axis angle
 	gamma = atan2(-Rotmat(3,1),Rotmat(3,2));
-	
+
 	% Calculate the fused yaw
 	psi = FYawOfRotmat(Rotmat);
-	
+
 	% Return the tilt angles representation
 	Tilt = [psi gamma alpha];
 

@@ -12,10 +12,10 @@
 function [Quat] = QuatFromEuler(Euler)
 
 	% Halve the Euler angles
-	hpsi = 0.5*Euler(1);
-	hth  = 0.5*Euler(2);
-	hphi = 0.5*Euler(3);
-	
+	hpsi = Euler(1)/2;
+	hth  = Euler(2)/2;
+	hphi = Euler(3)/2;
+
 	% Precalculate the sin and cos values
 	cpsi = cos(hpsi);
 	spsi = sin(hpsi);
@@ -23,7 +23,7 @@ function [Quat] = QuatFromEuler(Euler)
 	sth  = sin(hth);
 	cphi = cos(hphi);
 	sphi = sin(hphi);
-	
+
 	% Calculate the required quaternion
 	Quat = [cphi*cth*cpsi+sphi*sth*spsi sphi*cth*cpsi-cphi*sth*spsi cphi*sth*cpsi+sphi*cth*spsi cphi*cth*spsi-sphi*sth*cpsi];
 

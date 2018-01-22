@@ -16,14 +16,14 @@ function [Quat] = QuatFromAxis(Axis, Angle)
 		Quat = [1 0 0 0];
 		return;
 	end
-	
+
 	% Wrap the rotation angle to (-pi,pi]
-	Angle = pi - mod(pi - Angle, 2*pi);
-	
+	Angle = wrap(Angle);
+
 	% Precompute the required sin and cos terms
-	hcang = cos(0.5*Angle);
-	hsang = sin(0.5*Angle);
-	
+	hcang = cos(Angle/2);
+	hsang = sin(Angle/2);
+
 	% Handle case of standard axis rotations
 	if strcmpi(Axis, 'x')
 		Quat = [hcang hsang 0 0];
@@ -35,12 +35,12 @@ function [Quat] = QuatFromAxis(Axis, Angle)
 		Quat = [hcang 0 0 hsang];
 		return;
 	end
-	
+
 	% Axis error checking
 	if ~(isnumeric(Axis) && isvector(Axis) && length(Axis) == 3)
 		error('Axis must be a 3-vector, or one of {''x'',''y'',''z''}.');
 	end
-	
+
 	% Normalise the axis vector
 	AxisNorm = norm(Axis);
 	if AxisNorm <= 0
@@ -49,7 +49,7 @@ function [Quat] = QuatFromAxis(Axis, Angle)
 	else
 		Axis = Axis/AxisNorm;
 	end
-	
+
 	% Construct the required rotation
 	Quat = [hcang hsang*Axis(:)'];
 

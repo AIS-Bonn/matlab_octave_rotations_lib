@@ -27,22 +27,22 @@ function [Pass] = TestIdentity(N, Tol, Inter)
 	%
 	% Test *Identity
 	%
-	
+
 	% Begin test
 	BeginTest('*Identity');
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(EulerIdentity == [0 0 0]);
 	B = B && all(FusedIdentity == [0 0 0 1]);
 	B = B && all(QuatIdentity == [1 0 0 0]);
 	B = B && all(all(RotmatIdentity == eye(3)));
 	B = B && all(TiltIdentity == [0 0 0]);
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest();
-	
+
 	%
 	% End of test script
 	%
@@ -54,7 +54,7 @@ function [Pass] = TestIdentity(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass

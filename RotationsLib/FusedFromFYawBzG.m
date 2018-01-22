@@ -9,12 +9,12 @@
 function [FGB] = FusedFromFYawBzG(FYaw, BzG)
 
 	% Wrap the fused yaw to the desired range
-	FYaw = pi - mod(pi - FYaw, 2*pi);
+	FYaw = wrap(FYaw);
 
 	% Calculate the fused pitch
 	stheta = max(min(-BzG(1),1.0),-1.0); % Note: If BzG is a unit vector then this should only trim at most a few eps...
 	theta = asin(stheta);
-	
+
 	% Calculate the fused roll
 	sphi = max(min(BzG(2),1.0),-1.0); % Note: If BzG is a unit vector then this should only trim at most a few eps...
 	phi = asin(sphi);

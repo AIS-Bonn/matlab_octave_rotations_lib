@@ -19,27 +19,30 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 		return;
 	end
 	
+	% Get the required value of pi
+	PI = GetPI(Angle);
+
 	% Wrap the rotation angle to (-pi,pi]
-	Angle = pi - mod(pi - Angle, 2*pi);
-	
+	Angle = wrap(Angle);
+
 	% Precompute the required sin and cos terms
-	hcang = cos(0.5*Angle);
-	hsang = sin(0.5*Angle);
-	
+	hcang = cos(Angle/2);
+	hsang = sin(Angle/2);
+
 	% Handle case of standard axis rotations
 	if strcmpi(Axis, 'x')
 		if Angle >= 0
 			Tilt = [0 0 Angle];
 		else
-			Tilt = [0 pi -Angle];
+			Tilt = [0 PI -Angle];
 		end
 		Quat = [hcang hsang 0 0];
 		return;
 	elseif strcmpi(Axis, 'y')
 		if Angle >= 0
-			Tilt = [0 pi/2 Angle];
+			Tilt = [0 PI/2 Angle];
 		else
-			Tilt = [0 -pi/2 -Angle];
+			Tilt = [0 -PI/2 -Angle];
 		end
 		Quat = [hcang 0 hsang 0];
 		return;
@@ -48,12 +51,12 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 		Quat = [hcang 0 0 hsang];
 		return;
 	end
-	
+
 	% Axis error checking
 	if ~(isnumeric(Axis) && isvector(Axis) && length(Axis) == 3)
 		error('Axis must be a 3-vector, or one of {''x'',''y'',''z''}.');
 	end
-	
+
 	% Normalise the axis vector
 	AxisNorm = norm(Axis);
 	if AxisNorm <= 0
@@ -63,7 +66,7 @@ function [Tilt, Quat] = TiltFromAxis(Axis, Angle)
 	else
 		Axis = Axis/AxisNorm;
 	end
-	
+
 	% Construct the required rotation
 	Quat = [hcang hsang*Axis(:)'];
 	Tilt = TiltFromQuat(Quat);

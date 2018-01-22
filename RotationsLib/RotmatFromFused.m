@@ -19,7 +19,7 @@ function [Rotmat, Tilt] = RotmatFromFused(Fused)
 	% Precalculate the sin values
 	sth  = sin(Fused(2));
 	sphi = sin(Fused(3));
-	
+
 	% Calculate the sin and cos of the tilt angle
 	crit = sth*sth + sphi*sphi;
 	if crit >= 1.0
@@ -33,7 +33,7 @@ function [Rotmat, Tilt] = RotmatFromFused(Fused)
 			calpha = -sqrt(1-crit);
 		end
 	end
-	
+
 	% Calculate the tilt axis angle gamma
 	gamma = atan2(sth,sphi);
 
@@ -43,18 +43,18 @@ function [Rotmat, Tilt] = RotmatFromFused(Fused)
 	psigam = Fused(1) + gamma;
 	cpsigam = cos(psigam);
 	spsigam = sin(psigam);
-	
+
 	% Precalculate additional terms involved in the rotation matrix expression
 	A = cgam * cpsigam;
 	B = sgam * cpsigam;
 	C = cgam * spsigam;
 	D = sgam * spsigam;
-	
+
 	% Calculate the required rotation matrix
 	Rotmat = [A+D*calpha B-C*calpha  salpha*spsigam;
 	          C-B*calpha D+A*calpha -salpha*cpsigam;
 	          -sth       sphi        calpha];
-	
+
 	% Calculate the required tilt angles representation
 	if nargout >= 2
 		Tilt = [Fused(1) gamma acos(calpha)];

@@ -35,6 +35,6 @@ function [Tout, Rout] = ComposeTilt(varargin)
 		end
 		Tout = TiltFromRotmat(Rout);
 	end
-	
+
 end
 % EOF

@@ -14,10 +14,10 @@ function [Tout, EYaw, TEYaw] = TiltNoEYaw(Tin)
 
 	% Calculate the ZYX yaw of the input
 	EYaw = EYawOfTilt(Tin);
-	
+
 	% Construct the ZYX yaw component of the rotation
 	TEYaw = [EYaw 0 0];
-	
+
 	% Remove the ZYX yaw component of the rotation
 	Tout = [Tin(1)-EYaw Tin(2:3)];
 

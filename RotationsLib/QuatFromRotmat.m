@@ -27,7 +27,7 @@ function [Quat] = QuatFromRotmat(Rotmat)
 	else
 		qtilde = [Rotmat(3,2)-Rotmat(2,3) 1+Rotmat(1,1)-Rotmat(2,2)-Rotmat(3,3) Rotmat(2,1)+Rotmat(1,2) Rotmat(1,3)+Rotmat(3,1)];
 	end
-	
+
 	% Normalise the output quaternion
 	Quat = qtilde / norm(qtilde);
 

@@ -26,18 +26,21 @@ function [Eout, WasBad] = EnsureEuler(Ein, Tol, Unique)
 	if nargin < 3
 		Unique = false;
 	end
+	
+	% Get the required value of pi
+	PI = GetPI(Ein);
 
 	% Make a copy of the input
 	Eout = Ein;
 
 	% Wrap theta to (-pi,pi]
-	Eout(2) = pi - mod(pi - Eout(2), 2*pi);
+	Eout(2) = wrap(Eout(2));
 
 	% Collapse theta into the [-pi/2,pi/2] interval
-	if abs(Eout(2)) > pi/2
-		Eout = [pi+Eout(1) pi-mod(Eout(2),2*pi) pi+Eout(3)];
+	if abs(Eout(2)) > PI/2
+		Eout = [PI+Eout(1) PI-mod(Eout(2),2*PI) PI+Eout(3)];
 	end
-	
+
 	% Make positive and negative gimbal lock representations unique
 	if Unique
 		if abs(sin(Eout(2)) - 1) <= Tol
@@ -48,10 +51,10 @@ function [Eout, WasBad] = EnsureEuler(Ein, Tol, Unique)
 			Eout(1) = 0;
 		end
 	end
-	
+
 	% Wrap psi and phi to (-pi,pi]
-	Eout(1) = pi - mod(pi - Eout(1), 2*pi);
-	Eout(3) = pi - mod(pi - Eout(3), 2*pi);
+	Eout(1) = wrap(Eout(1));
+	Eout(3) = wrap(Eout(3));
 
 	% Work out whether we changed anything
 	WasBad = any(abs(Eout - Ein) > Tol);

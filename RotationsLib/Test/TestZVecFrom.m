@@ -27,25 +27,25 @@ function [Pass] = TestZVecFrom(N, Tol, Inter)
 	%
 	% Test ZVecFromEuler
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('ZVecFromEuler', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(ZVecFromEuler([0 0 0]) == [0 0 1]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Er = RandEuler;
 		Zr = ZVecFromEuler(Er);
-		
+
 		ErrA(k) = abs(norm(Zr) - 1);
-		
+
 		Rr = RotmatFromEuler(Er);
 		B = B && all(Zr == Rr(3,:));
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Norm error', ErrA);
@@ -53,25 +53,25 @@ function [Pass] = TestZVecFrom(N, Tol, Inter)
 	%
 	% Test ZVecFromFused
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('ZVecFromFused', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(ZVecFromFused([0 0 0 1]) == [0 0 1]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Fr = RandFused;
 		Zr = ZVecFromFused(Fr);
-		
+
 		ErrA(k) = abs(norm(Zr) - 1);
-		
+
 		Rr = RotmatFromFused(Fr);
 		B = B && all(Zr == Rr(3,:));
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Norm error', ErrA);
@@ -79,25 +79,25 @@ function [Pass] = TestZVecFrom(N, Tol, Inter)
 	%
 	% Test ZVecFromQuat
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('ZVecFromQuat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(ZVecFromQuat([1 0 0 0]) == [0 0 1]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Qr = RandQuat;
 		Zr = ZVecFromQuat(Qr);
-		
+
 		ErrA(k) = abs(norm(Zr) - 1);
-		
+
 		Rr = RotmatFromQuat(Qr);
 		B = B && all(Zr == Rr(3,:));
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Norm error', ErrA);
@@ -105,24 +105,24 @@ function [Pass] = TestZVecFrom(N, Tol, Inter)
 	%
 	% Test ZVecFromRotmat
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('ZVecFromRotmat', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(ZVecFromRotmat(eye(3)) == [0 0 1]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Rr = RandRotmat;
 		Zr = ZVecFromRotmat(Rr);
-		
+
 		ErrA(k) = abs(norm(Zr) - 1);
-		
+
 		B = B && all(Zr == Rr(3,:));
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Norm error', ErrA);
@@ -130,29 +130,29 @@ function [Pass] = TestZVecFrom(N, Tol, Inter)
 	%
 	% Test ZVecFromTilt
 	%
-	
+
 	% Begin test
 	[N, ErrA] = BeginTest('ZVecFromTilt', Nnormal);
 	B = BeginBoolean();
-	
+
 	% Boolean conditions
 	B = B && all(ZVecFromTilt([0 0 0]) == [0 0 1]);
-	
+
 	% Perform the required testing
 	for k = 1:N
 		Tr = RandTilt;
 		Zr = ZVecFromTilt(Tr);
-		
+
 		ErrA(k) = abs(norm(Zr) - 1);
-		
+
 		Rr = RotmatFromTilt(Tr);
 		B = B && all(Zr == Rr(3,:));
 	end
-	
+
 	% End test
 	P = P & EndBoolean(B);
 	P = P & EndTest(Tol, 'Norm error', ErrA);
-	
+
 	%
 	% End of test script
 	%
@@ -164,7 +164,7 @@ function [Pass] = TestZVecFrom(N, Tol, Inter)
 	if nargout >= 1
 		Pass = P;
 	end
-	
+
 	% Clear the function variable workspace
 	if isOctave
 		clear -x Pass
