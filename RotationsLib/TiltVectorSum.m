@@ -22,7 +22,7 @@ function [tilt] = TiltVectorSum(varargin)
 			tilt(1) = tilt(1);
 			tilt(2) = -tilt(2);
 		end
-		tilt(1) = picut(tilt(1));
+		tilt(1) = wrap(tilt(1));
 	else
 		polar = varargin{1};
 		sum = polar(2)*[cos(polar(1)) sin(polar(1))];
