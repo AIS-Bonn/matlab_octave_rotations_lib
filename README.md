@@ -7,20 +7,20 @@
 **Date:** 22/01/18
 
 ## General Overview
-The Matlab/Octave rotations library is a collection of functions, bundled as 
-m-scripts, that address computations and numerical handling of rotations in 3D 
-Euclidean space. The rotation representations that are supported are rotation 
-matrices (`Rotmat`), Quaternions (`Quat`), intrinsic ZYX Euler angles (`Euler`), 
-fused angles (`Fused`) and tilt angles (`Tilt`). Operations such as composition, 
-inversion, ZYX yaw extraction, fused yaw extraction, random generation, equality 
-detection, vector rotation and much more have been implemented for each rotation 
-representation. Tilt vector addition and the relative and absolute tilt phase 
-spaces are also supported. Unit tests for each function are provided to ensure 
-that the library is performant. For more information on fused angles and tilt 
-angles, please refer to 
-http://www.ais.uni-bonn.de/~pallgeuer/papers/IROS_2015_fused.pdf. The *fused 
-angles* and *tilt angles* rotation representations are the invention of the 
-author, as with the tilt phase space. 
+The Matlab/Octave rotations library is a collection of functions, bundled as
+m-scripts, that address computations and numerical handling of rotations in 3D
+Euclidean space. The rotation representations that are supported are rotation
+matrices (`Rotmat`), Quaternions (`Quat`), intrinsic ZYX Euler angles (`Euler`),
+fused angles (`Fused`) and tilt angles (`Tilt`). Operations such as composition,
+inversion, ZYX yaw extraction, fused yaw extraction, random generation, equality
+detection, vector rotation and much more have been implemented for each rotation
+representation. Tilt vector addition and the relative and absolute tilt phase
+spaces are also supported. Unit tests for each function are provided to ensure
+that the library is performant. For more information on fused angles and tilt
+angles, please refer to
+http://www.ais.uni-bonn.de/~pallgeuer/papers/IROS_2015_fused.pdf. The *fused
+angles* and *tilt angles* rotation representations are the invention of the
+author, as with the tilt phase space.
 
 ## Getting Started
 Clone the rotations library into the required local target directory. Usually
@@ -75,19 +75,16 @@ Quaternion | `Quat` | `[w x y z]` | &#x211a;
 Rotation matrix | `Rotmat` | `3x3 matrix` | SO(3)
 Tilt angles | `Tilt` | `[psi gamma alpha] =`<br>`(fused yaw, tilt axis angle, tilt angle)` | (-&pi;,&pi;] &times; (-&pi;,&pi;] &times; [0,&pi;]
 
-Note that in the library, `ZVec` refers to the bottom row of the rotation matrix 
-representation. This corresponds to the global z-axis, expressed in terms of the 
-rotated coordinate frame. `Axis` refers to the representation of a rotation by 
+Note that in the library, `ZVec` refers to the bottom row of the rotation matrix
+representation. This corresponds to the global z-axis, expressed in terms of the
+rotated coordinate frame. `Axis` refers to the representation of a rotation by
 its axis and angle of rotation.
 
 ## Where To Get More Help?
 If a look into the source code does not resolve an issue you have with the
-library, then you can contact the author at the email address given in the *Bugs
-and Improvements* section.
+library, then you can open a GitHub issue.
 
 ## Bugs and Improvements
-I welcome all feedback, suggestions and bug reports. If you improve or fix
-anything about the library then I encourage you to let me know so that the
-library can be improved for everyone!
-
-**Email:** `pallgeuer[at]ais.uni-bonn.de`
+I welcome all feedback, suggestions and bug reports (by opening a GitHub issue).
+If you improve or fix anything about the library then I encourage you to let me
+know so that the library can be improved for everyone!
